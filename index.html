@@ -1,0 +1,1483 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Portafolio Profesional</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.10.2/dist/cdn.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Estilos base responsive */
+        .mobile-menu {
+            display: none;
+        }
+        
+        /* Animación de pulso para botones */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Animación de arcoíris para el título */
+        @keyframes rainbow {
+            0% { color: #ff85a2; }
+            25% { color: #ffb3c6; }
+            50% { color: #ff578f; }
+            75% { color: #ff2970; }
+            100% { color: #ff85a2; }
+        }
+        
+        .animate-pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        .pacman-title {
+            animation: rainbow 4s infinite;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .pacman-button {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .pacman-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+            background-color: #ff57a6 !important;
+        }
+        
+        .pacman-canvas-container {
+            border: 4px solid #ff85a2;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .pacman-stats {
+            background-color: #ff85a2;
+            color: white;
+            font-weight: bold;
+            border-radius: 0 0 10px 10px;
+            padding: 8px 15px;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .kawaii-bg {
+            background-color: #ffe6ee;
+            background-image: linear-gradient(45deg, #ffe6ee 25%, #ffcce0 25%, #ffcce0 50%, #ffe6ee 50%, #ffe6ee 75%, #ffcce0 75%, #ffcce0 100%);
+            background-size: 20px 20px;
+        }
+        
+        .kawaii-border {
+            border: 3px dotted #ff85a2;
+            border-radius: 20px;
+        }
+        
+        /* Media queries para responsividad */
+        @media (max-width: 768px) {
+            .desktop-menu {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .pacman-game-container {
+                width: 100% !important;
+                height: auto !important;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr !important;
+            }
+            
+            .certificate-container {
+                min-width: 280px !important;
+            }
+            
+            #pacman-canvas {
+                width: 100% !important;
+                height: auto !important;
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .hero-text {
+                font-size: 1.5rem !important;
+            }
+            
+            .profile-image {
+                width: 6rem !important;
+                height: 6rem !important;
+            }
+            
+            .certificate-container {
+                min-width: 240px !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .certificate-container {
+                min-width: 200px !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-black text-white">
+    <!-- Header -->
+    <header class="bg-pink-200 shadow-lg fixed w-full z-10">
+        <div class="container mx-auto flex justify-between items-center p-5">
+            <h1 class="text-2xl font-bold text-black">Mi Portafolio</h1>
+            
+            <!-- Menú de escritorio -->
+            <nav class="desktop-menu">
+                <ul class="flex space-x-6">
+                    <li><a href="#about" class="hover:text-pink-400">Sobre mí</a></li>
+                    <li><a href="#projects" class="hover:text-pink-400">Proyectos</a></li>
+                    <li><a href="#skills" class="hover:text-pink-400">Habilidades</a></li>
+                    <li><a href="#contact" class="hover:text-pink-400">Contacto</a></li>
+                    <li><a href="#certificate" class="hover:text-pink-400">Certificados</a></li>
+                </ul>
+            </nav>
+            
+            <!-- Menú móvil (hamburguesa) -->
+            <div class="mobile-menu relative" x-data="{ open: false }">
+                <button @click="open = !open" class="text-black focus:outline-none">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+                
+                <div x-show="open" @click.away="open = false" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
+                    <a href="#about" class="block px-4 py-2 text-sm text-gray-700 hover:bg-pink-100">Sobre mí</a>
+                    <a href="#projects" class="block px-4 py-2 text-sm text-gray-700 hover:bg-pink-100">Proyectos</a>
+                    <a href="#skills" class="block px-4 py-2 text-sm text-gray-700 hover:bg-pink-100">Habilidades</a>
+                    <a href="#contact" class="block px-4 py-2 text-sm text-gray-700 hover:bg-pink-100">Contacto</a>
+                    <a href="#certificate" class="block px-4 py-2 text-sm text-gray-700 hover:bg-pink-100">Certificados</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen flex flex-col justify-center items-center text-center px-4 overflow-hidden" 
+        style="background: url('https://source.unsplash.com/1600x900/?technology') center/cover no-repeat;" id="hero">
+
+        <div id="particles-js" class="absolute inset-0"></div>
+
+        <div class="relative z-10 flex flex-col items-center">
+            <img src="lizeth.jpg" alt="Tu Foto" class="profile-image w-40 h-40 rounded-full border-4 border-pink-400 mb-4 transition-transform duration-300 hover:scale-110">
+            <h2 class="hero-text text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-300 via-pink-200 to-pink-500">
+                Hola, soy <span class="text-pink-400">Eva Lizeth</span>
+            </h2>
+            <p class="mt-4 text-lg">Ingeniera en Sistemas | Desarrolladora Web | Innovadora</p>
+            <a href="Eva_Lizeth_CV.pdf" download="Eva_Lizeth_CV.pdf" 
+                class="mt-6 bg-pink-400 text-white px-6 py-2 rounded-full text-lg font-semibold transition-all duration-300 hover:bg-pink-300 hover:scale-105 animate-pulse">
+                Descargar CV
+            </a>
+        </div>
+    </section>
+
+    <!-- Sección de Pac-Man Kawaii -->
+    <section id="pacman-game" class="fixed inset-0 flex justify-center items-center bg-black bg-opacity-90 z-50">
+        <div class="bg-pink-100 p-4 md:p-6 rounded-lg shadow-lg max-w-3xl w-full text-center">
+            <h2 class="text-3xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-pink-400 via-purple-400 to-pink-500 animate-pulse font-cute flex items-center justify-center">
+                <span class="mr-2">🎮</span>
+                ¡Supera el Pac-Man Kawaii para ver mis proyectos!
+                <span class="ml-2">❤️</span>
+              </h2>
+            <p class="mb-4 text-gray-700 text-sm md:text-base">Controles: Usa las teclas de flecha para mover a Pac-Man y come todos los puntos para ganar.</p>
+            
+            <div class="pacman-game-container relative mx-auto bg-pink-900 rounded-lg overflow-hidden w-full md:w-420px">
+                <canvas id="pacman-canvas" width="420" height="460" class="block w-full"></canvas>
+                <div class="pacman-stats bg-pink-800 flex justify-between items-center px-4 py-2 text-white">
+                    <div>Puntos: <span id="score">0</span></div>
+                    <div>Vidas: <span id="lives">3</span></div>
+                </div>
+            </div>
+            
+            <button id="start-game" class="pacman-button mt-4 md:mt-6 bg-pink-400 text-white px-4 md:px-6 py-2 rounded-full text-base md:text-lg font-semibold transition-all duration-300 hover:bg-pink-300 hover:scale-105">
+                Iniciar Juego
+            </button>
+        </div>
+    </section>
+
+    <!-- Overlay de Victoria -->
+    <div id="victory-overlay" class="pacman-victory fixed inset-0 flex justify-center items-center bg-black bg-opacity-80 z-50 hidden">
+        <div class="bg-pink-100 p-6 md:p-8 rounded-lg shadow-lg max-w-md w-full text-center">
+            <h2 class="text-2xl md:text-3xl font-bold text-pink-500 mb-4">¡Felicidades!</h2>
+            <p class="mb-6 text-gray-700">Has superado el juego. ¡Ahora puedes acceder a mis proyectos!</p>
+            <div class="flex justify-center">
+                <img src="pacman-win.gif" alt="Victoria" class="w-24 h-24 md:w-32 md:h-32 mb-4" onerror="this.src='https://i.gifer.com/ZJG.gif'; this.onerror=null;">
+            </div>
+            <button id="view-projects" class="pacman-button bg-pink-400 text-white px-4 md:px-6 py-2 rounded-full text-base md:text-lg font-semibold transition-all duration-300 hover:bg-pink-300 hover:scale-105">
+                Ver Proyectos
+            </button>
+        </div>
+    </div>
+
+    <!-- Overlay de Derrota -->
+    <div id="game-over-overlay" class="fixed inset-0 flex justify-center items-center bg-black bg-opacity-80 z-50 hidden">
+        <div class="bg-pink-100 p-6 md:p-8 rounded-lg shadow-lg max-w-md w-full text-center">
+            <h2 class="text-2xl md:text-3xl font-bold text-pink-500 mb-4">¡Game Over!</h2>
+            <p class="mb-6 text-gray-700">No te rindas, ¡inténtalo de nuevo!</p>
+            <div class="flex justify-center">
+                <img src="pacman-lose.gif" alt="Derrota" class="w-24 h-24 md:w-32 md:h-32 mb-4" onerror="this.src='https://i.gifer.com/7VE.gif'; this.onerror=null;">
+            </div>
+            <button id="retry-game" class="pacman-button bg-pink-400 text-white px-4 md:px-6 py-2 rounded-full text-base md:text-lg font-semibold transition-all duration-300 hover:bg-pink-300 hover:scale-105">
+                Intentar de nuevo
+            </button>
+        </div>
+    </div>
+
+    <!-- Sobre Mí -->
+    <section id="about" class="container mx-auto py-20 px-6">
+        <h2 class="text-3xl font-bold text-pink-400 text-center">Sobre Mí</h2>
+        <p class="mt-4 text-center max-w-3xl mx-auto">Soy una apasionada del desarrollo web con experiencia en tecnologías modernas como JavaScript, PHP y bases de datos. Me especializo en crear soluciones innovadoras y funcionales.</p>
+    </section>
+        
+    <!-- Proyectos -->
+    <section id="projects" class="bg-pink-50 py-20">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-black text-center">Mis Proyectos</h2>
+
+            <!-- Sección de Desarrollo Web -->
+            <div class="mt-10">
+                <h3 class="text-2xl font-semibold text-center text-pink-400">Desarrollo Web</h3>
+                <div class="projects-grid grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+                    <!-- Proyecto 1 -->
+                    <div class="bg-black p-5 rounded-lg shadow-lg">
+                        <video class="w-full h-48 object-cover rounded" autoplay loop muted onclick="openModal('nuevo_proyecto_1')">
+                            <source src="Miniatura.mp4" type="video/mp4">
+                            Tu navegador no soporta el video.
+                        </video>
+                        <h3 class="text-xl font-semibold mt-2 text-white">Expedientes Escolares</h3>
+                        <p class="mt-2 text-white">Aplicación de Expedientes Escolares.</p>
+                        <div class="flex flex-wrap mt-3">
+                            <img src="html.png" alt="HTML" class="w-8 h-8 mr-2 mb-2">
+                            <img src="CSS.png" alt="CSS" class="w-8 h-8 mr-2 mb-2">
+                            <img src="py.png" alt="JavaScript" class="w-8 h-8 mr-2 mb-2">
+                            <img src="mysql.png" alt="JavaScript" class="w-8 h-8 mr-2 mb-2">
+                        </div>
+                        <a href="https://github.com/LizzLove90/expedientes-escolares.git" target="_blank" class="bg-pink-500 text-white px-4 py-2 rounded-md hover:bg-gray-600 mt-6 inline-block">Ver Código</a>
+                    </div>
+                    
+                    <!-- Proyecto 2 -->
+                    <div class="bg-black p-5 rounded-lg shadow-lg">
+                        <video class="w-full h-48 object-cover rounded" autoplay loop muted onclick="openModal('nuevo_proyecto_2')">
+                            <source src="min.mp4" type="video/mp4">
+                            Tu navegador no soporta el video.
+                        </video>
+                        <h3 class="text-xl font-semibold mt-2 text-white">Sistema de Seguimiento de Estudiantes</h3>
+                        <p class="mt-2 text-white">Aplicación para seguimiento de Estudiantes con Reportes y Citatorios Recurrentes.</p>
+                        <div class="flex flex-wrap mt-3">
+                            <img src="html.png" alt="HTML" class="w-8 h-8 mr-2 mb-2">
+                            <img src="CSS.png" alt="CSS" class="w-8 h-8 mr-2 mb-2">
+                            <img src="PHP.png" alt="JavaScript" class="w-8 h-8 mr-2 mb-2">
+                            <img src="mysql.png" alt="JavaScript" class="w-8 h-8 mr-2 mb-2">
+                        </div>
+                        <a href="https://github.com/LizzLove90/SEGUIMIENTO-DE-ESTUDIANTES" target="_blank" class="bg-pink-500 text-white px-4 py-2 rounded-md hover:bg-gray-600 mt-6 inline-block">Ver Código</a>
+                    </div>
+                    
+                    <!-- Proyecto 3 -->
+                    <div class="bg-black p-5 rounded-lg shadow-lg">
+                        <video class="w-full h-48 object-cover rounded" autoplay loop muted onclick="openModal('nuevo_proyecto_2')">
+                            <source src="mm.mp4" type="video/mp4">
+                            Tu navegador no soporta el video.
+                        </video>
+                        <h3 class="text-xl font-semibold mt-2 text-white">Tetris</h3>
+                        <p class="mt-2 text-white">Juego de Tetris.</p>
+                        <div class="flex flex-wrap mt-3">
+                            <img src="html.png" alt="HTML" class="w-8 h-8 mr-2 mb-2">
+                            <img src="CSS.png" alt="CSS" class="w-8 h-8 mr-2 mb-2">
+                            <img src="js.png" alt="JavaScript" class="w-8 h-8 mr-2 mb-2">
+                        </div>
+                        <a href="https://github.com/LizzLove90/Tetris" target="_blank" class="bg-pink-500 text-white px-4 py-2 rounded-md hover:bg-gray-600 mt-6 inline-block">Ver Código</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección de Diseño UI/UX -->
+            <div class="mt-10">
+                <h3 class="text-2xl font-semibold text-center text-pink-400">Diseño UI/UX</h3>
+                <div class="projects-grid grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+                    <!-- Proyecto UI/UX -->
+                    <div class="bg-black p-5 rounded-lg shadow-lg">
+                        <video class="w-full h-48 object-cover rounded" autoplay loop muted onclick="openModal('nuevo_proyecto_uiux')">
+                            <source src="MI.mp4" type="video/mp4">
+                            Tu navegador no soporta el video.
+                        </video>
+                        <h3 class="text-xl font-semibold mt-2 text-white">Diseño UI/UX para Aplicación Móvil de Gestión de Tareas</h3>
+                        <p class="mt-2 text-white">Diseño para una aplicación móvil de gestión de tareas, con enfoque en la experiencia del usuario.</p>
+                        <div class="flex flex-wrap mt-4">
+                            <a href="https://www.figma.com/design/uiux_project_link" target="_blank" class="bg-pink-400 text-white px-4 py-2 rounded-md hover:bg-pink-600 mr-2 mb-2">Ver diseño en Figma</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección de Diseño Gráfico -->
+            <div class="mt-10">
+                <h3 class="text-2xl font-semibold text-center text-pink-400">Diseño Gráfico</h3>
+                <div class="projects-grid grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+                    <!-- Proyecto Gráfico -->
+                    <div class="bg-black p-5 rounded-lg shadow-lg">
+                        <video class="w-full h-48 object-cover rounded" autoplay loop muted onclick="openModal('nuevo_proyecto_grafico')">
+                            <source src="mii.mp4" type="video/mp4">
+                            Tu navegador no soporta el video.
+                        </video>
+                        <h3 class="text-xl font-semibold mt-2 text-white">Overlay Evolución de Gengar para Twitch</h3>
+                        <p class="mt-2 text-white">Diseño de Overlay para Twitch.</p>
+                        <a href="https://dribbble.com/shots/25809205-Overlay-Evoluci-n-de-Gengar-para-Twitch?added_first_shot=true&new_shot_upload=true&utm_source=Clipboard_Shot&utm_campaign=lizsmiling&utm_content=Overlay%20Evoluci%C3%B3n%20de%20Gengar%20para%20Twitch&utm_medium=Social_Share&utm_source=Clipboard_Shot&utm_campaign=lizsmiling&utm_content=Overlay%20Evoluci%C3%B3n%20de%20Gengar%20para%20Twitch&utm_medium=Social_Share" target="_blank" class="text-pink-400 mt-3 inline-block hover:underline">Ver proyecto en Behance</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal de Imágenes -->
+    <div id="imageModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden">
+        <div class="relative w-full max-w-3xl p-4 bg-white rounded-lg mx-4">
+            <button id="closeModal" class="absolute top-4 right-4 text-xl text-white bg-red-500 rounded-full px-3 py-1">X</button>
+            <div class="flex justify-between items-center">
+                <button id="prevBtn" class="text-3xl text-pink-500" onclick="changeImage(-1)">&#10094;</button>
+                <img id="modalImage" src="" alt="Imagen del proyecto" class="w-full max-h-96 object-contain">
+                <button id="nextBtn" class="text-3xl text-pink-500" onclick="changeImage(1)">&#10095;</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Certificados -->
+    <section id="certificate" class="container mx-auto py-20 px-6">
+        <h2 class="text-3xl font-bold text-pink-400 text-center">Mis Certificados</h2>
+        <div class="relative mt-6">
+            <button id="prevCert" class="absolute left-0 top-1/2 transform -translate-y-1/2 text-3xl text-pink-500 hover:text-pink-700 bg-white bg-opacity-50 rounded-full p-2 z-10" onclick="changeCertificate(-1)">&#10094;</button>
+
+            <div id="certificatesContainer" class="overflow-x-hidden flex space-x-6 py-4 scroll-smooth">
+                <!-- Certificados (se generan con JavaScript) -->
+                <!-- Ejemplo de un certificado para mostrar la estructura -->
+                <div class="certificate-container min-w-max bg-pink-200 p-6 rounded-lg shadow-lg cursor-pointer" onclick="openCertificate('python.jpg')">
+                    <div class="bg-cover bg-center h-60 w-96" style="background-image: url('python.jpg'); background-size: contain; background-repeat: no-repeat;"></div>
+                </div>
+                <!-- Más certificados serán agregados por JavaScript -->
+            </div>
+
+            <button id="nextCert" class="absolute right-0 top-1/2 transform -translate-y-1/2 text-3xl text-pink-500 hover:text-pink-700 bg-white bg-opacity-50 rounded-full p-2 z-10" onclick="changeCertificate(1)">&#10095;</button>
+        </div>
+
+        <div class="flex justify-center mt-4 space-x-2 flex-wrap" id="navDots">
+            <!-- Los puntos se generarán aquí con JavaScript -->
+        </div>
+    </section>
+
+    <!-- Modal para visualizar el certificado a pantalla completa -->
+    <div id="certificateModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden">
+        <div class="relative w-full max-w-3xl p-4 bg-white rounded-lg mx-4">
+            <button id="closeCertModal" class="absolute top-4 right-4 text-xl text-white bg-red-500 rounded-full px-3 py-1">X</button>
+            <img id="certificateImage" src="" alt="Certificado en pantalla completa" class="w-full max-h-96 object-contain">
+        </div>
+    </div>
+
+    <!-- Habilidades -->
+    <section id="skills" class="bg-pink-50 py-20 overflow-hidden">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl font-bold text-black">Habilidades</h2>
+            <div class="flex flex-wrap justify-center gap-6 mt-10 md:flex-nowrap md:justify-start md:overflow-hidden md:whitespace-nowrap" id="skills-container">
+                <div class="flex flex-wrap justify-center gap-6 md:flex-nowrap md:gap-10" id="skills-track">
+                    <img src="html.png" alt="HTML5" class="w-12 h-12 md:w-16 md:h-16 object-contain">
+                    <img src="CSS.png" alt="CSS3" class="w-12 h-12 md:w-16 md:h-16 object-contain">
+                    <img src="js.png" alt="JavaScript" class="w-12 h-12 md:w-16 md:h-16 object-contain">
+                    <img src="PHP.png" alt="PHP" class="w-12 h-12 md:w-16 md:h-16 object-contain">
+                    <img src="mysql.png" alt="MySQL" class="w-12 h-12 md:w-16 md:h-16 object-contain">
+                    <img src="ruby.png" alt="Ruby" class="w-12 h-12 md:w-16 md:h-16 object-contain">
+                    <img src="py.png" alt="Python" class="w-12 h-12 md:w-16 md:h-16 object-contain">
+                    <img src="git.png" alt="Git" class="w-12 h-12 md:w-16 md:h-16 object-contain">
+                    <img src="FIGMA.png" alt="Figma" class="w-12 h-12 md:w-16 md:h-16 object-contain">
+                    <img src="ai.png" alt="Adobe Illustrator" class="w-12 h-12 md:w-16 md:h-16 object-contain">
+                    <img src="xd.png" alt="Adobe XD" class="w-12 h-12 md:w-16 md:h-16 object-contain">
+                    <img src="bi.png" alt="Power BI" class="w-12 h-12 md:w-16 md:h-16 object-contain">
+                    <img src="excel.png" alt="Excel" class="w-12 h-12 md:w-16 md:h-16 object-contain">
+                    <img src="sheet.png" alt="Google Sheets" class="w-12 h-12 md:w-16 md:h-16 object-contain">
+                </div>
+            </div>
+        </div>
+    </section>
+
+   <!-- Contacto (continuación) -->
+<section id="contact" class="container mx-auto py-20 px-6">
+    <h2 class="text-3xl font-bold text-pink-400 text-center">Contáctame</h2>
+    <form class="max-w-lg mx-auto mt-6">
+        <input type="text" placeholder="Tu Nombre" class="w-full p-2 mb-4 bg-pink-50 border border-pink-200 rounded text-black">
+        <input type="email" placeholder="Tu Email" class="w-full p-2 mb-4 bg-pink-50 border border-pink-200 rounded text-black">
+        <textarea placeholder="Tu Mensaje" class="w-full p-2 mb-4 bg-pink-50 border border-pink-200 rounded text-black h-32"></textarea>
+        <button class="bg-pink-400 text-white px-6 py-2 rounded-full font-semibold hover:bg-pink-500 transition-all duration-300 w-full">
+            Enviar
+        </button>
+    </form>
+
+    <div class="mt-8 text-center">
+        <p class="text-pink-400">Conéctame en mis redes sociales</p>
+        <div class="flex justify-center space-x-6 mt-4">
+            <!-- LinkedIn -->
+            <a href="https://www.linkedin.com/in/eva-lizeth-estrada-calleros-157b1929b/" target="_blank" class="text-pink-400 hover:text-pink-500 transition-all duration-300">
+                <i class="fab fa-linkedin fa-2x"></i>
+            </a>
+            <!-- GitHub -->
+            <a href="https://github.com/LizzLove90" target="_blank" class="text-pink-400 hover:text-pink-500 transition-all duration-300">
+                <i class="fab fa-github fa-2x"></i>
+            </a>
+            <!-- WhatsApp -->
+            <a href="https://wa.me/6647510372" target="_blank" class="text-pink-400 hover:text-pink-500 transition-all duration-300">
+                <i class="fab fa-whatsapp fa-2x"></i>
+            </a>
+            <!-- Email -->
+            <a href="mailto:lizeth.estradac90@gmail.com" class="text-pink-400 hover:text-pink-500 transition-all duration-300">
+                <i class="fas fa-envelope fa-2x"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-pink-200 py-6 text-center text-black">
+    <div class="container mx-auto px-4">
+        <p class="text-base md:text-lg">&copy; 2025 Eva Lizeth Estrada. Todos los derechos reservados.</p>
+        <div class="flex justify-center space-x-4 mt-3">
+            <a href="#hero" class="text-pink-600 hover:text-pink-800 transition-all duration-300">
+                <i class="fas fa-arrow-up"></i> Volver arriba
+            </a>
+        </div>
+    </div>
+</footer>
+
+<!-- Script de Partículas -->
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<script>
+// Inicializar partículas solo en pantallas medianas y grandes
+function initParticles() {
+    if (window.innerWidth > 768) { // Verificar si la pantalla es lo suficientemente grande
+        particlesJS("particles-js", {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: "#f53b88" },  // Rosa pastel
+                shape: { type: "circle" },
+                opacity: { value: 0.7, random: true },
+                size: { value: 3, random: true },
+                move: { enable: true, speed: 2, direction: "none", out_mode: "out" }
+            },
+            background: {
+                color: "#F7D1D0"  // Rosa pastel
+            }
+        });
+    }
+}
+
+// Llamar a la función cuando el DOM esté cargado
+document.addEventListener('DOMContentLoaded', initParticles);
+
+// Y también al redimensionar la ventana (con debounce para rendimiento)
+let resizeTimer;
+window.addEventListener('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(initParticles, 250);
+});
+</script>
+
+<!-- Script para Modal de Imágenes -->
+<script>
+// Objeto con las imágenes de cada proyecto
+const projectImages = {
+    "nuevo_proyecto_1": ["15.png","16.png"], // Agregar imágenes del nuevo proyecto
+    "nuevo_proyecto_2": ["17.png","18.png","19.png","20.png","21.png","22.png","23.png"], // Agregar imágenes del nuevo proyecto
+    "nuevo_proyecto_uiux": ["1.png", "2.png", "3.png", "4.png", "5.png", "6.png", "7.png", "8.png", "9.png", "10.png", "11.png", "12.png", "13.png", "14.png"], // Agregar imágenes del nuevo proyecto UI/UX
+    "nuevo_proyecto_grafico": ["Overlay.gif"] // Agregar imágenes del nuevo proyecto gráfico
+};
+
+let currentProject = []; // Imágenes del proyecto seleccionado
+let currentIndex = 0; // Índice de la imagen actual
+
+// Función para abrir el modal y mostrar las imágenes del proyecto seleccionado
+function openModal(projectKey) {
+    currentProject = projectImages[projectKey] || []; // Obtener imágenes del proyecto
+    if (currentProject.length > 0) {
+        currentIndex = 0;
+        document.getElementById('modalImage').src = currentProject[currentIndex];
+        document.getElementById('imageModal').classList.remove('hidden');
+    }
+}
+
+// Función para cambiar la imagen en el modal
+function changeImage(direction) {
+    if (currentProject.length > 1) {
+        currentIndex = (currentIndex + direction + currentProject.length) % currentProject.length;
+        document.getElementById('modalImage').src = currentProject[currentIndex];
+    }
+}
+
+// Cerrar el modal
+document.getElementById('closeModal').addEventListener('click', function() {
+    document.getElementById('imageModal').classList.add('hidden');
+});
+
+// También cerrar al hacer clic fuera del contenido del modal
+document.getElementById('imageModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+        this.classList.add('hidden');
+    }
+});
+
+// Navegación con teclado para el modal
+document.addEventListener('keydown', function(e) {
+    if (!document.getElementById('imageModal').classList.contains('hidden')) {
+        if (e.key === 'ArrowLeft') {
+            changeImage(-1);
+        } else if (e.key === 'ArrowRight') {
+            changeImage(1);
+        } else if (e.key === 'Escape') {
+            document.getElementById('imageModal').classList.add('hidden');
+        }
+    }
+});
+</script>
+
+<!-- Script para Certificados -->
+<script>
+// Arreglo de las imágenes de los certificados
+const certificates = [
+    "python.jpg", "UI.jpg", "ux.jpeg", "php.jpeg", "ruby.jpeg", "html.jpeg", "python.jpeg", "powerbi.jpeg", "excel.jpeg", 
+    "excela.png", "sheets.png", "Legacy JavaScript Algorithms and Data Structures.png", "Relational Database.png", "Front End Development Libraries.png", "Responsive Web Design.png", "c.png"
+];
+
+let currentCertIndex = 0;
+
+// Función para abrir un certificado en pantalla completa
+function openCertificate(cert) {
+    document.getElementById('certificateImage').src = cert;
+    document.getElementById('certificateModal').classList.remove('hidden');
+}
+
+// Función para cambiar al siguiente o anterior certificado
+function changeCertificate(direction) {
+    const containerWidth = document.getElementById('certificatesContainer').offsetWidth;
+    const certificateWidth = document.querySelector('.certificate-container').offsetWidth + 24; // Ancho + margen
+    const visibleCerts = Math.floor(containerWidth / certificateWidth);
+    
+    if (direction > 0) {
+        // Asegurarse de que no nos pasemos del final
+        if (currentCertIndex + visibleCerts < certificates.length) {
+            currentCertIndex += 1;
+        }
+    } else {
+        // Asegurarse de que no nos pasemos del inicio
+        if (currentCertIndex > 0) {
+            currentCertIndex -= 1;
+        }
+    }
+    
+    const scrollPosition = certificateWidth * currentCertIndex;
+    document.getElementById('certificatesContainer').scrollTo({
+        left: scrollPosition,
+        behavior: 'smooth'
+    });
+
+    updateDots();
+}
+
+// Cerrar el modal del certificado
+document.getElementById('closeCertModal').addEventListener('click', function() {
+    document.getElementById('certificateModal').classList.add('hidden');
+});
+
+// También cerrar al hacer clic fuera del contenido del modal
+document.getElementById('certificateModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+        this.classList.add('hidden');
+    }
+});
+
+// Actualizar los puntos de navegación debajo del carrusel
+function updateDots() {
+    const navDots = document.getElementById('navDots');
+    navDots.innerHTML = '';
+    
+    const containerWidth = document.getElementById('certificatesContainer').offsetWidth;
+    const certificateWidth = document.querySelector('.certificate-container').offsetWidth + 24;
+    const visibleCerts = Math.floor(containerWidth / certificateWidth);
+    const totalGroups = Math.ceil(certificates.length / visibleCerts);
+    
+    // Crear un punto por cada grupo
+    for (let i = 0; i < totalGroups; i++) {
+        const dot = document.createElement('div');
+        dot.classList.add('w-3', 'h-3', 'rounded-full', 'bg-pink-100', 'cursor-pointer', 'mb-2');
+        
+        // Resaltar el punto activo
+        if (Math.floor(currentCertIndex / visibleCerts) === i) {
+            dot.classList.add('bg-pink-400');
+        }
+        
+        dot.addEventListener('click', () => {
+            currentCertIndex = i * visibleCerts;
+            const scrollPosition = certificateWidth * currentCertIndex;
+            document.getElementById('certificatesContainer').scrollTo({
+                left: scrollPosition,
+                behavior: 'smooth'
+            });
+            updateDots();
+        });
+        
+        navDots.appendChild(dot);
+    }
+}
+
+// Inicializar el carrusel de certificados
+document.addEventListener('DOMContentLoaded', function() {
+    const certificatesContainer = document.getElementById('certificatesContainer');
+    
+    // Limpiar cualquier contenido existente
+    certificatesContainer.innerHTML = '';
+    
+    // Crear elementos para cada certificado
+    certificates.forEach((cert, index) => {
+        const certDiv = document.createElement('div');
+        certDiv.className = 'certificate-container min-w-max bg-pink-200 p-6 rounded-lg shadow-lg cursor-pointer';
+        certDiv.onclick = function() { openCertificate(cert); };
+        
+        const imgContainer = document.createElement('div');
+        imgContainer.className = 'bg-cover bg-center h-60 w-96';
+        imgContainer.style.backgroundImage = `url('${cert}')`;
+        imgContainer.style.backgroundSize = 'contain';
+        imgContainer.style.backgroundRepeat = 'no-repeat';
+        
+        certDiv.appendChild(imgContainer);
+        certificatesContainer.appendChild(certDiv);
+    });
+    
+    // Inicializar los puntos de navegación
+    updateDots();
+    
+    // Ajustar al redimensionar
+    window.addEventListener('resize', updateDots);
+});
+
+// Navegación con teclado para el modal de certificados
+document.addEventListener('keydown', function(e) {
+    if (!document.getElementById('certificateModal').classList.contains('hidden')) {
+        if (e.key === 'Escape') {
+            document.getElementById('certificateModal').classList.add('hidden');
+        }
+    }
+});
+</script>
+
+<!-- Script para Animación en Sección de Habilidades -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Solo aplicar la animación en pantallas medianas y grandes
+    if (window.innerWidth > 768) {
+        gsap.to("#skills-track", {
+            x: "-50%",
+            duration: 15,
+            repeat: -1,
+            ease: "linear"
+        });
+    }
+});
+
+// Reiniciar animación si cambia el tamaño de la ventana
+window.addEventListener('resize', function() {
+    if (window.innerWidth > 768) {
+        gsap.to("#skills-track", {
+            x: "-50%",
+            duration: 15,
+            repeat: -1,
+            ease: "linear"
+        });
+    } else {
+        gsap.killTweensOf("#skills-track");
+        gsap.set("#skills-track", { x: 0 });
+    }
+});
+</script>
+
+<!-- Script para el Juego de Pac-Man -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Referencias a los elementos del DOM
+    const canvas = document.getElementById('pacman-canvas');
+    const ctx = canvas.getContext('2d');
+    const scoreElement = document.getElementById('score');
+    const livesElement = document.getElementById('lives');
+    const startButton = document.getElementById('start-game');
+    const gameSection = document.getElementById('pacman-game');
+    const victoryOverlay = document.getElementById('victory-overlay');
+    const gameOverOverlay = document.getElementById('game-over-overlay');
+    const viewProjectsButton = document.getElementById('view-projects');
+    const retryButton = document.getElementById('retry-game');
+
+    // Ajustar tamaño del canvas según el tamaño de la pantalla
+    function adjustCanvasSize() {
+        if (window.innerWidth < 768) {
+            // En móviles, ajustar proporcionalmente
+            const containerWidth = canvas.parentElement.offsetWidth;
+            const aspectRatio = 460 / 420;
+            canvas.width = containerWidth;
+            canvas.height = containerWidth * aspectRatio;
+        } else {
+            // En pantallas grandes, tamaño original
+            canvas.width = 420;
+            canvas.height = 460;
+        }
+    }
+
+    // Llamar a adjustCanvasSize al cargar y al redimensionar
+    adjustCanvasSize();
+    window.addEventListener('resize', adjustCanvasSize);
+
+    // Dimensiones del laberinto y tamaño de celda
+    let CELL_SIZE, ROWS, COLS, WIDTH, HEIGHT;
+
+    function updateDimensions() {
+        ROWS = 23;
+        COLS = 21;
+        CELL_SIZE = canvas.width / COLS;
+        WIDTH = COLS * CELL_SIZE;
+        HEIGHT = ROWS * CELL_SIZE;
+    }
+
+    updateDimensions();
+    window.addEventListener('resize', updateDimensions);
+
+    // Colores
+    const COLORS = {
+        wall: '#f705a3',      // Rosa fuerte
+        path: '#FFE4E1',      // Rosa muy claro
+        dot: '#0a0a0a',       // Rosa medio
+        pacman: '#FFFF00',    // Amarillo
+        ghost1: '#c859ff',    // Morado
+        ghost2: '#FF5A87',    // Rosa medio
+        ghost3: '#59f9ff',    // Azul cielo
+        ghost4: '#59ffcd'     // Menta
+    };
+
+    // Estado del juego
+    let gameRunning = false;
+    let gameWon = false;
+    let score = 0;
+    let lives = 3;
+    let totalDots = 0;
+    let dotsEaten = 0;
+
+    // AÑADIR AQUÍ: Variables para controlar velocidad de Pac-Man
+    let pacmanMoveInterval = 0;
+    const PACMAN_MOVE_DELAY = 10; // Ajusta este valor para controlar la velocidad (mayor = más lento)
+
+    // Dirección actual y siguiente de Pac-Man (0: ninguna, 1: arriba, 2: derecha, 3: abajo, 4: izquierda)
+    let currentDirection = 0;
+    let nextDirection = 0;
+
+    // Posición de Pac-Man
+    let pacman = {
+        x: 10,
+        y: 15,
+        mouthOpen: true,
+        mouthAngle: 0.2
+    };
+
+    // Posición de fantasmas
+    let ghosts = [
+        { x: 10, y: 11, direction: Math.floor(Math.random() * 4) + 1, color: COLORS.ghost1, speed: 1 },
+        { x: 9, y: 11, direction: Math.floor(Math.random() * 4) + 1, color: COLORS.ghost2, speed: 0.8 },
+        { x: 11, y: 11, direction: Math.floor(Math.random() * 4) + 1, color: COLORS.ghost3, speed: 0.7 },
+        { x: 10, y: 10, direction: Math.floor(Math.random() * 4) + 1, color: COLORS.ghost4, speed: 0.9 }
+    ];
+
+    // Controlador de animación
+    let animationId;
+    let lastTime = 0;
+    let pacmanMouthInterval;
+    let ghostMoveInterval = 0;
+
+    // Laberinto (0: camino, 1: pared, 2: punto)
+    let maze = [
+        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1],
+        [1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1],
+        [1, 2, 1, 0, 1, 2, 1, 0, 1, 2, 1, 2, 1, 0, 1, 2, 1, 0, 1, 2, 1],
+        [1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1],
+        [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1],
+        [1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1],
+        [1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1],
+        [1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1],
+        [1, 1, 1, 1, 1, 2, 1, 1, 1, 0, 1, 0, 1, 1, 1, 2, 1, 1, 1, 1, 1],
+        [0, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0],
+        [0, 0, 0, 0, 1, 2, 1, 0, 1, 1, 0, 1, 1, 0, 1, 2, 1, 0, 0, 0, 0],
+        [1, 1, 1, 1, 1, 2, 1, 0, 1, 0, 0, 0, 1, 0, 1, 2, 1, 1, 1, 1, 1],
+        [0, 0, 0, 0, 0, 2, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2, 0, 0, 0, 0, 0],
+        [1, 1, 1, 1, 1, 2, 1, 0, 1, 1, 1, 1, 1, 0, 1, 2, 1, 1, 1, 1, 1],
+        [0, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0],
+        [0, 0, 0, 0, 1, 2, 1, 0, 1, 1, 1, 1, 1, 0, 1, 2, 1, 0, 0, 0, 0],
+        [1, 1, 1, 1, 1, 2, 1, 0, 1, 1, 1, 1, 1, 0, 1, 2, 1, 1, 1, 1, 1],
+        [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1],
+        [1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1],
+        [1, 2, 2, 2, 1, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 1, 2, 2, 2, 1],
+        [1, 1, 1, 2, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 2, 1, 1, 1],
+        [1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1]
+    ];
+
+    // Contar puntos totales
+    function countTotalDots() {
+        totalDots = 0;
+        for (let y = 0; y < ROWS; y++) {
+            for (let x = 0; x < COLS; x++) {
+                if (maze[y][x] === 2) {
+                    totalDots++;
+                }
+            }
+        }
+    }
+    
+    countTotalDots();
+
+    // Inicializar eventos
+    function initEvents() {
+        // Controles de teclado para el movimiento
+        document.addEventListener('keydown', function(e) {
+            if (!gameRunning) return;
+
+            // Flechas de dirección
+            switch (e.key) {
+                case 'ArrowUp':
+                    nextDirection = 1;
+                    break;
+                case 'ArrowRight':
+                    nextDirection = 2;
+                    break;
+                case 'ArrowDown':
+                    nextDirection = 3;
+                    break;
+                case 'ArrowLeft':
+                    nextDirection = 4;
+                    break;
+            }
+        });
+
+        // Controles táctiles para dispositivos móviles
+        let touchStartX = 0;
+        let touchStartY = 0;
+        
+        canvas.addEventListener('touchstart', function(e) {
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+            e.preventDefault();
+        }, { passive: false });
+        
+        canvas.addEventListener('touchmove', function(e) {
+            if (!gameRunning) return;
+            
+            const touchEndX = e.touches[0].clientX;
+            const touchEndY = e.touches[0].clientY;
+            
+            const diffX = touchStartX - touchEndX;
+            const diffY = touchStartY - touchEndY;
+            
+            // Determinar dirección del deslizamiento
+            if (Math.abs(diffX) > Math.abs(diffY)) {
+                // Deslizamiento horizontal
+                if (diffX > 0) {
+                    // Deslizar a la izquierda
+                    nextDirection = 4;
+                } else {
+                    // Deslizar a la derecha
+                    nextDirection = 2;
+                }
+            } else {
+                // Deslizamiento vertical
+                if (diffY > 0) {
+                    // Deslizar hacia arriba
+                    nextDirection = 1;
+                } else {
+                    // Deslizar hacia abajo
+                    nextDirection = 3;
+                }
+            }
+            
+            e.preventDefault();
+        }, { passive: false });
+
+        // Iniciar juego
+        startButton.addEventListener('click', startGame);
+
+        // Ver proyectos
+        viewProjectsButton.addEventListener('click', function() {
+            victoryOverlay.classList.add('hidden');
+            gameSection.classList.add('hidden');
+            
+            // Hacer scroll a la sección de proyectos
+            document.getElementById('projects').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // Reintentar juego
+        retryButton.addEventListener('click', function() {
+            gameOverOverlay.classList.add('hidden');
+            resetGame();
+            startGame();
+        });
+    }
+
+    // Dibujar el laberinto
+    function drawMaze() {
+        for (let y = 0; y < ROWS; y++) {
+            for (let x = 0; x < COLS; x++) {
+                if (maze[y][x] === 1) {
+                    // Pared
+                    ctx.fillStyle = COLORS.wall;
+                    ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+                    
+                    // Añadir un borde para hacerlo kawaii
+                    ctx.strokeStyle = '#FF9CC5';
+                    ctx.lineWidth = 2;
+                    ctx.strokeRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+                } else {
+                    // Camino
+                    ctx.fillStyle = COLORS.path;
+                    ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+                    
+                    // Dibujar puntos
+                    if (maze[y][x] === 2) {
+                        ctx.fillStyle = COLORS.dot;
+                        ctx.beginPath();
+                        ctx.arc(x * CELL_SIZE + CELL_SIZE / 2, y * CELL_SIZE + CELL_SIZE / 2, CELL_SIZE / 6, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                }
+            }
+        }
+    }
+
+    // Dibujar Pac-Man
+    function drawPacman() {
+        const x = pacman.x * CELL_SIZE + CELL_SIZE / 2;
+        const y = pacman.y * CELL_SIZE + CELL_SIZE / 2;
+        const radius = CELL_SIZE / 2 - 2;
+        
+        // Ángulo de la boca según la dirección
+        let startAngle = 0;
+        let endAngle = 2 * Math.PI;
+        
+        if (pacman.mouthOpen) {
+            switch (currentDirection) {
+                case 1: // Arriba
+                    startAngle = Math.PI * 1.25 + pacman.mouthAngle;
+                    endAngle = Math.PI * 2.75 - pacman.mouthAngle;
+                    break;
+                case 2: // Derecha
+                    startAngle = pacman.mouthAngle;
+                    endAngle = 2 * Math.PI - pacman.mouthAngle;
+                    break;
+                case 3: // Abajo
+                    startAngle = Math.PI * 0.75 + pacman.mouthAngle;
+                    endAngle = Math.PI * 2.25 - pacman.mouthAngle;
+                    break;
+                case 4: // Izquierda
+                    startAngle = Math.PI + pacman.mouthAngle;
+                    endAngle = Math.PI - pacman.mouthAngle;
+                    break;
+                default:
+                    startAngle = pacman.mouthAngle;
+                    endAngle = 2 * Math.PI - pacman.mouthAngle;
+            }
+        }
+        
+        // Dibujar a Pac-Man
+        ctx.fillStyle = COLORS.pacman;
+        ctx.beginPath();
+        ctx.arc(x, y, radius, startAngle, endAngle);
+        if (pacman.mouthOpen && currentDirection !== 0) {
+            ctx.lineTo(x, y);
+        }
+        ctx.fill();
+        
+        // Dibujar ojo kawaii
+        ctx.fillStyle = '#000';
+        let eyeX = x;
+        let eyeY = y;
+        
+        switch (currentDirection) {
+            case 1: // Arriba
+                eyeX -= 3;
+                eyeY -= 5;
+                break;
+            case 2: // Derecha
+                eyeX += 3;
+                eyeY -= 5;
+                break;
+            case 3: // Abajo
+                eyeX += 3;
+                eyeY += 0;
+                break;
+            case 4: // Izquierda
+                eyeX -= 3;
+                eyeY -= 5;
+                break;
+            default:
+                eyeX += 3;
+                eyeY -= 5;
+        }
+        
+        ctx.beginPath();
+        ctx.arc(eyeX, eyeY, 2, 0, Math.PI * 2);
+        ctx.fill();
+        
+        // Añadir rubor kawaii
+        ctx.fillStyle = 'rgba(255, 150, 150, 0.5)';
+        ctx.beginPath();
+        ctx.arc(x + radius * 0.5, y + radius * 0.3, radius * 0.3, 0, Math.PI * 2);
+        ctx.fill();
+        
+        ctx.beginPath();
+        ctx.arc(x - radius * 0.5, y + radius * 0.3, radius * 0.3, 0, Math.PI * 2);
+        ctx.fill();
+    }
+    
+    // Dibujar fantasmas
+    function drawGhosts() {
+        ghosts.forEach(ghost => {
+            const x = ghost.x * CELL_SIZE + CELL_SIZE / 2;
+            const y = ghost.y * CELL_SIZE + CELL_SIZE / 2;
+            const radius = CELL_SIZE / 2 - 2;
+            
+            // Cuerpo del fantasma
+            ctx.fillStyle = ghost.color;
+            ctx.beginPath();
+            ctx.arc(x, y - 2, radius, Math.PI, 0, false);
+            ctx.lineTo(x + radius, y + radius);
+            
+            // Base ondulada
+            const waveCount = 4;
+            const waveHeight = 3;
+            const waveWidth = (radius * 2) / waveCount;
+            
+            for (let i = 0; i < waveCount; i++) {
+                ctx.quadraticCurveTo(
+                    x + radius - waveWidth * i - waveWidth / 2, 
+                    y + radius + waveHeight,
+                    x + radius - waveWidth * (i + 1), 
+                    y + radius
+                );
+            }
+            
+            ctx.lineTo(x - radius, y + radius);
+            ctx.closePath();
+            ctx.fill();
+            
+            // Ojos
+            ctx.fillStyle = '#FFF';
+            ctx.beginPath();
+            ctx.arc(x - 4, y - 2, 4, 0, Math.PI * 2);
+            ctx.arc(x + 4, y - 2, 4, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Pupilas
+            ctx.fillStyle = '#000';
+            let pupilOffsetX = 0;
+            let pupilOffsetY = 0;
+            
+            switch (ghost.direction) {
+                case 1: // Arriba
+                    pupilOffsetY = -1;
+                    break;
+                case 2: // Derecha
+                    pupilOffsetX = 1;
+                    break;
+                case 3: // Abajo
+                    pupilOffsetY = 1;
+                    break;
+                case 4: // Izquierda
+                    pupilOffsetX = -1;
+                    break;
+            }
+            
+            ctx.beginPath();
+            ctx.arc(x - 4 + pupilOffsetX, y - 2 + pupilOffsetY, 2, 0, Math.PI * 2);
+            ctx.arc(x + 4 + pupilOffsetX, y - 2 + pupilOffsetY, 2, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Boca kawaii
+            ctx.strokeStyle = '#000';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.arc(x, y + 3, 2, 0, Math.PI);
+            ctx.stroke();
+        });
+    }
+
+    // Actualizar la posición de Pac-Man
+    function updatePacman() {
+        // Control de velocidad para Pac-Man
+        pacmanMoveInterval += 1;
+        if (pacmanMoveInterval < PACMAN_MOVE_DELAY) return; // Esperar hasta el siguiente intervalo
+        pacmanMoveInterval = 0;
+        
+        // Verificar si el movimiento en la dirección siguiente es válido
+        let nextX = pacman.x;
+        let nextY = pacman.y;
+        
+        switch (nextDirection) {
+            case 1: // Arriba
+                nextY--;
+                break;
+            case 2: // Derecha
+                nextX++;
+                break;
+            case 3: // Abajo
+                nextY++;
+                break;
+            case 4: // Izquierda
+                nextX--;
+                break;
+        }
+        
+        // Si la dirección siguiente es válida, actualizar la dirección actual
+        if (nextX >= 0 && nextX < COLS && nextY >= 0 && nextY < ROWS && maze[nextY][nextX] !== 1) {
+            currentDirection = nextDirection;
+        }
+        
+        // Mover en la dirección actual
+        nextX = pacman.x;
+        nextY = pacman.y;
+        
+        switch (currentDirection) {
+            case 1: // Arriba
+                nextY--;
+                break;
+            case 2: // Derecha
+                nextX++;
+                break;
+            case 3: // Abajo
+                nextY++;
+                break;
+            case 4: // Izquierda
+                nextX--;
+                break;
+        }
+        
+        // Verificar si el movimiento es válido
+        if (nextX >= 0 && nextX < COLS && nextY >= 0 && nextY < ROWS && maze[nextY][nextX] !== 1) {
+            pacman.x = nextX;
+            pacman.y = nextY;
+            
+            // Comer punto
+            if (maze[nextY][nextX] === 2) {
+                maze[nextY][nextX] = 0;
+                score += 10;
+                dotsEaten++;
+                scoreElement.textContent = score;
+                
+                // Verificar victoria
+                if (dotsEaten >= totalDots) {
+                    gameWon = true;
+                    endGame();
+                }
+            }
+        }
+    }
+    
+    // Actualizar la posición de los fantasmas
+    function updateGhosts() {
+        ghostMoveInterval += 1;
+        if (ghostMoveInterval < 15) return; // Ralentizar el movimiento de los fantasmas
+        ghostMoveInterval = 0;
+        
+        ghosts.forEach(ghost => {
+            // Decidir aleatoriamente si cambiar de dirección
+            if (Math.random() < 0.3) {
+                // Intentar moverse hacia Pac-Man con cierta probabilidad
+                if (Math.random() < 0.5) {
+                    if (pacman.x < ghost.x) ghost.direction = 4; // Izquierda
+                    else if (pacman.x > ghost.x) ghost.direction = 2; // Derecha
+                    else if (pacman.y < ghost.y) ghost.direction = 1; // Arriba
+                    else if (pacman.y > ghost.y) ghost.direction = 3; // Abajo
+                } else {
+                    // Dirección aleatoria
+                    ghost.direction = Math.floor(Math.random() * 4) + 1;
+                }
+            }
+            
+            // Intentar mover en la dirección actual
+            let nextX = ghost.x;
+            let nextY = ghost.y;
+            
+            switch (ghost.direction) {
+                case 1: // Arriba
+                    nextY--;
+                    break;
+                case 2: // Derecha
+                    nextX++;
+                    break;
+                case 3: // Abajo
+                    nextY++;
+                    break;
+                case 4: // Izquierda
+                    nextX--;
+                    break;
+            }
+            
+            // Verificar si el movimiento es válido
+            if (nextX >= 0 && nextX < COLS && nextY >= 0 && nextY < ROWS && maze[nextY][nextX] !== 1) {
+                ghost.x = nextX;
+                ghost.y = nextY;
+            } else {
+                // Si no es válido, cambiar a una dirección aleatoria
+                ghost.direction = Math.floor(Math.random() * 4) + 1;
+            }
+            
+            // Verificar colisión con Pac-Man
+            if (Math.abs(ghost.x - pacman.x) < 0.5 && Math.abs(ghost.y - pacman.y) < 0.5) {
+                lives--;
+                livesElement.textContent = lives;
+                
+                // Verificar game over
+                if (lives <= 0) {
+                    endGame();
+                } else {
+                    // Reiniciar posiciones
+                    resetPositions();
+                }
+            }
+        });
+    }
+    
+    // Animación de la boca de Pac-Man
+    function animatePacmanMouth() {
+        pacman.mouthOpen = !pacman.mouthOpen;
+    }
+    
+    // Reiniciar las posiciones
+    function resetPositions() {
+        pacman.x = 10;
+        pacman.y = 15;
+        currentDirection = 0;
+        nextDirection = 0;
+        
+        ghosts = [
+            { x: 10, y: 11, direction: Math.floor(Math.random() * 4) + 1, color: COLORS.ghost1, speed: 1 },
+            { x: 9, y: 11, direction: Math.floor(Math.random() * 4) + 1, color: COLORS.ghost2, speed: 0.8 },
+            { x: 11, y: 11, direction: Math.floor(Math.random() * 4) + 1, color: COLORS.ghost3, speed: 0.7 },
+            { x: 10, y: 10, direction: Math.floor(Math.random() * 4) + 1, color: COLORS.ghost4, speed: 0.9 }
+        ];
+    }
+    
+    // Reiniciar el juego
+    function resetGame() {
+        gameRunning = false;
+        gameWon = false;
+        score = 0;
+        lives = 3;
+        dotsEaten = 0;
+        scoreElement.textContent = score;
+        livesElement.textContent = lives;
+        
+        // Reiniciar el laberinto (regenerar los puntos)
+        maze = [
+            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+            [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1],
+            [1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1],
+            [1, 2, 1, 0, 1, 2, 1, 0, 1, 2, 1, 2, 1, 0, 1, 2, 1, 0, 1, 2, 1],
+            [1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1],
+            [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1],
+            [1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1],
+            [1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1],
+            [1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1],
+            [1, 1, 1, 1, 1, 2, 1, 1, 1, 0, 1, 0, 1, 1, 1, 2, 1, 1, 1, 1, 1],
+            [0, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0],
+            [0, 0, 0, 0, 1, 2, 1, 0, 1, 1, 0, 1, 1, 0, 1, 2, 1, 0, 0, 0, 0],
+            [1, 1, 1, 1, 1, 2, 1, 0, 1, 0, 0, 0, 1, 0, 1, 2, 1, 1, 1, 1, 1],
+            [0, 0, 0, 0, 0, 2, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2, 0, 0, 0, 0, 0],
+            [1, 1, 1, 1, 1, 2, 1, 0, 1, 1, 1, 1, 1, 0, 1, 2, 1, 1, 1, 1, 1],
+            [0, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0],
+            [0, 0, 0, 0, 1, 2, 1, 0, 1, 1, 1, 1, 1, 0, 1, 2, 1, 0, 0, 0, 0],
+            [1, 1, 1, 1, 1, 2, 1, 0, 1, 1, 1, 1, 1, 0, 1, 2, 1, 1, 1, 1, 1],
+            [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1],
+            [1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1],
+            [1, 2, 2, 2, 1, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 1, 2, 2, 2, 1],
+            [1, 1, 1, 2, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 2, 1, 1, 1],
+            [1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1]
+        ];
+        
+        // Contar puntos totales de nuevo
+        countTotalDots();
+        resetPositions();
+    }
+    
+    // Bucle principal del juego
+    function gameLoop(timestamp) {
+        // Calcular delta de tiempo
+        const deltaTime = timestamp - lastTime;
+        lastTime = timestamp;
+        
+        // Limpiar el canvas
+        ctx.clearRect(0, 0, WIDTH, HEIGHT);
+        
+        // Dibujar elementos
+        drawMaze();
+        drawPacman();
+        drawGhosts();
+        
+        // Actualizar el estado del juego
+        updatePacman();
+        updateGhosts();
+        
+        // Continuar el bucle si el juego sigue corriendo
+        if (gameRunning) {
+            animationId = requestAnimationFrame(gameLoop);
+        }
+    }
+    
+    // Iniciar el juego
+    function startGame() {
+        if (gameRunning) return;
+        
+        gameRunning = true;
+        startButton.innerText = "Jugando...";
+        startButton.disabled = true;
+        
+        // Iniciar animación de la boca
+        pacmanMouthInterval = setInterval(animatePacmanMouth, 200);
+        
+        // Iniciar bucle del juego
+        lastTime = performance.now();
+        animationId = requestAnimationFrame(gameLoop);
+    }
+    
+    // Finalizar el juego
+    function endGame() {
+        gameRunning = false;
+        clearInterval(pacmanMouthInterval);
+        cancelAnimationFrame(animationId);
+        startButton.innerText = "Iniciar Juego";
+        startButton.disabled = false;
+        
+        if (gameWon) {
+            victoryOverlay.classList.remove('hidden');
+        } else {
+            gameOverOverlay.classList.remove('hidden');
+        }
+    }
+    
+    // Inicializar el juego
+    initEvents();
+    drawMaze();
+    drawPacman();
+    drawGhosts();
+});
+</script>
+
+<!-- Script para el botón "Skip Game" para móviles -->
+<script>
+// Añadir un botón para saltar el juego en dispositivos móviles
+document.addEventListener('DOMContentLoaded', function() {
+    // Crear el botón Skip solo si estamos en un dispositivo móvil
+    if (window.innerWidth < 768) {
+        const skipButton = document.createElement('button');
+        skipButton.className = 'pacman-button mt-2 bg-gray-400 text-white px-4 py-1 rounded-full text-sm font-semibold transition-all duration-300 hover:bg-gray-500';
+        skipButton.innerText = 'Saltar juego';
+        skipButton.addEventListener('click', function() {
+            document.getElementById('pacman-game').classList.add('hidden');
+            document.getElementById('projects').scrollIntoView({ behavior: 'smooth' });
+        });
+        
+        // Agregar el botón después del botón de inicio
+        const startButton = document.getElementById('start-game');
+        startButton.parentNode.insertBefore(skipButton, startButton.nextSibling);
+    }
+});
+</script>
+
+<!-- Script para la navegación fluida -->
+<script>
+// Navegación fluida para los enlaces del menú
+document.addEventListener('DOMContentLoaded', function() {
+    const menuLinks = document.querySelectorAll('header a[href^="#"]');
+    
+    menuLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Si estamos en móvil, cerrar el menú desplegable
+            if (window.innerWidth < 768) {
+                const menuToggle = document.querySelector('.mobile-menu [x-data]');
+                if (menuToggle && typeof menuToggle.__x !== 'undefined') {
+                    menuToggle.__x.updateElements(menuToggle);
+                }
+            }
+            
+            // Desplazamiento suave a la sección
+            const targetId = this.getAttribute('href');
+            const targetSection = document.querySelector(targetId);
+            
+            if (targetSection) {
+                const headerHeight = document.querySelector('header').offsetHeight;
+                const targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+});
+</script>
+
+<!-- Script para efectos de desplazamiento -->
+<script>
+// Efectos de aparición al desplazarse
+document.addEventListener('DOMContentLoaded', function() {
+    // Verificar si GSAP está disponible
+    if (typeof gsap !== 'undefined') {
+        // Elementos a animar
+        const sections = document.querySelectorAll('section:not(#pacman-game)');
+        
+        // Configurar animaciones
+        sections.forEach((section, index) => {
+            gsap.fromTo(
+                section, 
+                { opacity: 0, y: 50 }, 
+                { 
+                    opacity: 1, 
+                    y: 0, 
+                    duration: 0.8, 
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "top 80%",
+                        toggleActions: "play none none none"
+                    }
+                }
+            );
+        });
+    }
+});
+</script>
+
+</body>
+</html>
