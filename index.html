@@ -577,12 +577,12 @@
     </div>
 </section>
 
-<!-- Script para EmailJS -->
+<!-- Script para EmailJS con parámetros corregidos -->
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <script>
     (function() {
-        // Inicializar EmailJS con tu Public Key (deberás registrarte en EmailJS)
-        emailjs.init("do-1jRGWDvkYenqW2"); // Reemplaza con tu clave pública de EmailJS
+        // Inicializar EmailJS con tu Public Key
+        emailjs.init("do-1jRGWDvkYenqW2");
         
         // Referencias a elementos del DOM
         const form = document.getElementById('contact-form');
@@ -604,26 +604,45 @@
             successMessage.classList.add('hidden');
             errorMessage.classList.add('hidden');
             
-            // Preparar parámetros para EmailJS
-            const templateParams = {
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                message: document.getElementById('message').value
+            // Obtener valores del formulario
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            // IMPORTANTE: Mira tu plantilla en EmailJS y asegúrate de usar 
+            // exactamente los mismos nombres de variables que espera tu plantilla
+            
+            // Parámetros para el correo que TÚ recibes (mensaje original)
+            const paramsForYou = {
+                name: name,
+                email: email,
+                message: message
+                // No agregamos to_email o reply_to aquí, eso se configura en la plantilla
             };
             
-            // Enviar el correo usando EmailJS
-            emailjs.send('service_s88nri1', 'template_vvlrlve', templateParams)
+            // Enviar el correo para ti
+            emailjs.send('service_s88nri1', 'template_vvlrlve', paramsForYou)
                 .then(function(response) {
+                    console.log('Mensaje enviado a Eva Lizeth:', response);
+                    
                     // Éxito: mostrar mensaje y resetear formulario
                     successMessage.classList.remove('hidden');
                     form.reset();
+                    
+                    // Opcional: Enviar confirmación al remitente
+                    // Si decides implementar esto más adelante
                 })
                 .catch(function(error) {
+                    // Error: mostrar mensaje de error
                     errorMessage.classList.remove('hidden');
                     console.error('Error al enviar el mensaje:', error);
+                    
+                    // Mostrar detalles del error en la consola para depuración
+                    if (error.text) {
+                        console.log('Detalle del error:', error.text);
+                    }
                 })
-                
-               .finally(function() {
+                .finally(function() {
                     // Restaurar botón
                     submitText.classList.remove('invisible');
                     loadingSpinner.classList.add('hidden');
