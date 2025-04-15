@@ -8,6 +8,8 @@
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.10.2/dist/cdn.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair Display:wght@300;400;600&display=swap" rel="stylesheet">
+
     <style>
         /* Estilos base responsive */
         .mobile-menu {
@@ -140,6 +142,76 @@
                 min-width: 200px !important;
             }
         }
+        <!-- Estilos para corazones y símbolos -->
+        <style>
+            .heart-container {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                overflow: visible;
+                pointer-events: none;
+            }
+        
+            .heart,
+            .code-symbol {
+                position: absolute;
+                width: 10px;
+                height: 10px;
+                animation: floatUp 3s linear infinite;
+                opacity: 0.8;
+            }
+        
+            .heart {
+                background-color: #ff69b4;
+                transform: rotate(45deg);
+            }
+        
+            .heart::before,
+            .heart::after {
+                content: '';
+                position: absolute;
+                width: 10px;
+                height: 10px;
+                background-color: #ff69b4;
+                border-radius: 50%;
+            }
+        
+            .heart::before {
+                top: -5px;
+                left: 0;
+            }
+        
+            .heart::after {
+                left: -5px;
+                top: 0;
+            }
+        
+            .code-symbol {
+                font-size: 14px;
+                color: #ff69b4;
+                width: auto;
+                height: auto;
+                font-weight: bold;
+                animation: floatUp 4s linear infinite;
+            }
+        
+            @keyframes floatUp {
+                0% {
+                    transform: translateY(0) scale(1);
+                    opacity: 1;
+                }
+        
+                100% {
+                    transform: translateY(-200px) scale(1.2);
+                    opacity: 0;
+                }
+            }
+        </style>
+      
+        
+  
+  
+  
     </style>
 </head>
 <body class="bg-black text-white">
@@ -178,83 +250,118 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="relative h-screen flex flex-col justify-center items-center text-center px-4 overflow-hidden" 
-        style="background: url('https://source.unsplash.com/1600x900/?technology') center/cover no-repeat;" id="hero">
+<!-- Hero Section -->
+<section class="relative h-screen flex flex-col justify-center items-center text-center px-4 py-12 md:py-20 overflow-hidden"
+    style="background: url('https://source.unsplash.com/1600x900/?technology') center/cover no-repeat;" id="hero">
 
-        <div id="particles-js" class="absolute inset-0"></div>
+    <!-- Partículas (si ya las usas) -->
+    <div id="particles-js" class="absolute inset-0"></div>
 
-        <div class="relative z-10 flex flex-col items-center">
-            <img src="lizeth.jpg" alt="Tu Foto" class="profile-image w-40 h-40 rounded-full border-4 border-pink-400 mb-4 transition-transform duration-300 hover:scale-110">
-            <h2 class="hero-text text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-300 via-pink-200 to-pink-500">
-                Hola, soy <span class="text-pink-400">Eva Lizeth</span>
-            </h2>
-            <p class="mt-4 text-lg">Ingeniera en Sistemas | Desarrolladora Web | Innovadora</p>
-            <a href="Eva_Lizeth_CV.pdf" download="Eva_Lizeth_CV.pdf" 
-                class="mt-6 bg-pink-400 text-white px-6 py-2 rounded-full text-lg font-semibold transition-all duration-300 hover:bg-pink-300 hover:scale-105 animate-pulse">
-                Descargar CV
-            </a>
+    <!-- Contenido principal -->
+    <div class="relative z-10 flex flex-col items-center">
+
+        <!-- Contenedor de imagen con corazones -->
+        <div class="relative mb-10 w-32 h-32 md:w-40 md:h-40 rounded-full">
+            <img src="lizeth.jpg" alt="Tu Foto"
+                class="relative z-10 w-full h-full object-cover rounded-full border-4 border-pink-400 
+                shadow-xl hover:shadow-pink-400 transition-all duration-500 hover:scale-110">
+
+            <!-- Corazones y símbolos animados -->
+            <div class="heart-container absolute inset-0 z-0"></div>
         </div>
-    </section>
 
-    <!-- Sección de Pac-Man Kawaii -->
-    <section id="pacman-game" class="fixed inset-0 flex justify-center items-center bg-black bg-opacity-90 z-50">
-        <div class="bg-pink-100 p-4 md:p-6 rounded-lg shadow-lg max-w-3xl w-full text-center">
-            <h2 class="text-3xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-pink-400 via-purple-400 to-pink-500 animate-pulse font-cute flex items-center justify-center">
-                <span class="mr-2">🎮</span>
-                ¡Supera el Pac-Man Kawaii para ver mis proyectos!
-                <span class="ml-2">❤️</span>
-              </h2>
-            <p class="mb-4 text-gray-700 text-sm md:text-base">Controles: Usa las teclas de flecha para mover a Pac-Man y come todos los puntos para ganar.</p>
-            
-            <div class="pacman-game-container relative mx-auto bg-pink-900 rounded-lg overflow-hidden w-full md:w-420px">
-                <canvas id="pacman-canvas" width="420" height="460" class="block w-full"></canvas>
-                <div class="pacman-stats bg-pink-800 flex justify-between items-center px-4 py-2 text-white">
-                    <div>Puntos: <span id="score">0</span></div>
-                    <div>Vidas: <span id="lives">3</span></div>
-                </div>
+        <!-- Texto principal -->
+        <h2 class="hero-text text-4xl font-bold mt-6 bg-clip-text text-transparent bg-gradient-to-r from-pink-300 via-pink-200 to-pink-500">
+            Hola, soy <span class="text-pink-400">Eva Lizeth</span>
+        </h2>
+
+        <p class="mt-6 text-lg text-white max-w-xl">
+            Ingeniera en Sistemas | Desarrolladora Web | Innovadora | Diseñadora UI/UX | Diseñadora Gráfica
+        </p>
+
+        <a href="Eva_Lizeth_CV.pdf" download="Eva_Lizeth_CV.pdf"
+            class="mt-8 bg-pink-400 text-white px-6 py-2 rounded-full text-lg font-semibold transition-all duration-300 hover:bg-pink-300 hover:scale-105 animate-pulse">
+            Descargar CV
+        </a>
+    </div>
+</section>
+
+
+
+
+
+
+   
+<!-- Sección de Pac-Man Kawaii (Ajustada) -->
+<section id="pacman-game" class="fixed inset-0 flex justify-center items-center bg-black bg-opacity-90 z-50 p-4">
+    <div class="bg-pink-100 p-3 md:p-4 rounded-lg shadow-lg max-w-xl w-full text-center">
+        <h2 class="text-xl md:text-2xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-pink-400 via-purple-400 to-pink-500 animate-pulse font-cute flex items-center justify-center">
+            <span class="mr-2">🎮</span>
+            ¡Pac-Man Kawaii!
+            <span class="ml-2">❤️</span>
+        </h2>
+        <p class="mb-2 text-gray-700 text-xs md:text-sm">Usa las flechas para mover a Pac-Man y come todos los puntos para ganar.</p>
+        
+        <div class="pacman-game-container relative mx-auto bg-pink-900 rounded-lg overflow-hidden" style="max-width: 320px; width: 100%;">
+            <canvas id="pacman-canvas" width="320" height="350" class="block w-full"></canvas>
+            <div class="pacman-stats bg-pink-800 flex justify-between items-center px-4 py-1 text-white text-sm">
+                <div>Puntos: <span id="score">0</span></div>
+                <div>Vidas: <span id="lives">3</span></div>
             </div>
-            
-            <button id="start-game" class="pacman-button mt-4 md:mt-6 bg-pink-400 text-white px-4 md:px-6 py-2 rounded-full text-base md:text-lg font-semibold transition-all duration-300 hover:bg-pink-300 hover:scale-105">
+        </div>
+        
+        <div class="flex justify-center gap-2 mt-3">
+            <button id="start-game" class="pacman-button bg-pink-400 text-white px-3 py-1 rounded-full text-sm font-semibold transition-all duration-300 hover:bg-pink-300 hover:scale-105">
                 Iniciar Juego
             </button>
-        </div>
-    </section>
-
-    <!-- Overlay de Victoria -->
-    <div id="victory-overlay" class="pacman-victory fixed inset-0 flex justify-center items-center bg-black bg-opacity-80 z-50 hidden">
-        <div class="bg-pink-100 p-6 md:p-8 rounded-lg shadow-lg max-w-md w-full text-center">
-            <h2 class="text-2xl md:text-3xl font-bold text-pink-500 mb-4">¡Felicidades!</h2>
-            <p class="mb-6 text-gray-700">Has superado el juego. ¡Ahora puedes acceder a mis proyectos!</p>
-            <div class="flex justify-center">
-                <img src="pacman-win.gif" alt="Victoria" class="w-24 h-24 md:w-32 md:h-32 mb-4" onerror="this.src='https://i.gifer.com/ZJG.gif'; this.onerror=null;">
-            </div>
-            <button id="view-projects" class="pacman-button bg-pink-400 text-white px-4 md:px-6 py-2 rounded-full text-base md:text-lg font-semibold transition-all duration-300 hover:bg-pink-300 hover:scale-105">
-                Ver Proyectos
-            </button>
+           
         </div>
     </div>
+</section>
 
-    <!-- Overlay de Derrota -->
-    <div id="game-over-overlay" class="fixed inset-0 flex justify-center items-center bg-black bg-opacity-80 z-50 hidden">
-        <div class="bg-pink-100 p-6 md:p-8 rounded-lg shadow-lg max-w-md w-full text-center">
-            <h2 class="text-2xl md:text-3xl font-bold text-pink-500 mb-4">¡Game Over!</h2>
-            <p class="mb-6 text-gray-700">No te rindas, ¡inténtalo de nuevo!</p>
-            <div class="flex justify-center">
-                <img src="pacman-lose.gif" alt="Derrota" class="w-24 h-24 md:w-32 md:h-32 mb-4" onerror="this.src='https://i.gifer.com/7VE.gif'; this.onerror=null;">
-            </div>
-            <button id="retry-game" class="pacman-button bg-pink-400 text-white px-4 md:px-6 py-2 rounded-full text-base md:text-lg font-semibold transition-all duration-300 hover:bg-pink-300 hover:scale-105">
-                Intentar de nuevo
-            </button>
+<!-- Overlay de Victoria (Ajustado) -->
+<div id="victory-overlay" class="pacman-victory fixed inset-0 flex justify-center items-center bg-black bg-opacity-80 z-50 hidden p-4">
+    <div class="bg-pink-100 p-4 md:p-6 rounded-lg shadow-lg max-w-sm w-full text-center">
+        <h2 class="text-xl md:text-2xl font-bold text-pink-500 mb-2">¡Felicidades!</h2>
+        <p class="mb-3 text-gray-700 text-sm">Has superado el juego. ¡Ahora puedes acceder a mis proyectos!</p>
+        <div class="flex justify-center">
+            <img src="pacman-win.gif" alt="Victoria" class="w-20 h-20 mb-3" onerror="this.src='https://i.gifer.com/ZJG.gif'; this.onerror=null;">
         </div>
+        <button id="view-projects" class="pacman-button bg-pink-400 text-white px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 hover:bg-pink-300 hover:scale-105">
+            Ver Proyectos
+        </button>
     </div>
+</div>
 
-    <!-- Sobre Mí -->
-    <section id="about" class="container mx-auto py-20 px-6">
-        <h2 class="text-3xl font-bold text-pink-400 text-center">Sobre Mí</h2>
-        <p class="mt-4 text-center max-w-3xl mx-auto">Soy una apasionada del desarrollo web con experiencia en tecnologías modernas como JavaScript, PHP y bases de datos. Me especializo en crear soluciones innovadoras y funcionales.</p>
-    </section>
-        
+<!-- Overlay de Derrota (Ajustado) -->
+<div id="game-over-overlay" class="fixed inset-0 flex justify-center items-center bg-black bg-opacity-80 z-50 hidden p-4">
+    <div class="bg-pink-100 p-4 md:p-6 rounded-lg shadow-lg max-w-sm w-full text-center">
+        <h2 class="text-xl md:text-2xl font-bold text-pink-500 mb-2">¡Game Over!</h2>
+        <p class="mb-3 text-gray-700 text-sm">No te rindas, ¡inténtalo de nuevo!</p>
+        <div class="flex justify-center">
+            <img src="pacman-lose.gif" alt="Derrota" class="w-20 h-20 mb-3" onerror="this.src='https://i.gifer.com/7VE.gif'; this.onerror=null;">
+        </div>
+        <button id="retry-game" class="pacman-button bg-pink-400 text-white px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 hover:bg-pink-300 hover:scale-105">
+            Intentar de nuevo
+        </button>
+    </div>
+</div>
+
+
+
+<!-- Sobre Mí -->
+<section id="about" class="container mx-auto py-20 px-6 text-white">
+    <h2 class="text-4xl font-extrabold text-pink-400 text-center mb-6 font-serif">Sobre Mí</h2>
+    <p class="mt-4 text-center max-w-3xl mx-auto text-lg leading-relaxed font-light font-[Inter]">
+        Soy <span class="font-medium text-pink-500"">Ingeniera en Sistemas Computacionales</span> con un enfoque integral en el desarrollo web, combinando habilidades técnicas con un fuerte sentido estético. Cuento con experiencia en tecnologías modernas como <span class="font-medium text-pink-500">JavaScript, PHP</span> y bases de datos, y me especializo en diseñar e implementar soluciones digitales eficientes y funcionales.
+        <br><br>
+        Además, me desempeño como <span class="font-medium text-pink-500">Diseñadora UI/UX</span>, creando interfaces intuitivas, accesibles y centradas en el usuario. Como <span class="font-medium text-pink-500">Diseñadora Gráfica</span>, aporto creatividad y coherencia visual a cada proyecto, asegurando una experiencia atractiva y profesional.
+        <br><br>
+        Mi objetivo es ofrecer soluciones digitales completas que integren tecnología, diseño y usabilidad para generar valor real a los usuarios y a los proyectos en los que participo.
+    </p>
+</section>
+
+
     <!-- Proyectos -->
     <section id="projects" class="bg-pink-50 py-20">
         <div class="container mx-auto px-6">
@@ -366,37 +473,31 @@
         </div>
     </div>
 
-    <!-- Certificados -->
-    <section id="certificate" class="container mx-auto py-20 px-6">
-        <h2 class="text-3xl font-bold text-pink-400 text-center">Mis Certificados</h2>
-        <div class="relative mt-6">
-            <button id="prevCert" class="absolute left-0 top-1/2 transform -translate-y-1/2 text-3xl text-pink-500 hover:text-pink-700 bg-white bg-opacity-50 rounded-full p-2 z-10" onclick="changeCertificate(-1)">&#10094;</button>
+    <!-- Certificados con diseño mejorado para móviles -->
+<section id="certificate" class="container mx-auto py-20 px-6">
+    <h2 class="text-3xl font-bold text-pink-400 text-center">Mis Certificados</h2>
+    <div class="relative mt-6">
+        <button id="prevCert" class="absolute left-0 top-1/2 transform -translate-y-1/2 text-3xl text-pink-500 hover:text-pink-700 bg-white bg-opacity-50 rounded-full p-2 z-10" onclick="changeCertificate(-1)">&#10094;</button>
 
-            <div id="certificatesContainer" class="overflow-x-hidden flex space-x-6 py-4 scroll-smooth">
-                <!-- Certificados (se generan con JavaScript) -->
-                <!-- Ejemplo de un certificado para mostrar la estructura -->
-                <div class="certificate-container min-w-max bg-pink-200 p-6 rounded-lg shadow-lg cursor-pointer" onclick="openCertificate('python.jpg')">
-                    <div class="bg-cover bg-center h-60 w-96" style="background-image: url('python.jpg'); background-size: contain; background-repeat: no-repeat;"></div>
-                </div>
-                <!-- Más certificados serán agregados por JavaScript -->
-            </div>
-
-            <button id="nextCert" class="absolute right-0 top-1/2 transform -translate-y-1/2 text-3xl text-pink-500 hover:text-pink-700 bg-white bg-opacity-50 rounded-full p-2 z-10" onclick="changeCertificate(1)">&#10095;</button>
+        <div id="certificatesContainer" class="overflow-x-hidden flex space-x-6 py-4 scroll-smooth">
+            <!-- Los certificados se generarán con JavaScript -->
         </div>
 
-        <div class="flex justify-center mt-4 space-x-2 flex-wrap" id="navDots">
-            <!-- Los puntos se generarán aquí con JavaScript -->
-        </div>
-    </section>
-
-    <!-- Modal para visualizar el certificado a pantalla completa -->
-    <div id="certificateModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden">
-        <div class="relative w-full max-w-3xl p-4 bg-white rounded-lg mx-4">
-            <button id="closeCertModal" class="absolute top-4 right-4 text-xl text-white bg-red-500 rounded-full px-3 py-1">X</button>
-            <img id="certificateImage" src="" alt="Certificado en pantalla completa" class="w-full max-h-96 object-contain">
-        </div>
+        <button id="nextCert" class="absolute right-0 top-1/2 transform -translate-y-1/2 text-3xl text-pink-500 hover:text-pink-700 bg-white bg-opacity-50 rounded-full p-2 z-10" onclick="changeCertificate(1)">&#10095;</button>
     </div>
 
+    <div class="flex justify-center mt-4 space-x-2 flex-wrap" id="navDots">
+        <!-- Los puntos se generarán aquí con JavaScript -->
+    </div>
+</section>
+
+<!-- Modal para visualizar el certificado a pantalla completa -->
+<div id="certificateModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden">
+    <div class="relative w-full max-w-3xl p-4 bg-white rounded-lg mx-4">
+        <button id="closeCertModal" class="absolute top-4 right-4 text-xl text-white bg-red-500 rounded-full px-3 py-1">X</button>
+        <img id="certificateImage" src="" alt="Certificado en pantalla completa" class="w-full max-h-96 object-contain">
+    </div>
+</div>
     <!-- Habilidades -->
     <section id="skills" class="bg-pink-50 py-20 overflow-hidden">
         <div class="container mx-auto px-6 text-center">
@@ -422,15 +523,34 @@
         </div>
     </section>
 
-   <!-- Contacto (continuación) -->
+  <!-- Contacto (con funcionalidad de envío de correo) -->
 <section id="contact" class="container mx-auto py-20 px-6">
     <h2 class="text-3xl font-bold text-pink-400 text-center">Contáctame</h2>
-    <form class="max-w-lg mx-auto mt-6">
-        <input type="text" placeholder="Tu Nombre" class="w-full p-2 mb-4 bg-pink-50 border border-pink-200 rounded text-black">
-        <input type="email" placeholder="Tu Email" class="w-full p-2 mb-4 bg-pink-50 border border-pink-200 rounded text-black">
-        <textarea placeholder="Tu Mensaje" class="w-full p-2 mb-4 bg-pink-50 border border-pink-200 rounded text-black h-32"></textarea>
-        <button class="bg-pink-400 text-white px-6 py-2 rounded-full font-semibold hover:bg-pink-500 transition-all duration-300 w-full">
-            Enviar
+    
+    <!-- Mensaje de éxito (oculto inicialmente) -->
+    <div id="success-message" class="hidden max-w-lg mx-auto mt-4 p-3 bg-green-100 text-green-700 rounded-lg text-center">
+        ¡Mensaje enviado con éxito! Te responderé lo antes posible.
+    </div>
+    
+    <!-- Mensaje de error (oculto inicialmente) -->
+    <div id="error-message" class="hidden max-w-lg mx-auto mt-4 p-3 bg-red-100 text-red-700 rounded-lg text-center">
+        Ha ocurrido un error al enviar el mensaje. Por favor, intenta de nuevo.
+    </div>
+    
+    <form id="contact-form" class="max-w-lg mx-auto mt-6">
+        <input type="text" id="name" name="name" placeholder="Tu Nombre" class="w-full p-2 mb-4 bg-pink-50 border border-pink-200 rounded text-black" required>
+        <input type="email" id="email" name="email" placeholder="Tu Email" class="w-full p-2 mb-4 bg-pink-50 border border-pink-200 rounded text-black" required>
+        <textarea id="message" name="message" placeholder="Tu Mensaje" class="w-full p-2 mb-4 bg-pink-50 border border-pink-200 rounded text-black h-32" required></textarea>
+        
+        <!-- Botón con indicador de carga -->
+        <button type="submit" id="submit-btn" class="bg-pink-400 text-white px-6 py-2 rounded-full font-semibold hover:bg-pink-500 transition-all duration-300 w-full relative">
+            <span>Enviar</span>
+            <span id="loading-spinner" class="hidden absolute inset-0 flex items-center justify-center">
+                <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+            </span>
         </button>
     </form>
 
@@ -457,17 +577,60 @@
     </div>
 </section>
 
-<!-- Footer -->
-<footer class="bg-pink-200 py-6 text-center text-black">
-    <div class="container mx-auto px-4">
-        <p class="text-base md:text-lg">&copy; 2025 Eva Lizeth Estrada. Todos los derechos reservados.</p>
-        <div class="flex justify-center space-x-4 mt-3">
-            <a href="#hero" class="text-pink-600 hover:text-pink-800 transition-all duration-300">
-                <i class="fas fa-arrow-up"></i> Volver arriba
-            </a>
-        </div>
-    </div>
-</footer>
+<!-- Script para EmailJS -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+<script>
+    (function() {
+        // Inicializar EmailJS con tu Public Key (deberás registrarte en EmailJS)
+        emailjs.init("do-1jRGWDvkYenqW2"); // Reemplaza con tu clave pública de EmailJS
+        
+        // Referencias a elementos del DOM
+        const form = document.getElementById('contact-form');
+        const submitBtn = document.getElementById('submit-btn');
+        const submitText = submitBtn.querySelector('span');
+        const loadingSpinner = document.getElementById('loading-spinner');
+        const successMessage = document.getElementById('success-message');
+        const errorMessage = document.getElementById('error-message');
+        
+        // Manejar envío del formulario
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // Mostrar indicador de carga
+            submitText.classList.add('invisible');
+            loadingSpinner.classList.remove('hidden');
+            
+            // Ocultar mensajes previos
+            successMessage.classList.add('hidden');
+            errorMessage.classList.add('hidden');
+            
+            // Preparar parámetros para EmailJS
+            const templateParams = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                message: document.getElementById('message').value
+            };
+            
+            // Enviar el correo usando EmailJS
+            emailjs.send('service_s88nri1', 'template_vvlrlve', templateParams)
+                .then(function(response) {
+                    // Éxito: mostrar mensaje y resetear formulario
+                    successMessage.classList.remove('hidden');
+                    form.reset();
+                })
+                .catch(function(error) {
+                    errorMessage.classList.remove('hidden');
+                    console.error('Error al enviar el mensaje:', error);
+                })
+                
+               .finally(function() {
+                    // Restaurar botón
+                    submitText.classList.remove('invisible');
+                    loadingSpinner.classList.add('hidden');
+                });
+        });
+    })();
+</script>
 
 <!-- Script de Partículas -->
 <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
@@ -559,134 +722,200 @@ document.addEventListener('keydown', function(e) {
 });
 </script>
 
-<!-- Script para Certificados -->
+<!-- Script mejorado para Certificados -->
 <script>
-// Arreglo de las imágenes de los certificados
-const certificates = [
-    "python.jpg", "UI.jpg", "ux.jpeg", "php.jpeg", "ruby.jpeg", "html.jpeg", "python.jpeg", "powerbi.jpeg", "excel.jpeg", 
-    "excela.png", "sheets.png", "Legacy JavaScript Algorithms and Data Structures.png", "Relational Database.png", "Front End Development Libraries.png", "Responsive Web Design.png", "c.png"
-];
-
-let currentCertIndex = 0;
-
-// Función para abrir un certificado en pantalla completa
-function openCertificate(cert) {
-    document.getElementById('certificateImage').src = cert;
-    document.getElementById('certificateModal').classList.remove('hidden');
-}
-
-// Función para cambiar al siguiente o anterior certificado
-function changeCertificate(direction) {
-    const containerWidth = document.getElementById('certificatesContainer').offsetWidth;
-    const certificateWidth = document.querySelector('.certificate-container').offsetWidth + 24; // Ancho + margen
-    const visibleCerts = Math.floor(containerWidth / certificateWidth);
+    // Arreglo de las imágenes de los certificados
+    const certificates = [
+        "python.jpg", "UI.jpg", "ux.jpeg", "php.jpeg", "ruby.jpeg", "html.jpeg", "python.jpeg", "powerbi.jpeg", "excel.jpeg", 
+        "excela.png", "sheets.png", "Legacy JavaScript Algorithms and Data Structures.png", "Relational Database.png", "Front End Development Libraries.png", "Responsive Web Design.png", "c.png"
+    ];
     
-    if (direction > 0) {
-        // Asegurarse de que no nos pasemos del final
-        if (currentCertIndex + visibleCerts < certificates.length) {
-            currentCertIndex += 1;
-        }
-    } else {
-        // Asegurarse de que no nos pasemos del inicio
-        if (currentCertIndex > 0) {
-            currentCertIndex -= 1;
-        }
+    let currentCertIndex = 0;
+    
+    // Función para abrir un certificado en pantalla completa
+    function openCertificate(cert) {
+        document.getElementById('certificateImage').src = cert;
+        document.getElementById('certificateModal').classList.remove('hidden');
     }
     
-    const scrollPosition = certificateWidth * currentCertIndex;
-    document.getElementById('certificatesContainer').scrollTo({
-        left: scrollPosition,
-        behavior: 'smooth'
+    // Función para cambiar al siguiente o anterior certificado
+    function changeCertificate(direction) {
+        const containerWidth = document.getElementById('certificatesContainer').offsetWidth;
+        const certificateWidth = document.querySelector('.certificate-container').offsetWidth + parseInt(getComputedStyle(document.querySelector('.certificate-container')).marginRight);
+        
+        // Calcular cuántos certificados son visibles a la vez
+        let visibleCerts = Math.floor(containerWidth / certificateWidth);
+        // En móviles, asegurar que al menos 1 es visible
+        visibleCerts = Math.max(1, visibleCerts);
+        
+        if (direction > 0) {
+            // Asegurarse de que no nos pasemos del final
+            if (currentCertIndex + visibleCerts < certificates.length) {
+                currentCertIndex += 1;
+            }
+        } else {
+            // Asegurarse de que no nos pasemos del inicio
+            if (currentCertIndex > 0) {
+                currentCertIndex -= 1;
+            }
+        }
+        
+        const scrollPosition = certificateWidth * currentCertIndex;
+        document.getElementById('certificatesContainer').scrollTo({
+            left: scrollPosition,
+            behavior: 'smooth'
+        });
+    
+        updateDots();
+    }
+    
+    // Cerrar el modal del certificado
+    document.getElementById('closeCertModal').addEventListener('click', function() {
+        document.getElementById('certificateModal').classList.add('hidden');
     });
-
-    updateDots();
-}
-
-// Cerrar el modal del certificado
-document.getElementById('closeCertModal').addEventListener('click', function() {
-    document.getElementById('certificateModal').classList.add('hidden');
-});
-
-// También cerrar al hacer clic fuera del contenido del modal
-document.getElementById('certificateModal').addEventListener('click', function(e) {
-    if (e.target === this) {
-        this.classList.add('hidden');
-    }
-});
-
-// Actualizar los puntos de navegación debajo del carrusel
-function updateDots() {
-    const navDots = document.getElementById('navDots');
-    navDots.innerHTML = '';
     
-    const containerWidth = document.getElementById('certificatesContainer').offsetWidth;
-    const certificateWidth = document.querySelector('.certificate-container').offsetWidth + 24;
-    const visibleCerts = Math.floor(containerWidth / certificateWidth);
-    const totalGroups = Math.ceil(certificates.length / visibleCerts);
-    
-    // Crear un punto por cada grupo
-    for (let i = 0; i < totalGroups; i++) {
-        const dot = document.createElement('div');
-        dot.classList.add('w-3', 'h-3', 'rounded-full', 'bg-pink-100', 'cursor-pointer', 'mb-2');
-        
-        // Resaltar el punto activo
-        if (Math.floor(currentCertIndex / visibleCerts) === i) {
-            dot.classList.add('bg-pink-400');
+    // También cerrar al hacer clic fuera del contenido del modal
+    document.getElementById('certificateModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            this.classList.add('hidden');
         }
+    });
+    
+    // Actualizar los puntos de navegación debajo del carrusel
+    function updateDots() {
+        const navDots = document.getElementById('navDots');
+        navDots.innerHTML = '';
         
-        dot.addEventListener('click', () => {
-            currentCertIndex = i * visibleCerts;
-            const scrollPosition = certificateWidth * currentCertIndex;
-            document.getElementById('certificatesContainer').scrollTo({
-                left: scrollPosition,
-                behavior: 'smooth'
+        const containerWidth = document.getElementById('certificatesContainer').offsetWidth;
+        const certificateWidth = document.querySelector('.certificate-container').offsetWidth + parseInt(getComputedStyle(document.querySelector('.certificate-container')).marginRight);
+        
+        // Calcular cuántos certificados son visibles a la vez
+        let visibleCerts = Math.floor(containerWidth / certificateWidth);
+        // En móviles, asegurar que al menos 1 es visible
+        visibleCerts = Math.max(1, visibleCerts);
+        
+        const totalGroups = Math.ceil(certificates.length / visibleCerts);
+        
+        // Crear un punto por cada grupo
+        for (let i = 0; i < totalGroups; i++) {
+            const dot = document.createElement('div');
+            dot.classList.add('w-3', 'h-3', 'rounded-full', 'bg-pink-100', 'cursor-pointer', 'mb-2');
+            
+            // Resaltar el punto activo
+            if (Math.floor(currentCertIndex / visibleCerts) === i) {
+                dot.classList.add('bg-pink-400');
+            }
+            
+            dot.addEventListener('click', () => {
+                currentCertIndex = i * visibleCerts;
+                const scrollPosition = certificateWidth * currentCertIndex;
+                document.getElementById('certificatesContainer').scrollTo({
+                    left: scrollPosition,
+                    behavior: 'smooth'
+                });
+                updateDots();
             });
-            updateDots();
+            
+            navDots.appendChild(dot);
+        }
+    }
+    
+    // Inicializar el carrusel de certificados
+    document.addEventListener('DOMContentLoaded', function() {
+        const certificatesContainer = document.getElementById('certificatesContainer');
+        
+        // Limpiar cualquier contenido existente
+        certificatesContainer.innerHTML = '';
+        
+        // Crear elementos para cada certificado con tamaños adaptables
+        certificates.forEach((cert, index) => {
+            const certDiv = document.createElement('div');
+            certDiv.className = 'certificate-container flex-shrink-0 bg-pink-200 p-3 md:p-6 rounded-lg shadow-lg cursor-pointer';
+            
+            // Estilos específicos para móvil y escritorio
+            if (window.innerWidth < 640) {
+                // Tamaño más pequeño en móviles
+                certDiv.style.width = '220px';
+                certDiv.style.minWidth = '220px';
+            } else if (window.innerWidth < 768) {
+                // Tamaño medio en tabletas
+                certDiv.style.width = '260px';
+                certDiv.style.minWidth = '260px';
+            } else {
+                // Tamaño completo en escritorio
+                certDiv.style.width = '320px';
+                certDiv.style.minWidth = '320px';
+            }
+            
+            certDiv.onclick = function() { openCertificate(cert); };
+            
+            const imgContainer = document.createElement('div');
+            imgContainer.className = 'bg-cover bg-center';
+            
+            // Ajustar altura según el dispositivo
+            if (window.innerWidth < 640) {
+                imgContainer.classList.add('h-40');
+            } else if (window.innerWidth < 768) {
+                imgContainer.classList.add('h-48');
+            } else {
+                imgContainer.classList.add('h-60');
+            }
+            
+            imgContainer.style.width = '100%';
+            imgContainer.style.backgroundImage = `url('${cert}')`;
+            imgContainer.style.backgroundSize = 'contain';
+            imgContainer.style.backgroundRepeat = 'no-repeat';
+            imgContainer.style.backgroundPosition = 'center';
+            
+            certDiv.appendChild(imgContainer);
+            certificatesContainer.appendChild(certDiv);
         });
         
-        navDots.appendChild(dot);
-    }
-}
-
-// Inicializar el carrusel de certificados
-document.addEventListener('DOMContentLoaded', function() {
-    const certificatesContainer = document.getElementById('certificatesContainer');
-    
-    // Limpiar cualquier contenido existente
-    certificatesContainer.innerHTML = '';
-    
-    // Crear elementos para cada certificado
-    certificates.forEach((cert, index) => {
-        const certDiv = document.createElement('div');
-        certDiv.className = 'certificate-container min-w-max bg-pink-200 p-6 rounded-lg shadow-lg cursor-pointer';
-        certDiv.onclick = function() { openCertificate(cert); };
+        // Inicializar los puntos de navegación
+        updateDots();
         
-        const imgContainer = document.createElement('div');
-        imgContainer.className = 'bg-cover bg-center h-60 w-96';
-        imgContainer.style.backgroundImage = `url('${cert}')`;
-        imgContainer.style.backgroundSize = 'contain';
-        imgContainer.style.backgroundRepeat = 'no-repeat';
-        
-        certDiv.appendChild(imgContainer);
-        certificatesContainer.appendChild(certDiv);
+        // Ajustar al redimensionar
+        window.addEventListener('resize', function() {
+            // Actualizar tamaños de certificados al cambiar el tamaño de la ventana
+            const certDivs = document.querySelectorAll('.certificate-container');
+            
+            certDivs.forEach(div => {
+                const imgContainer = div.querySelector('div');
+                
+                // Quitar clases de altura previas
+                imgContainer.classList.remove('h-40', 'h-48', 'h-60');
+                
+                if (window.innerWidth < 640) {
+                    // Tamaño más pequeño en móviles
+                    div.style.width = '220px';
+                    div.style.minWidth = '220px';
+                    imgContainer.classList.add('h-40');
+                } else if (window.innerWidth < 768) {
+                    // Tamaño medio en tabletas
+                    div.style.width = '260px';
+                    div.style.minWidth = '260px';
+                    imgContainer.classList.add('h-48');
+                } else {
+                    // Tamaño completo en escritorio
+                    div.style.width = '320px';
+                    div.style.minWidth = '320px';
+                    imgContainer.classList.add('h-60');
+                }
+            });
+            
+            updateDots();
+        });
     });
     
-    // Inicializar los puntos de navegación
-    updateDots();
-    
-    // Ajustar al redimensionar
-    window.addEventListener('resize', updateDots);
-});
-
-// Navegación con teclado para el modal de certificados
-document.addEventListener('keydown', function(e) {
-    if (!document.getElementById('certificateModal').classList.contains('hidden')) {
-        if (e.key === 'Escape') {
-            document.getElementById('certificateModal').classList.add('hidden');
+    // Navegación con teclado para el modal de certificados
+    document.addEventListener('keydown', function(e) {
+        if (!document.getElementById('certificateModal').classList.contains('hidden')) {
+            if (e.key === 'Escape') {
+                document.getElementById('certificateModal').classList.add('hidden');
+            }
         }
-    }
-});
-</script>
+    });
+    </script>
 
 <!-- Script para Animación en Sección de Habilidades -->
 <script>
@@ -717,427 +946,426 @@ window.addEventListener('resize', function() {
     }
 });
 </script>
-
 <!-- Script para el Juego de Pac-Man -->
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Referencias a los elementos del DOM
-    const canvas = document.getElementById('pacman-canvas');
-    const ctx = canvas.getContext('2d');
-    const scoreElement = document.getElementById('score');
-    const livesElement = document.getElementById('lives');
-    const startButton = document.getElementById('start-game');
-    const gameSection = document.getElementById('pacman-game');
-    const victoryOverlay = document.getElementById('victory-overlay');
-    const gameOverOverlay = document.getElementById('game-over-overlay');
-    const viewProjectsButton = document.getElementById('view-projects');
-    const retryButton = document.getElementById('retry-game');
-
-    // Ajustar tamaño del canvas según el tamaño de la pantalla
-    function adjustCanvasSize() {
-        if (window.innerWidth < 768) {
-            // En móviles, ajustar proporcionalmente
-            const containerWidth = canvas.parentElement.offsetWidth;
-            const aspectRatio = 460 / 420;
-            canvas.width = containerWidth;
-            canvas.height = containerWidth * aspectRatio;
-        } else {
-            // En pantallas grandes, tamaño original
-            canvas.width = 420;
-            canvas.height = 460;
-        }
-    }
-
-    // Llamar a adjustCanvasSize al cargar y al redimensionar
-    adjustCanvasSize();
-    window.addEventListener('resize', adjustCanvasSize);
-
-    // Dimensiones del laberinto y tamaño de celda
-    let CELL_SIZE, ROWS, COLS, WIDTH, HEIGHT;
-
-    function updateDimensions() {
-        ROWS = 23;
-        COLS = 21;
-        CELL_SIZE = canvas.width / COLS;
-        WIDTH = COLS * CELL_SIZE;
-        HEIGHT = ROWS * CELL_SIZE;
-    }
-
-    updateDimensions();
-    window.addEventListener('resize', updateDimensions);
-
-    // Colores
-    const COLORS = {
-        wall: '#f705a3',      // Rosa fuerte
-        path: '#FFE4E1',      // Rosa muy claro
-        dot: '#0a0a0a',       // Rosa medio
-        pacman: '#FFFF00',    // Amarillo
-        ghost1: '#c859ff',    // Morado
-        ghost2: '#FF5A87',    // Rosa medio
-        ghost3: '#59f9ff',    // Azul cielo
-        ghost4: '#59ffcd'     // Menta
-    };
-
-    // Estado del juego
-    let gameRunning = false;
-    let gameWon = false;
-    let score = 0;
-    let lives = 3;
-    let totalDots = 0;
-    let dotsEaten = 0;
-
-    // AÑADIR AQUÍ: Variables para controlar velocidad de Pac-Man
-    let pacmanMoveInterval = 0;
-    const PACMAN_MOVE_DELAY = 10; // Ajusta este valor para controlar la velocidad (mayor = más lento)
-
-    // Dirección actual y siguiente de Pac-Man (0: ninguna, 1: arriba, 2: derecha, 3: abajo, 4: izquierda)
-    let currentDirection = 0;
-    let nextDirection = 0;
-
-    // Posición de Pac-Man
-    let pacman = {
-        x: 10,
-        y: 15,
-        mouthOpen: true,
-        mouthAngle: 0.2
-    };
-
-    // Posición de fantasmas
-    let ghosts = [
-        { x: 10, y: 11, direction: Math.floor(Math.random() * 4) + 1, color: COLORS.ghost1, speed: 1 },
-        { x: 9, y: 11, direction: Math.floor(Math.random() * 4) + 1, color: COLORS.ghost2, speed: 0.8 },
-        { x: 11, y: 11, direction: Math.floor(Math.random() * 4) + 1, color: COLORS.ghost3, speed: 0.7 },
-        { x: 10, y: 10, direction: Math.floor(Math.random() * 4) + 1, color: COLORS.ghost4, speed: 0.9 }
-    ];
-
-    // Controlador de animación
-    let animationId;
-    let lastTime = 0;
-    let pacmanMouthInterval;
-    let ghostMoveInterval = 0;
-
-    // Laberinto (0: camino, 1: pared, 2: punto)
-    let maze = [
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1],
-        [1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1],
-        [1, 2, 1, 0, 1, 2, 1, 0, 1, 2, 1, 2, 1, 0, 1, 2, 1, 0, 1, 2, 1],
-        [1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1],
-        [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1],
-        [1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1],
-        [1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1],
-        [1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1],
-        [1, 1, 1, 1, 1, 2, 1, 1, 1, 0, 1, 0, 1, 1, 1, 2, 1, 1, 1, 1, 1],
-        [0, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0],
-        [0, 0, 0, 0, 1, 2, 1, 0, 1, 1, 0, 1, 1, 0, 1, 2, 1, 0, 0, 0, 0],
-        [1, 1, 1, 1, 1, 2, 1, 0, 1, 0, 0, 0, 1, 0, 1, 2, 1, 1, 1, 1, 1],
-        [0, 0, 0, 0, 0, 2, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2, 0, 0, 0, 0, 0],
-        [1, 1, 1, 1, 1, 2, 1, 0, 1, 1, 1, 1, 1, 0, 1, 2, 1, 1, 1, 1, 1],
-        [0, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0],
-        [0, 0, 0, 0, 1, 2, 1, 0, 1, 1, 1, 1, 1, 0, 1, 2, 1, 0, 0, 0, 0],
-        [1, 1, 1, 1, 1, 2, 1, 0, 1, 1, 1, 1, 1, 0, 1, 2, 1, 1, 1, 1, 1],
-        [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1],
-        [1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1],
-        [1, 2, 2, 2, 1, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 1, 2, 2, 2, 1],
-        [1, 1, 1, 2, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 2, 1, 1, 1],
-        [1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1]
-    ];
-
-    // Contar puntos totales
-    function countTotalDots() {
-        totalDots = 0;
-        for (let y = 0; y < ROWS; y++) {
-            for (let x = 0; x < COLS; x++) {
-                if (maze[y][x] === 2) {
-                    totalDots++;
-                }
-            }
-        }
-    }
+    document.addEventListener('DOMContentLoaded', function() {
+        // Referencias a los elementos del DOM
+        const canvas = document.getElementById('pacman-canvas');
+        const ctx = canvas.getContext('2d');
+        const scoreElement = document.getElementById('score');
+        const livesElement = document.getElementById('lives');
+        const startButton = document.getElementById('start-game');
+        const gameSection = document.getElementById('pacman-game');
+        const victoryOverlay = document.getElementById('victory-overlay');
+        const gameOverOverlay = document.getElementById('game-over-overlay');
+        const viewProjectsButton = document.getElementById('view-projects');
+        const retryButton = document.getElementById('retry-game');
     
-    countTotalDots();
-
-    // Inicializar eventos
-    function initEvents() {
-        // Controles de teclado para el movimiento
-        document.addEventListener('keydown', function(e) {
-            if (!gameRunning) return;
-
-            // Flechas de dirección
-            switch (e.key) {
-                case 'ArrowUp':
-                    nextDirection = 1;
-                    break;
-                case 'ArrowRight':
-                    nextDirection = 2;
-                    break;
-                case 'ArrowDown':
-                    nextDirection = 3;
-                    break;
-                case 'ArrowLeft':
-                    nextDirection = 4;
-                    break;
-            }
-        });
-
-        // Controles táctiles para dispositivos móviles
-        let touchStartX = 0;
-        let touchStartY = 0;
-        
-        canvas.addEventListener('touchstart', function(e) {
-            touchStartX = e.touches[0].clientX;
-            touchStartY = e.touches[0].clientY;
-            e.preventDefault();
-        }, { passive: false });
-        
-        canvas.addEventListener('touchmove', function(e) {
-            if (!gameRunning) return;
-            
-            const touchEndX = e.touches[0].clientX;
-            const touchEndY = e.touches[0].clientY;
-            
-            const diffX = touchStartX - touchEndX;
-            const diffY = touchStartY - touchEndY;
-            
-            // Determinar dirección del deslizamiento
-            if (Math.abs(diffX) > Math.abs(diffY)) {
-                // Deslizamiento horizontal
-                if (diffX > 0) {
-                    // Deslizar a la izquierda
-                    nextDirection = 4;
-                } else {
-                    // Deslizar a la derecha
-                    nextDirection = 2;
-                }
+        // Ajustar tamaño del canvas según el tamaño de la pantalla
+        function adjustCanvasSize() {
+            if (window.innerWidth < 768) {
+                // En móviles, ajustar proporcionalmente
+                const containerWidth = canvas.parentElement.offsetWidth;
+                const aspectRatio = 460 / 420;
+                canvas.width = containerWidth;
+                canvas.height = containerWidth * aspectRatio;
             } else {
-                // Deslizamiento vertical
-                if (diffY > 0) {
-                    // Deslizar hacia arriba
-                    nextDirection = 1;
-                } else {
-                    // Deslizar hacia abajo
-                    nextDirection = 3;
-                }
+                // En pantallas grandes, tamaño original
+                canvas.width = 420;
+                canvas.height = 460;
             }
-            
-            e.preventDefault();
-        }, { passive: false });
-
-        // Iniciar juego
-        startButton.addEventListener('click', startGame);
-
-        // Ver proyectos
-        viewProjectsButton.addEventListener('click', function() {
-            victoryOverlay.classList.add('hidden');
-            gameSection.classList.add('hidden');
-            
-            // Hacer scroll a la sección de proyectos
-            document.getElementById('projects').scrollIntoView({ behavior: 'smooth' });
-        });
-
-        // Reintentar juego
-        retryButton.addEventListener('click', function() {
-            gameOverOverlay.classList.add('hidden');
-            resetGame();
-            startGame();
-        });
-    }
-
-    // Dibujar el laberinto
-    function drawMaze() {
-        for (let y = 0; y < ROWS; y++) {
-            for (let x = 0; x < COLS; x++) {
-                if (maze[y][x] === 1) {
-                    // Pared
-                    ctx.fillStyle = COLORS.wall;
-                    ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
-                    
-                    // Añadir un borde para hacerlo kawaii
-                    ctx.strokeStyle = '#FF9CC5';
-                    ctx.lineWidth = 2;
-                    ctx.strokeRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
-                } else {
-                    // Camino
-                    ctx.fillStyle = COLORS.path;
-                    ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
-                    
-                    // Dibujar puntos
+        }
+    
+        // Llamar a adjustCanvasSize al cargar y al redimensionar
+        adjustCanvasSize();
+        window.addEventListener('resize', adjustCanvasSize);
+    
+        // Dimensiones del laberinto y tamaño de celda
+        let CELL_SIZE, ROWS, COLS, WIDTH, HEIGHT;
+    
+        function updateDimensions() {
+            ROWS = 23;
+            COLS = 21;
+            CELL_SIZE = canvas.width / COLS;
+            WIDTH = COLS * CELL_SIZE;
+            HEIGHT = ROWS * CELL_SIZE;
+        }
+    
+        updateDimensions();
+        window.addEventListener('resize', updateDimensions);
+    
+        // Colores
+        const COLORS = {
+            wall: '#f705a3',      // Rosa fuerte
+            path: '#FFE4E1',      // Rosa muy claro
+            dot: '#0a0a0a',       // Rosa medio
+            pacman: '#FFFF00',    // Amarillo
+            ghost1: '#c859ff',    // Morado
+            ghost2: '#FF5A87',    // Rosa medio
+            ghost3: '#59f9ff',    // Azul cielo
+            ghost4: '#59ffcd'     // Menta
+        };
+    
+        // Estado del juego
+        let gameRunning = false;
+        let gameWon = false;
+        let score = 0;
+        let lives = 3;
+        let totalDots = 0;
+        let dotsEaten = 0;
+    
+        // AÑADIR AQUÍ: Variables para controlar velocidad de Pac-Man
+        let pacmanMoveInterval = 0;
+        const PACMAN_MOVE_DELAY = 10; // Ajusta este valor para controlar la velocidad (mayor = más lento)
+    
+        // Dirección actual y siguiente de Pac-Man (0: ninguna, 1: arriba, 2: derecha, 3: abajo, 4: izquierda)
+        let currentDirection = 0;
+        let nextDirection = 0;
+    
+        // Posición de Pac-Man
+        let pacman = {
+            x: 10,
+            y: 15,
+            mouthOpen: true,
+            mouthAngle: 0.2
+        };
+    
+        // Posición de fantasmas
+        let ghosts = [
+            { x: 10, y: 11, direction: Math.floor(Math.random() * 4) + 1, color: COLORS.ghost1, speed: 1 },
+            { x: 9, y: 11, direction: Math.floor(Math.random() * 4) + 1, color: COLORS.ghost2, speed: 0.8 },
+            { x: 11, y: 11, direction: Math.floor(Math.random() * 4) + 1, color: COLORS.ghost3, speed: 0.7 },
+            { x: 10, y: 10, direction: Math.floor(Math.random() * 4) + 1, color: COLORS.ghost4, speed: 0.9 }
+        ];
+    
+        // Controlador de animación
+        let animationId;
+        let lastTime = 0;
+        let pacmanMouthInterval;
+        let ghostMoveInterval = 0;
+    
+        // Laberinto (0: camino, 1: pared, 2: punto)
+        let maze = [
+            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+            [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1],
+            [1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1],
+            [1, 2, 1, 0, 1, 2, 1, 0, 1, 2, 1, 2, 1, 0, 1, 2, 1, 0, 1, 2, 1],
+            [1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1],
+            [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1],
+            [1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1],
+            [1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1],
+            [1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1],
+            [1, 1, 1, 1, 1, 2, 1, 1, 1, 0, 1, 0, 1, 1, 1, 2, 1, 1, 1, 1, 1],
+            [0, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0],
+            [0, 0, 0, 0, 1, 2, 1, 0, 1, 1, 0, 1, 1, 0, 1, 2, 1, 0, 0, 0, 0],
+            [1, 1, 1, 1, 1, 2, 1, 0, 1, 0, 0, 0, 1, 0, 1, 2, 1, 1, 1, 1, 1],
+            [0, 0, 0, 0, 0, 2, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2, 0, 0, 0, 0, 0],
+            [1, 1, 1, 1, 1, 2, 1, 0, 1, 1, 1, 1, 1, 0, 1, 2, 1, 1, 1, 1, 1],
+            [0, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0],
+            [0, 0, 0, 0, 1, 2, 1, 0, 1, 1, 1, 1, 1, 0, 1, 2, 1, 0, 0, 0, 0],
+            [1, 1, 1, 1, 1, 2, 1, 0, 1, 1, 1, 1, 1, 0, 1, 2, 1, 1, 1, 1, 1],
+            [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1],
+            [1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1],
+            [1, 2, 2, 2, 1, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 1, 2, 2, 2, 1],
+            [1, 1, 1, 2, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 2, 1, 1, 1],
+            [1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1]
+        ];
+    
+        // Contar puntos totales
+        function countTotalDots() {
+            totalDots = 0;
+            for (let y = 0; y < ROWS; y++) {
+                for (let x = 0; x < COLS; x++) {
                     if (maze[y][x] === 2) {
-                        ctx.fillStyle = COLORS.dot;
-                        ctx.beginPath();
-                        ctx.arc(x * CELL_SIZE + CELL_SIZE / 2, y * CELL_SIZE + CELL_SIZE / 2, CELL_SIZE / 6, 0, Math.PI * 2);
-                        ctx.fill();
+                        totalDots++;
                     }
                 }
             }
         }
-    }
-
-    // Dibujar Pac-Man
-    function drawPacman() {
-        const x = pacman.x * CELL_SIZE + CELL_SIZE / 2;
-        const y = pacman.y * CELL_SIZE + CELL_SIZE / 2;
-        const radius = CELL_SIZE / 2 - 2;
         
-        // Ángulo de la boca según la dirección
-        let startAngle = 0;
-        let endAngle = 2 * Math.PI;
-        
-        if (pacman.mouthOpen) {
-            switch (currentDirection) {
-                case 1: // Arriba
-                    startAngle = Math.PI * 1.25 + pacman.mouthAngle;
-                    endAngle = Math.PI * 2.75 - pacman.mouthAngle;
-                    break;
-                case 2: // Derecha
-                    startAngle = pacman.mouthAngle;
-                    endAngle = 2 * Math.PI - pacman.mouthAngle;
-                    break;
-                case 3: // Abajo
-                    startAngle = Math.PI * 0.75 + pacman.mouthAngle;
-                    endAngle = Math.PI * 2.25 - pacman.mouthAngle;
-                    break;
-                case 4: // Izquierda
-                    startAngle = Math.PI + pacman.mouthAngle;
-                    endAngle = Math.PI - pacman.mouthAngle;
-                    break;
-                default:
-                    startAngle = pacman.mouthAngle;
-                    endAngle = 2 * Math.PI - pacman.mouthAngle;
+        countTotalDots();
+    
+        // Inicializar eventos
+        function initEvents() {
+            // Controles de teclado para el movimiento
+            document.addEventListener('keydown', function(e) {
+                if (!gameRunning) return;
+    
+                // Flechas de dirección
+                switch (e.key) {
+                    case 'ArrowUp':
+                        nextDirection = 1;
+                        break;
+                    case 'ArrowRight':
+                        nextDirection = 2;
+                        break;
+                    case 'ArrowDown':
+                        nextDirection = 3;
+                        break;
+                    case 'ArrowLeft':
+                        nextDirection = 4;
+                        break;
+                }
+            });
+    
+            // Controles táctiles para dispositivos móviles
+            let touchStartX = 0;
+            let touchStartY = 0;
+            
+            canvas.addEventListener('touchstart', function(e) {
+                touchStartX = e.touches[0].clientX;
+                touchStartY = e.touches[0].clientY;
+                e.preventDefault();
+            }, { passive: false });
+            
+            canvas.addEventListener('touchmove', function(e) {
+                if (!gameRunning) return;
+                
+                const touchEndX = e.touches[0].clientX;
+                const touchEndY = e.touches[0].clientY;
+                
+                const diffX = touchStartX - touchEndX;
+                const diffY = touchStartY - touchEndY;
+                
+                // Determinar dirección del deslizamiento
+                if (Math.abs(diffX) > Math.abs(diffY)) {
+                    // Deslizamiento horizontal
+                    if (diffX > 0) {
+                        // Deslizar a la izquierda
+                        nextDirection = 4;
+                    } else {
+                        // Deslizar a la derecha
+                        nextDirection = 2;
+                    }
+                } else {
+                    // Deslizamiento vertical
+                    if (diffY > 0) {
+                        // Deslizar hacia arriba
+                        nextDirection = 1;
+                    } else {
+                        // Deslizar hacia abajo
+                        nextDirection = 3;
+                    }
+                }
+                
+                e.preventDefault();
+            }, { passive: false });
+    
+            // Iniciar juego
+            startButton.addEventListener('click', startGame);
+    
+            // Ver proyectos
+            viewProjectsButton.addEventListener('click', function() {
+                victoryOverlay.classList.add('hidden');
+                gameSection.classList.add('hidden');
+                
+                // Hacer scroll a la sección de proyectos
+                document.getElementById('projects').scrollIntoView({ behavior: 'smooth' });
+            });
+    
+            // Reintentar juego
+            retryButton.addEventListener('click', function() {
+                gameOverOverlay.classList.add('hidden');
+                resetGame();
+                startGame();
+            });
+        }
+    
+        // Dibujar el laberinto
+        function drawMaze() {
+            for (let y = 0; y < ROWS; y++) {
+                for (let x = 0; x < COLS; x++) {
+                    if (maze[y][x] === 1) {
+                        // Pared
+                        ctx.fillStyle = COLORS.wall;
+                        ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+                        
+                        // Añadir un borde para hacerlo kawaii
+                        ctx.strokeStyle = '#FF9CC5';
+                        ctx.lineWidth = 2;
+                        ctx.strokeRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+                    } else {
+                        // Camino
+                        ctx.fillStyle = COLORS.path;
+                        ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
+                        
+                        // Dibujar puntos
+                        if (maze[y][x] === 2) {
+                            ctx.fillStyle = COLORS.dot;
+                            ctx.beginPath();
+                            ctx.arc(x * CELL_SIZE + CELL_SIZE / 2, y * CELL_SIZE + CELL_SIZE / 2, CELL_SIZE / 6, 0, Math.PI * 2);
+                            ctx.fill();
+                        }
+                    }
+                }
             }
         }
-        
-        // Dibujar a Pac-Man
-        ctx.fillStyle = COLORS.pacman;
-        ctx.beginPath();
-        ctx.arc(x, y, radius, startAngle, endAngle);
-        if (pacman.mouthOpen && currentDirection !== 0) {
-            ctx.lineTo(x, y);
-        }
-        ctx.fill();
-        
-        // Dibujar ojo kawaii
-        ctx.fillStyle = '#000';
-        let eyeX = x;
-        let eyeY = y;
-        
-        switch (currentDirection) {
-            case 1: // Arriba
-                eyeX -= 3;
-                eyeY -= 5;
-                break;
-            case 2: // Derecha
-                eyeX += 3;
-                eyeY -= 5;
-                break;
-            case 3: // Abajo
-                eyeX += 3;
-                eyeY += 0;
-                break;
-            case 4: // Izquierda
-                eyeX -= 3;
-                eyeY -= 5;
-                break;
-            default:
-                eyeX += 3;
-                eyeY -= 5;
-        }
-        
-        ctx.beginPath();
-        ctx.arc(eyeX, eyeY, 2, 0, Math.PI * 2);
-        ctx.fill();
-        
-        // Añadir rubor kawaii
-        ctx.fillStyle = 'rgba(255, 150, 150, 0.5)';
-        ctx.beginPath();
-        ctx.arc(x + radius * 0.5, y + radius * 0.3, radius * 0.3, 0, Math.PI * 2);
-        ctx.fill();
-        
-        ctx.beginPath();
-        ctx.arc(x - radius * 0.5, y + radius * 0.3, radius * 0.3, 0, Math.PI * 2);
-        ctx.fill();
-    }
     
-    // Dibujar fantasmas
-    function drawGhosts() {
-        ghosts.forEach(ghost => {
-            const x = ghost.x * CELL_SIZE + CELL_SIZE / 2;
-            const y = ghost.y * CELL_SIZE + CELL_SIZE / 2;
+        // Dibujar Pac-Man
+        function drawPacman() {
+            const x = pacman.x * CELL_SIZE + CELL_SIZE / 2;
+            const y = pacman.y * CELL_SIZE + CELL_SIZE / 2;
             const radius = CELL_SIZE / 2 - 2;
             
-            // Cuerpo del fantasma
-            ctx.fillStyle = ghost.color;
-            ctx.beginPath();
-            ctx.arc(x, y - 2, radius, Math.PI, 0, false);
-            ctx.lineTo(x + radius, y + radius);
+            // Ángulo de la boca según la dirección
+            let startAngle = 0;
+            let endAngle = 2 * Math.PI;
             
-            // Base ondulada
-            const waveCount = 4;
-            const waveHeight = 3;
-            const waveWidth = (radius * 2) / waveCount;
-            
-            for (let i = 0; i < waveCount; i++) {
-                ctx.quadraticCurveTo(
-                    x + radius - waveWidth * i - waveWidth / 2, 
-                    y + radius + waveHeight,
-                    x + radius - waveWidth * (i + 1), 
-                    y + radius
-                );
+            if (pacman.mouthOpen) {
+                switch (currentDirection) {
+                    case 1: // Arriba
+                        startAngle = Math.PI * 1.25 + pacman.mouthAngle;
+                        endAngle = Math.PI * 2.75 - pacman.mouthAngle;
+                        break;
+                    case 2: // Derecha
+                        startAngle = pacman.mouthAngle;
+                        endAngle = 2 * Math.PI - pacman.mouthAngle;
+                        break;
+                    case 3: // Abajo
+                        startAngle = Math.PI * 0.75 + pacman.mouthAngle;
+                        endAngle = Math.PI * 2.25 - pacman.mouthAngle;
+                        break;
+                    case 4: // Izquierda
+                        startAngle = Math.PI + pacman.mouthAngle;
+                        endAngle = Math.PI - pacman.mouthAngle;
+                        break;
+                    default:
+                        startAngle = pacman.mouthAngle;
+                        endAngle = 2 * Math.PI - pacman.mouthAngle;
+                }
             }
             
-            ctx.lineTo(x - radius, y + radius);
-            ctx.closePath();
-            ctx.fill();
-            
-            // Ojos
-            ctx.fillStyle = '#FFF';
+            // Dibujar a Pac-Man
+            ctx.fillStyle = COLORS.pacman;
             ctx.beginPath();
-            ctx.arc(x - 4, y - 2, 4, 0, Math.PI * 2);
-            ctx.arc(x + 4, y - 2, 4, 0, Math.PI * 2);
+            ctx.arc(x, y, radius, startAngle, endAngle);
+            if (pacman.mouthOpen && currentDirection !== 0) {
+                ctx.lineTo(x, y);
+            }
             ctx.fill();
             
-            // Pupilas
+            // Dibujar ojo kawaii
             ctx.fillStyle = '#000';
-            let pupilOffsetX = 0;
-            let pupilOffsetY = 0;
+            let eyeX = x;
+            let eyeY = y;
             
-            switch (ghost.direction) {
+            switch (currentDirection) {
                 case 1: // Arriba
-                    pupilOffsetY = -1;
+                    eyeX -= 3;
+                    eyeY -= 5;
                     break;
                 case 2: // Derecha
-                    pupilOffsetX = 1;
+                    eyeX += 3;
+                    eyeY -= 5;
                     break;
                 case 3: // Abajo
-                    pupilOffsetY = 1;
+                    eyeX += 3;
+                    eyeY += 0;
                     break;
                 case 4: // Izquierda
-                    pupilOffsetX = -1;
+                    eyeX -= 3;
+                    eyeY -= 5;
                     break;
+                default:
+                    eyeX += 3;
+                    eyeY -= 5;
             }
             
             ctx.beginPath();
-            ctx.arc(x - 4 + pupilOffsetX, y - 2 + pupilOffsetY, 2, 0, Math.PI * 2);
-            ctx.arc(x + 4 + pupilOffsetX, y - 2 + pupilOffsetY, 2, 0, Math.PI * 2);
+            ctx.arc(eyeX, eyeY, 2, 0, Math.PI * 2);
             ctx.fill();
             
-            // Boca kawaii
-            ctx.strokeStyle = '#000';
-            ctx.lineWidth = 1;
+            // Añadir rubor kawaii
+            ctx.fillStyle = 'rgba(255, 150, 150, 0.5)';
             ctx.beginPath();
-            ctx.arc(x, y + 3, 2, 0, Math.PI);
-            ctx.stroke();
-        });
-    }
-
-    // Actualizar la posición de Pac-Man
+            ctx.arc(x + radius * 0.5, y + radius * 0.3, radius * 0.3, 0, Math.PI * 2);
+            ctx.fill();
+            
+            ctx.beginPath();
+            ctx.arc(x - radius * 0.5, y + radius * 0.3, radius * 0.3, 0, Math.PI * 2);
+            ctx.fill();
+        }
+        
+        // Dibujar fantasmas
+        function drawGhosts() {
+            ghosts.forEach(ghost => {
+                const x = ghost.x * CELL_SIZE + CELL_SIZE / 2;
+                const y = ghost.y * CELL_SIZE + CELL_SIZE / 2;
+                const radius = CELL_SIZE / 2 - 2;
+                
+                // Cuerpo del fantasma
+                ctx.fillStyle = ghost.color;
+                ctx.beginPath();
+                ctx.arc(x, y - 2, radius, Math.PI, 0, false);
+                ctx.lineTo(x + radius, y + radius);
+                
+                // Base ondulada
+                const waveCount = 4;
+                const waveHeight = 3;
+                const waveWidth = (radius * 2) / waveCount;
+                
+                for (let i = 0; i < waveCount; i++) {
+                    ctx.quadraticCurveTo(
+                        x + radius - waveWidth * i - waveWidth / 2, 
+                        y + radius + waveHeight,
+                        x + radius - waveWidth * (i + 1), 
+                        y + radius
+                    );
+                }
+                
+                ctx.lineTo(x - radius, y + radius);
+                ctx.closePath();
+                ctx.fill();
+                
+                // Ojos
+                ctx.fillStyle = '#FFF';
+                ctx.beginPath();
+                ctx.arc(x - 4, y - 2, 4, 0, Math.PI * 2);
+                ctx.arc(x + 4, y - 2, 4, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Pupilas
+                ctx.fillStyle = '#000';
+                let pupilOffsetX = 0;
+                let pupilOffsetY = 0;
+                
+                switch (ghost.direction) {
+                    case 1: // Arriba
+                        pupilOffsetY = -1;
+                        break;
+                    case 2: // Derecha
+                        pupilOffsetX = 1;
+                        break;
+                    case 3: // Abajo
+                        pupilOffsetY = 1;
+                        break;
+                    case 4: // Izquierda
+                        pupilOffsetX = -1;
+                        break;
+                }
+                
+                ctx.beginPath();
+                ctx.arc(x - 4 + pupilOffsetX, y - 2 + pupilOffsetY, 2, 0, Math.PI * 2);
+                ctx.arc(x + 4 + pupilOffsetX, y - 2 + pupilOffsetY, 2, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Boca kawaii
+                ctx.strokeStyle = '#000';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.arc(x, y + 3, 2, 0, Math.PI);
+                ctx.stroke();
+            });
+        }
+    
+        // Función actualizada para el movimiento de Pac-Man con portales
     function updatePacman() {
         // Control de velocidad para Pac-Man
         pacmanMoveInterval += 1;
         if (pacmanMoveInterval < PACMAN_MOVE_DELAY) return; // Esperar hasta el siguiente intervalo
         pacmanMoveInterval = 0;
         
-        // Verificar si el movimiento en la dirección siguiente es válido
+        // Verificar si el movimiento en la dirección siguiente es válida
         let nextX = pacman.x;
         let nextY = pacman.y;
         
@@ -1157,7 +1385,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         // Si la dirección siguiente es válida, actualizar la dirección actual
-        if (nextX >= 0 && nextX < COLS && nextY >= 0 && nextY < ROWS && maze[nextY][nextX] !== 1) {
+        // Verificar tanto los límites normales como los portales
+        if ((nextX >= 0 && nextX < COLS && nextY >= 0 && nextY < ROWS && maze[nextY][nextX] !== 1) || 
+            (nextDirection === 2 && nextX >= COLS) || 
+            (nextDirection === 4 && nextX < 0)) {
             currentDirection = nextDirection;
         }
         
@@ -1180,13 +1411,32 @@ document.addEventListener('DOMContentLoaded', function() {
                 break;
         }
         
-        // Verificar si el movimiento es válido
-        if (nextX >= 0 && nextX < COLS && nextY >= 0 && nextY < ROWS && maze[nextY][nextX] !== 1) {
-            pacman.x = nextX;
+        // Implementar portales
+        // Portal del lado derecho al izquierdo
+        if (nextX >= COLS) {
+            nextX = 0;
+        }
+        // Portal del lado izquierdo al derecho
+        else if (nextX < 0) {
+            nextX = COLS - 1;
+        }
+        
+        // Verificar si el movimiento es válido (excluyendo paredes)
+        if ((nextX >= 0 && nextX < COLS && nextY >= 0 && nextY < ROWS && maze[nextY][nextX] !== 1) || 
+            nextX >= COLS || nextX < 0) {
+            
+            // Actualizar posición con manejo de portales
+            if (nextX >= COLS) {
+                pacman.x = 0;
+            } else if (nextX < 0) {
+                pacman.x = COLS - 1;
+            } else {
+                pacman.x = nextX;
+            }
             pacman.y = nextY;
             
-            // Comer punto
-            if (maze[nextY][nextX] === 2) {
+            // Comer punto (solo si estamos dentro del laberinto)
+            if (nextX >= 0 && nextX < COLS && nextY >= 0 && nextY < ROWS && maze[nextY][nextX] === 2) {
                 maze[nextY][nextX] = 0;
                 score += 10;
                 dotsEaten++;
@@ -1201,7 +1451,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Actualizar la posición de los fantasmas
+    // Función actualizada para el movimiento de los fantasmas con portales
     function updateGhosts() {
         ghostMoveInterval += 1;
         if (ghostMoveInterval < 15) return; // Ralentizar el movimiento de los fantasmas
@@ -1241,6 +1491,16 @@ document.addEventListener('DOMContentLoaded', function() {
                     break;
             }
             
+            // Implementar portales para fantasmas
+            // Portal del lado derecho al izquierdo
+            if (nextX >= COLS) {
+                nextX = 0;
+            }
+            // Portal del lado izquierdo al derecho
+            else if (nextX < 0) {
+                nextX = COLS - 1;
+            }
+            
             // Verificar si el movimiento es válido
             if (nextX >= 0 && nextX < COLS && nextY >= 0 && nextY < ROWS && maze[nextY][nextX] !== 1) {
                 ghost.x = nextX;
@@ -1265,219 +1525,361 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-    
-    // Animación de la boca de Pac-Man
-    function animatePacmanMouth() {
-        pacman.mouthOpen = !pacman.mouthOpen;
-    }
-    
-    // Reiniciar las posiciones
-    function resetPositions() {
-        pacman.x = 10;
-        pacman.y = 15;
-        currentDirection = 0;
-        nextDirection = 0;
         
-        ghosts = [
-            { x: 10, y: 11, direction: Math.floor(Math.random() * 4) + 1, color: COLORS.ghost1, speed: 1 },
-            { x: 9, y: 11, direction: Math.floor(Math.random() * 4) + 1, color: COLORS.ghost2, speed: 0.8 },
-            { x: 11, y: 11, direction: Math.floor(Math.random() * 4) + 1, color: COLORS.ghost3, speed: 0.7 },
-            { x: 10, y: 10, direction: Math.floor(Math.random() * 4) + 1, color: COLORS.ghost4, speed: 0.9 }
-        ];
-    }
-    
-    // Reiniciar el juego
-    function resetGame() {
-        gameRunning = false;
-        gameWon = false;
-        score = 0;
-        lives = 3;
-        dotsEaten = 0;
-        scoreElement.textContent = score;
-        livesElement.textContent = lives;
+        // Animación de la boca de Pac-Man
+        function animatePacmanMouth() {
+            pacman.mouthOpen = !pacman.mouthOpen;
+        }
         
-        // Reiniciar el laberinto (regenerar los puntos)
-        maze = [
-            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-            [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1],
-            [1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1],
-            [1, 2, 1, 0, 1, 2, 1, 0, 1, 2, 1, 2, 1, 0, 1, 2, 1, 0, 1, 2, 1],
-            [1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1],
-            [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1],
-            [1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1],
-            [1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1],
-            [1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1],
-            [1, 1, 1, 1, 1, 2, 1, 1, 1, 0, 1, 0, 1, 1, 1, 2, 1, 1, 1, 1, 1],
-            [0, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0],
-            [0, 0, 0, 0, 1, 2, 1, 0, 1, 1, 0, 1, 1, 0, 1, 2, 1, 0, 0, 0, 0],
-            [1, 1, 1, 1, 1, 2, 1, 0, 1, 0, 0, 0, 1, 0, 1, 2, 1, 1, 1, 1, 1],
-            [0, 0, 0, 0, 0, 2, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2, 0, 0, 0, 0, 0],
-            [1, 1, 1, 1, 1, 2, 1, 0, 1, 1, 1, 1, 1, 0, 1, 2, 1, 1, 1, 1, 1],
-            [0, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0],
-            [0, 0, 0, 0, 1, 2, 1, 0, 1, 1, 1, 1, 1, 0, 1, 2, 1, 0, 0, 0, 0],
-            [1, 1, 1, 1, 1, 2, 1, 0, 1, 1, 1, 1, 1, 0, 1, 2, 1, 1, 1, 1, 1],
-            [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1],
-            [1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1],
-            [1, 2, 2, 2, 1, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 1, 2, 2, 2, 1],
-            [1, 1, 1, 2, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 2, 1, 1, 1],
-            [1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1]
-        ];
+        // Reiniciar las posiciones
+        function resetPositions() {
+            pacman.x = 10;
+            pacman.y = 15;
+            currentDirection = 0;
+            nextDirection = 0;
+            
+            ghosts = [
+                { x: 10, y: 11, direction: Math.floor(Math.random() * 4) + 1, color: COLORS.ghost1, speed: 1 },
+                { x: 9, y: 11, direction: Math.floor(Math.random() * 4) + 1, color: COLORS.ghost2, speed: 0.8 },
+                { x: 11, y: 11, direction: Math.floor(Math.random() * 4) + 1, color: COLORS.ghost3, speed: 0.7 },
+                { x: 10, y: 10, direction: Math.floor(Math.random() * 4) + 1, color: COLORS.ghost4, speed: 0.9 }
+            ];
+        }
         
-        // Contar puntos totales de nuevo
-        countTotalDots();
-        resetPositions();
-    }
-    
-    // Bucle principal del juego
-    function gameLoop(timestamp) {
-        // Calcular delta de tiempo
-        const deltaTime = timestamp - lastTime;
-        lastTime = timestamp;
+        // Reiniciar el juego
+        function resetGame() {
+            gameRunning = false;
+            gameWon = false;
+            score = 0;
+            lives = 3;
+            dotsEaten = 0;
+            scoreElement.textContent = score;
+            livesElement.textContent = lives;
+            
+            // Reiniciar el laberinto (regenerar los puntos)
+            maze = [
+                [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1],
+                [1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1],
+                [1, 2, 1, 0, 1, 2, 1, 0, 1, 2, 1, 2, 1, 0, 1, 2, 1, 0, 1, 2, 1],
+                [1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1],
+                [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1],
+                [1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1],
+                [1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1],
+                [1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1],
+                [1, 1, 1, 1, 1, 2, 1, 1, 1, 0, 1, 0, 1, 1, 1, 2, 1, 1, 1, 1, 1],
+                [0, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0],
+                [0, 0, 0, 0, 1, 2, 1, 0, 1, 1, 0, 1, 1, 0, 1, 2, 1, 0, 0, 0, 0],
+                [1, 1, 1, 1, 1, 2, 1, 0, 1, 0, 0, 0, 1, 0, 1, 2, 1, 1, 1, 1, 1],
+                [0, 0, 0, 0, 0, 2, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2, 0, 0, 0, 0, 0],
+                [1, 1, 1, 1, 1, 2, 1, 0, 1, 1, 1, 1, 1, 0, 1, 2, 1, 1, 1, 1, 1],
+                [0, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0],
+                [0, 0, 0, 0, 1, 2, 1, 0, 1, 1, 1, 1, 1, 0, 1, 2, 1, 0, 0, 0, 0],
+                [1, 1, 1, 1, 1, 2, 1, 0, 1, 1, 1, 1, 1, 0, 1, 2, 1, 1, 1, 1, 1],
+                [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1],
+                [1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1],
+                [1, 2, 2, 2, 1, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 1, 2, 2, 2, 1],
+                [1, 1, 1, 2, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 2, 1, 1, 1],
+                [1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1]
+            ];
+            
+            // Contar puntos totales de nuevo
+            countTotalDots();
+            resetPositions();
+        }
         
-        // Limpiar el canvas
-        ctx.clearRect(0, 0, WIDTH, HEIGHT);
+        // Bucle principal del juego
+        function gameLoop(timestamp) {
+            // Calcular delta de tiempo
+            const deltaTime = timestamp - lastTime;
+            lastTime = timestamp;
+            
+            // Limpiar el canvas
+            ctx.clearRect(0, 0, WIDTH, HEIGHT);
+            
+            // Dibujar elementos
+            drawMaze();
+            drawPacman();
+            drawGhosts();
+            
+            // Actualizar el estado del juego
+            updatePacman();
+            updateGhosts();
+            
+            // Continuar el bucle si el juego sigue corriendo
+            if (gameRunning) {
+                animationId = requestAnimationFrame(gameLoop);
+            }
+        }
         
-        // Dibujar elementos
+        // Iniciar el juego
+        function startGame() {
+            if (gameRunning) return;
+            
+            gameRunning = true;
+            startButton.innerText = "Jugando...";
+            startButton.disabled = true;
+            
+            // Iniciar animación de la boca
+            pacmanMouthInterval = setInterval(animatePacmanMouth, 200);
+            
+            // Iniciar bucle del juego
+            lastTime = performance.now();
+            animationId = requestAnimationFrame(gameLoop);
+        }
+        
+        // Finalizar el juego
+        function endGame() {
+            gameRunning = false;
+            clearInterval(pacmanMouthInterval);
+            cancelAnimationFrame(animationId);
+            startButton.innerText = "Iniciar Juego";
+            startButton.disabled = false;
+            
+            if (gameWon) {
+                victoryOverlay.classList.remove('hidden');
+            } else {
+                gameOverOverlay.classList.remove('hidden');
+            }
+        }
+        
+        // Inicializar el juego
+        initEvents();
         drawMaze();
         drawPacman();
         drawGhosts();
-        
-        // Actualizar el estado del juego
-        updatePacman();
-        updateGhosts();
-        
-        // Continuar el bucle si el juego sigue corriendo
-        if (gameRunning) {
-            animationId = requestAnimationFrame(gameLoop);
-        }
-    }
-    
-    // Iniciar el juego
-    function startGame() {
-        if (gameRunning) return;
-        
-        gameRunning = true;
-        startButton.innerText = "Jugando...";
-        startButton.disabled = true;
-        
-        // Iniciar animación de la boca
-        pacmanMouthInterval = setInterval(animatePacmanMouth, 200);
-        
-        // Iniciar bucle del juego
-        lastTime = performance.now();
-        animationId = requestAnimationFrame(gameLoop);
-    }
-    
-    // Finalizar el juego
-    function endGame() {
-        gameRunning = false;
-        clearInterval(pacmanMouthInterval);
-        cancelAnimationFrame(animationId);
-        startButton.innerText = "Iniciar Juego";
-        startButton.disabled = false;
-        
-        if (gameWon) {
-            victoryOverlay.classList.remove('hidden');
-        } else {
-            gameOverOverlay.classList.remove('hidden');
-        }
-    }
-    
-    // Inicializar el juego
-    initEvents();
-    drawMaze();
-    drawPacman();
-    drawGhosts();
-});
-</script>
-
-<!-- Script para el botón "Skip Game" para móviles -->
-<script>
-// Añadir un botón para saltar el juego en dispositivos móviles
-document.addEventListener('DOMContentLoaded', function() {
-    // Crear el botón Skip solo si estamos en un dispositivo móvil
-    if (window.innerWidth < 768) {
-        const skipButton = document.createElement('button');
-        skipButton.className = 'pacman-button mt-2 bg-gray-400 text-white px-4 py-1 rounded-full text-sm font-semibold transition-all duration-300 hover:bg-gray-500';
-        skipButton.innerText = 'Saltar juego';
-        skipButton.addEventListener('click', function() {
-            document.getElementById('pacman-game').classList.add('hidden');
-            document.getElementById('projects').scrollIntoView({ behavior: 'smooth' });
-        });
-        
-        // Agregar el botón después del botón de inicio
-        const startButton = document.getElementById('start-game');
-        startButton.parentNode.insertBefore(skipButton, startButton.nextSibling);
-    }
-});
-</script>
-
-<!-- Script para la navegación fluida -->
-<script>
-// Navegación fluida para los enlaces del menú
-document.addEventListener('DOMContentLoaded', function() {
-    const menuLinks = document.querySelectorAll('header a[href^="#"]');
-    
-    menuLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            // Si estamos en móvil, cerrar el menú desplegable
-            if (window.innerWidth < 768) {
-                const menuToggle = document.querySelector('.mobile-menu [x-data]');
-                if (menuToggle && typeof menuToggle.__x !== 'undefined') {
-                    menuToggle.__x.updateElements(menuToggle);
-                }
-            }
-            
-            // Desplazamiento suave a la sección
-            const targetId = this.getAttribute('href');
-            const targetSection = document.querySelector(targetId);
-            
-            if (targetSection) {
-                const headerHeight = document.querySelector('header').offsetHeight;
-                const targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-                
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-            }
-        });
     });
-});
-</script>
-
-<!-- Script para efectos de desplazamiento -->
-<script>
-// Efectos de aparición al desplazarse
-document.addEventListener('DOMContentLoaded', function() {
-    // Verificar si GSAP está disponible
-    if (typeof gsap !== 'undefined') {
-        // Elementos a animar
-        const sections = document.querySelectorAll('section:not(#pacman-game)');
+    </script>
+    
+    <!-- Script para el botón "Skip Game" para móviles -->
+    <script>
+    // Añadir un botón para saltar el juego en dispositivos móviles
+    document.addEventListener('DOMContentLoaded', function() {
+        // Crear el botón Skip solo si estamos en un dispositivo móvil
+        if (window.innerWidth < 768) {
+            const skipButton = document.createElement('button');
+            skipButton.className = 'pacman-button mt-2 bg-gray-400 text-white px-4 py-1 rounded-full text-sm font-semibold transition-all duration-300 hover:bg-gray-500';
+            skipButton.innerText = 'Saltar juego';
+            skipButton.addEventListener('click', function() {
+                document.getElementById('pacman-game').classList.add('hidden');
+                document.getElementById('projects').scrollIntoView({ behavior: 'smooth' });
+            });
+            
+            // Agregar el botón después del botón de inicio
+            const startButton = document.getElementById('start-game');
+            startButton.parentNode.insertBefore(skipButton, startButton.nextSibling);
+        }
+    });
+    </script>
+    
+    <!-- Script para la navegación fluida -->
+    <script>
+    // Navegación fluida para los enlaces del menú
+    document.addEventListener('DOMContentLoaded', function() {
+        const menuLinks = document.querySelectorAll('header a[href^="#"]');
         
-        // Configurar animaciones
-        sections.forEach((section, index) => {
-            gsap.fromTo(
-                section, 
-                { opacity: 0, y: 50 }, 
-                { 
-                    opacity: 1, 
-                    y: 0, 
-                    duration: 0.8, 
-                    ease: "power2.out",
-                    scrollTrigger: {
-                        trigger: section,
-                        start: "top 80%",
-                        toggleActions: "play none none none"
+        menuLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Si estamos en móvil, cerrar el menú desplegable
+                if (window.innerWidth < 768) {
+                    const menuToggle = document.querySelector('.mobile-menu [x-data]');
+                    if (menuToggle && typeof menuToggle.__x !== 'undefined') {
+                        menuToggle.__x.updateElements(menuToggle);
                     }
                 }
-            );
+                
+                // Desplazamiento suave a la sección
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                
+                if (targetSection) {
+                    const headerHeight = document.querySelector('header').offsetHeight;
+                    const targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
         });
-    }
-});
-</script>
+    });
+    </script>
+    
+    <!-- Script para efectos de desplazamiento -->
+    <script>
+    // Efectos de aparición al desplazarse
+    document.addEventListener('DOMContentLoaded', function() {
+        // Verificar si GSAP está disponible
+        if (typeof gsap !== 'undefined') {
+            // Elementos a animar
+            const sections = document.querySelectorAll('section:not(#pacman-game)');
+            
+            // Configurar animaciones
+            sections.forEach((section, index) => {
+                gsap.fromTo(
+                    section, 
+                    { opacity: 0, y: 50 }, 
+                    { 
+                        opacity: 1, 
+                        y: 0, 
+                        duration: 0.8, 
+                        ease: "power2.out",
+                        scrollTrigger: {
+                            trigger: section,
+                            start: "top 80%",
+                            toggleActions: "play none none none"
+                        }
+                    }
+                );
+            });
+        }
+    });
+    </script>
+<!-- Script para los controles táctiles visibles -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Solo crear controles táctiles si estamos en un dispositivo móvil
+        if (window.innerWidth < 768) {
+            // Crear el contenedor de controles
+            const controlsContainer = document.createElement('div');
+            controlsContainer.id = 'mobile-controls';
+            controlsContainer.style.cssText = `
+                position: fixed;
+                bottom: 30px;
+                left: 50%;
+                transform: translateX(-50%);
+                display: grid;
+                grid-template-columns: repeat(3, 45px);
+                grid-template-rows: repeat(3, 45px);
+                gap: 4px;
+                z-index: 1000;
+                background-color: rgba(255, 255, 255, 0.4);
+                border-radius: 15px;
+                padding: 8px;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            `;
+            
+            // Crear botones de dirección
+            const directions = [
+                { id: 'up', text: '↑', x: 1, y: 0, dir: 1 },
+                { id: 'left', text: '←', x: 0, y: 1, dir: 4 },
+                { id: 'right', text: '→', x: 2, y: 1, dir: 2 },
+                { id: 'down', text: '↓', x: 1, y: 2, dir: 3 }
+            ];
+            
+            directions.forEach(dir => {
+                const button = document.createElement('button');
+                button.id = `control-${dir.id}`;
+                button.textContent = dir.text;
+                button.style.cssText = `
+                    grid-column: ${dir.x + 1};
+                    grid-row: ${dir.y + 1};
+                    background-color: rgba(247, 5, 163, 0.7);
+                    border: none;
+                    border-radius: 50%;
+                    color: white;
+                    font-size: 22px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: pointer;
+                    user-select: none;
+                    -webkit-tap-highlight-color: transparent;
+                `;
+                
+                // Añadir eventos de toque
+                const handleDirectionChange = function(e) {
+                    e.preventDefault();
+                    // Simular evento de teclado para aprovechar la lógica existente
+                    const keyEvent = new KeyboardEvent('keydown', {
+                        key: dir.id === 'up' ? 'ArrowUp' : 
+                             dir.id === 'right' ? 'ArrowRight' : 
+                             dir.id === 'down' ? 'ArrowDown' : 'ArrowLeft'
+                    });
+                    document.dispatchEvent(keyEvent);
+                    
+                    button.style.backgroundColor = 'rgba(255, 156, 197, 0.8)';
+                    setTimeout(() => {
+                        button.style.backgroundColor = 'rgba(247, 5, 163, 0.7)';
+                    }, 200);
+                };
+                
+                button.addEventListener('touchstart', handleDirectionChange);
+                
+                controlsContainer.appendChild(button);
+            });
+            
+            // Crear un espacio vacío en el centro para mejor diseño
+            const centerSpace = document.createElement('div');
+            centerSpace.style.cssText = `
+                grid-column: 2;
+                grid-row: 2;
+            `;
+            controlsContainer.appendChild(centerSpace);
+            
+            // Añadir el contenedor al documento
+            document.body.appendChild(controlsContainer);
+            
+            // Ocultar inicialmente los controles
+            controlsContainer.style.display = 'none';
+            
+            // Mostrar los controles cuando se inicia el juego
+            const startButton = document.getElementById('start-game');
+            if (startButton) {
+                startButton.addEventListener('click', function() {
+                    controlsContainer.style.display = 'grid';
+                });
+            }
+            
+            // Ocultar los controles cuando termina el juego
+            const gameSection = document.getElementById('pacman-game');
+            if (gameSection) {
+                // Usar un MutationObserver para detectar cuando el gameSection se oculta
+                const observer = new MutationObserver(function(mutations) {
+                    mutations.forEach(function(mutation) {
+                        if (mutation.attributeName === 'class' && gameSection.classList.contains('hidden')) {
+                            controlsContainer.style.display = 'none';
+                        }
+                    });
+                });
+                
+                observer.observe(gameSection, { attributes: true });
+            }
+            
+            // Ocultar también cuando aparecen las pantallas finales
+            const victoryOverlay = document.getElementById('victory-overlay');
+            const gameOverOverlay = document.getElementById('game-over-overlay');
+            
+            if (victoryOverlay) {
+                victoryOverlay.addEventListener('click', function() {
+                    controlsContainer.style.display = 'none';
+                });
+            }
+            
+            if (gameOverOverlay) {
+                gameOverOverlay.addEventListener('click', function() {
+                    controlsContainer.style.display = 'none';
+                });
+            }
+            
+            // Adicionalmente, ocultar cuando se hace scroll fuera de la sección del juego
+            window.addEventListener('scroll', function() {
+                const gameSectionRect = gameSection ? gameSection.getBoundingClientRect() : null;
+                if (gameSectionRect && (gameSectionRect.bottom < 0 || gameSectionRect.top > window.innerHeight)) {
+                    controlsContainer.style.display = 'none';
+                }
+            });
+        }
+    });
+    </script>
+    <script src="corazoncitos.js"></script>
 
-</body>
-</html>
+    </body>
+    </html>
+
+
+
+    
