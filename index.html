@@ -281,25 +281,71 @@
             top: 0;
             width: 100%;
             padding: 20px 0;
-            background: rgba(10, 10, 15, 0.8);
+            background: rgba(10, 10, 15, 0.7);
             backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 42, 159, 0.2);
             z-index: 1000;
             transition: all 0.3s;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
         }
 
         .navbar.scrolled {
-            padding: 10px 0;
+            padding: 12px 0;
             background: rgba(10, 10, 15, 0.95);
+            border-bottom: 1px solid rgba(255, 42, 159, 0.4);
+            box-shadow: 
+                0 5px 30px rgba(0, 0, 0, 0.5),
+                0 0 20px rgba(255, 42, 159, 0.2);
+        }
+
+        /* Logo Navbar */
+        .navbar-logo {
+            cursor: pointer;
+            transition: all 0.3s;
+            text-shadow: 
+                0 0 10px rgba(255, 42, 159, 0.5),
+                0 0 20px rgba(199, 76, 255, 0.3);
+        }
+
+        .navbar-logo:hover {
+            transform: scale(1.05);
+            text-shadow: 
+                0 0 20px rgba(255, 42, 159, 0.8),
+                0 0 40px rgba(199, 76, 255, 0.6),
+                0 0 60px rgba(0, 217, 255, 0.4);
         }
 
         .nav-link {
             position: relative;
-            padding: 10px 20px;
+            padding: 12px 24px;
             color: white;
             text-decoration: none;
             font-weight: 600;
-            transition: all 0.3s;
+            font-size: 14px;
+            letter-spacing: 1px;
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            overflow: hidden;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent,
+                rgba(255, 42, 159, 0.3),
+                transparent
+            );
+            transition: left 0.5s;
         }
 
         .nav-link::after {
@@ -312,10 +358,55 @@
             background: linear-gradient(90deg, var(--neon-pink), var(--neon-purple));
             transition: all 0.3s;
             transform: translateX(-50%);
+            box-shadow: 
+                0 0 10px var(--neon-pink),
+                0 0 20px var(--neon-purple);
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 42, 159, 0.1);
+            border-color: var(--neon-pink);
+            transform: translateY(-3px);
+            box-shadow: 
+                0 0 20px rgba(255, 42, 159, 0.4),
+                0 0 40px rgba(199, 76, 255, 0.2),
+                0 5px 15px rgba(0, 0, 0, 0.3);
+            text-shadow: 
+                0 0 10px rgba(255, 42, 159, 0.8),
+                0 0 20px rgba(199, 76, 255, 0.6);
+        }
+
+        .nav-link:hover::before {
+            left: 100%;
         }
 
         .nav-link:hover::after {
-            width: 80%;
+            width: 90%;
+        }
+
+        .nav-link i {
+            font-size: 16px;
+            transition: transform 0.3s;
+        }
+
+        .nav-link:hover i {
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        /* Active state */
+        .nav-link.active {
+            background: linear-gradient(135deg, 
+                rgba(255, 42, 159, 0.2), 
+                rgba(199, 76, 255, 0.2)
+            );
+            border-color: var(--neon-pink);
+            box-shadow: 
+                0 0 15px rgba(255, 42, 159, 0.3),
+                0 0 30px rgba(199, 76, 255, 0.2);
+        }
+
+        .nav-link.active::after {
+            width: 90%;
         }
 
         /* ===== SECTION TITLE ===== */
@@ -793,7 +884,7 @@
         .certificate-image {
             width: 100%;
             height: 200px;
-            object-fit: cover;
+            object-fit: contain;
             border-radius: 15px;
             margin-bottom: 15px;
             transition: transform 0.5s;
@@ -905,6 +996,157 @@
                 font-size: 10px;
             }
         }
+
+        /* ===== MENÚ MÓVIL HAMBURGUESA ===== */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 300px;
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(10, 10, 15, 0.98), rgba(20, 10, 30, 0.98));
+            backdrop-filter: blur(20px);
+            border-left: 2px solid var(--neon-pink);
+            z-index: 9998;
+            transition: right 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            padding: 80px 30px 30px;
+            overflow-y: auto;
+            box-shadow: 
+                0 0 40px rgba(255, 42, 159, 0.3),
+                0 0 80px rgba(199, 76, 255, 0.2);
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            z-index: 9997;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-menu-link {
+            display: block;
+            padding: 15px 20px;
+            margin-bottom: 10px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mobile-menu-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--neon-pink), var(--neon-purple));
+            transition: left 0.4s;
+            z-index: -1;
+        }
+
+        .mobile-menu-link:hover {
+            transform: translateX(10px);
+            border-color: var(--neon-pink);
+            box-shadow: 
+                0 0 20px rgba(255, 42, 159, 0.5),
+                0 0 40px rgba(199, 76, 255, 0.3);
+        }
+
+        .mobile-menu-link:hover::before {
+            left: 0;
+        }
+
+        .mobile-menu-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: transparent;
+            border: 2px solid var(--neon-pink);
+            color: var(--neon-pink);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 24px;
+            transition: all 0.3s;
+        }
+
+        .mobile-menu-close:hover {
+            background: var(--neon-pink);
+            color: white;
+            transform: rotate(90deg);
+            box-shadow: 0 0 20px rgba(255, 42, 159, 0.8);
+        }
+
+        /* Hamburger Icon Animation */
+        .hamburger {
+            width: 30px;
+            height: 24px;
+            position: relative;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .hamburger span {
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--neon-pink), var(--neon-purple));
+            border-radius: 3px;
+            transition: all 0.3s;
+            box-shadow: 0 0 10px rgba(255, 42, 159, 0.5);
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(8px, -8px);
+        }
+
+        .mobile-menu-header {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .mobile-menu-title {
+            font-size: 28px;
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
@@ -920,20 +1162,70 @@
     <!-- Navbar -->
     <nav class="navbar">
         <div class="container mx-auto px-6 flex justify-between items-center">
-            <h1 class="text-2xl font-bold holographic">EVA LIZETH</h1>
-            <div class="hidden md:flex space-x-6">
-                <a href="#home" class="nav-link">INICIO</a>
-                <a href="#about" class="nav-link">SOBRE MÍ</a>
-                <a href="#projects" class="nav-link">PROYECTOS</a>
-                <a href="#skills" class="nav-link">SKILLS</a>
-                <a href="#certificates" class="nav-link">CERTIFICADOS</a>
-                <a href="#contact" class="nav-link">CONTACTO</a>
+            <h1 class="text-2xl font-bold holographic navbar-logo">EVA LIZETH</h1>
+            <div class="flex space-x-4 max-md:hidden">
+                <a href="#home" class="nav-link">
+                    <i class="fas fa-home"></i> INICIO
+                </a>
+                <a href="#about" class="nav-link">
+                    <i class="fas fa-user"></i> SOBRE MÍ
+                </a>
+                <a href="#projects" class="nav-link">
+                    <i class="fas fa-code"></i> PROYECTOS
+                </a>
+                <a href="#skills" class="nav-link">
+                    <i class="fas fa-star"></i> SKILLS
+                </a>
+                <a href="#certificates" class="nav-link">
+                    <i class="fas fa-certificate"></i> CERTIFICADOS
+                </a>
+                <a href="#contact" class="nav-link">
+                    <i class="fas fa-envelope"></i> CONTACTO
+                </a>
             </div>
-            <button class="md:hidden text-white" onclick="alert('Menú móvil - En desarrollo')">
-                <i class="fas fa-bars text-2xl"></i>
+            <button class="md:hidden text-white" onclick="toggleMobileMenu()" id="hamburger-btn">
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
             </button>
         </div>
     </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay" onclick="toggleMobileMenu()"></div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobile-menu">
+        <button class="mobile-menu-close" onclick="toggleMobileMenu()">
+            <i class="fas fa-times"></i>
+        </button>
+        
+        <div class="mobile-menu-header">
+            <h2 class="mobile-menu-title holographic">MENÚ</h2>
+            <div style="width: 50px; height: 3px; background: linear-gradient(90deg, var(--neon-pink), var(--neon-purple)); margin: 0 auto; border-radius: 3px;"></div>
+        </div>
+
+        <a href="#home" class="mobile-menu-link" onclick="toggleMobileMenu()">
+            <i class="fas fa-home mr-3"></i> INICIO
+        </a>
+        <a href="#about" class="mobile-menu-link" onclick="toggleMobileMenu()">
+            <i class="fas fa-user mr-3"></i> SOBRE MÍ
+        </a>
+        <a href="#projects" class="mobile-menu-link" onclick="toggleMobileMenu()">
+            <i class="fas fa-code mr-3"></i> PROYECTOS
+        </a>
+        <a href="#skills" class="mobile-menu-link" onclick="toggleMobileMenu()">
+            <i class="fas fa-star mr-3"></i> SKILLS
+        </a>
+        <a href="#certificates" class="mobile-menu-link" onclick="toggleMobileMenu()">
+            <i class="fas fa-certificate mr-3"></i> CERTIFICADOS
+        </a>
+        <a href="#contact" class="mobile-menu-link" onclick="toggleMobileMenu()">
+            <i class="fas fa-envelope mr-3"></i> CONTACTO
+        </a>
+    </div>
 
     <!-- Pac-Man Game Overlay -->
     <section id="pacman-game" class="pacman-overlay">
@@ -1172,7 +1464,7 @@
                         <span class="px-2 md:px-3 py-1 bg-pink-500 bg-opacity-20 text-pink-400 rounded-full text-xs md:text-sm border border-pink-500">Figma</span>
                         <span class="px-2 md:px-3 py-1 bg-purple-500 bg-opacity-20 text-purple-400 rounded-full text-xs md:text-sm border border-purple-500">UI/UX</span>
                     </div>
-                    <button class="btn-neon w-full text-sm md:text-base">VER DISEÑO</button>
+                    <a href="https://www.figma.com/proto/SLgIUDJz8Bn1I6y9UUQcef/Melom-Delights-Eva-Lizeth?node-id=7-283&starting-point-node-id=7%3A283" target="_blank" class="btn-neon w-full text-sm md:text-base block text-center">VER DISEÑO</a>
                 </div>
             </div>
 
@@ -1345,99 +1637,99 @@
                 </div>
 
                 <!-- Certificado 6 -->
-                <div class="certificate-card" onclick="openCertificate('cert6.jpg')">
+                <div class="certificate-card" onclick="openCertificate('c.png')">
                     <span class="certificate-badge">CERTIFICADO</span>
-                    <img src="cert6.jpg" alt="Certificate 6" class="certificate-image">
-                    <h4 class="text-lg font-bold mb-2 neon-text">JavaScript Avanzado</h4>
-                    <p class="text-sm text-gray-400">ES6+ y Frameworks</p>
+                    <img src="c.png" alt="Certificate 6" class="certificate-image">
+                    <h4 class="text-lg font-bold mb-2 neon-text">Foundational C# with Microsoft</h4>
+                    <p class="text-sm text-gray-400">Programación C# y .NET</p>
                 </div>
 
                 <!-- Certificado 7 -->
-                <div class="certificate-card" onclick="openCertificate('cert7.jpg')">
+                <div class="certificate-card" onclick="openCertificate('Relational Database.png')">
                     <span class="certificate-badge">CERTIFICADO</span>
-                    <img src="cert7.jpg" alt="Certificate 7" class="certificate-image">
-                    <h4 class="text-lg font-bold mb-2 neon-text">MySQL Database</h4>
-                    <p class="text-sm text-gray-400">Administración BD</p>
+                    <img src="Relational Database.png" alt="Certificate 7" class="certificate-image">
+                    <h4 class="text-lg font-bold mb-2 neon-text">Relational Database</h4>
+                    <p class="text-sm text-gray-400">Bases de Datos Relacionales</p>
                 </div>
 
                 <!-- Certificado 8 -->
-                <div class="certificate-card" onclick="openCertificate('cert8.jpg')">
+                <div class="certificate-card" onclick="openCertificate('python.jpeg')">
                     <span class="certificate-badge">CERTIFICADO</span>
-                    <img src="cert8.jpg" alt="Certificate 8" class="certificate-image">
-                    <h4 class="text-lg font-bold mb-2 neon-text">Git & GitHub</h4>
-                    <p class="text-sm text-gray-400">Control de Versiones</p>
+                    <img src="python.jpeg" alt="Certificate 8" class="certificate-image">
+                    <h4 class="text-lg font-bold mb-2 neon-text">Python Programming</h4>
+                    <p class="text-sm text-gray-400">Programación con Python</p>
                 </div>
 
                 <!-- Certificado 9 -->
-                <div class="certificate-card" onclick="openCertificate('cert9.jpg')">
+                <div class="certificate-card" onclick="openCertificate('Responsive Web Design.png')">
                     <span class="certificate-badge">CERTIFICADO</span>
-                    <img src="cert9.jpg" alt="Certificate 9" class="certificate-image">
-                    <h4 class="text-lg font-bold mb-2 neon-text">Responsive Design</h4>
-                    <p class="text-sm text-gray-400">Mobile First Approach</p>
+                    <img src="Responsive Web Design.png" alt="Certificate 9" class="certificate-image">
+                    <h4 class="text-lg font-bold mb-2 neon-text">Responsive Web Design</h4>
+                    <p class="text-sm text-gray-400">Diseño Web Responsivo</p>
                 </div>
 
                 <!-- Certificado 10 -->
-                <div class="certificate-card" onclick="openCertificate('cert10.jpg')">
+                <div class="certificate-card" onclick="openCertificate('Legacy JavaScript Algorithms and Data Structures.png')">
                     <span class="certificate-badge">CERTIFICADO</span>
-                    <img src="cert10.jpg" alt="Certificate 10" class="certificate-image">
-                    <h4 class="text-lg font-bold mb-2 neon-text">Adobe Illustrator</h4>
-                    <p class="text-sm text-gray-400">Diseño Gráfico</p>
+                    <img src="Legacy JavaScript Algorithms and Data Structures.png" alt="Certificate 10" class="certificate-image">
+                    <h4 class="text-lg font-bold mb-2 neon-text">JavaScript Algorithms & Data Structures</h4>
+                    <p class="text-sm text-gray-400">Algoritmos y Estructuras de Datos</p>
                 </div>
 
                 <!-- Certificado 11 -->
-                <div class="certificate-card" onclick="openCertificate('cert11.jpg')">
+                <div class="certificate-card" onclick="openCertificate('html.jpeg')">
                     <span class="certificate-badge">CERTIFICADO</span>
-                    <img src="cert11.jpg" alt="Certificate 11" class="certificate-image">
-                    <h4 class="text-lg font-bold mb-2 neon-text">Adobe XD</h4>
-                    <p class="text-sm text-gray-400">Prototipado UI/UX</p>
+                    <img src="html.jpeg" alt="Certificate 11" class="certificate-image">
+                    <h4 class="text-lg font-bold mb-2 neon-text">Learn HTML Course</h4>
+                    <p class="text-sm text-gray-400">Fundamentos de HTML</p>
                 </div>
 
                 <!-- Certificado 12 -->
-                <div class="certificate-card" onclick="openCertificate('cert12.jpg')">
+                <div class="certificate-card" onclick="openCertificate('Front End Development Libraries.png')">
                     <span class="certificate-badge">CERTIFICADO</span>
-                    <img src="cert12.jpg" alt="Certificate 12" class="certificate-image">
-                    <h4 class="text-lg font-bold mb-2 neon-text">Figma</h4>
-                    <p class="text-sm text-gray-400">Diseño Colaborativo</p>
+                    <img src="Front End Development Libraries.png" alt="Certificate 12" class="certificate-image">
+                    <h4 class="text-lg font-bold mb-2 neon-text">Front End Development Libraries</h4>
+                    <p class="text-sm text-gray-400">React, Redux, Bootstrap & más</p>
                 </div>
 
                 <!-- Certificado 13 -->
-                <div class="certificate-card" onclick="openCertificate('cert13.jpg')">
+                <div class="certificate-card" onclick="openCertificate('powerbi.jpeg')">
                     <span class="certificate-badge">CERTIFICADO</span>
-                    <img src="cert13.jpg" alt="Certificate 13" class="certificate-image">
+                    <img src="powerbi.jpeg" alt="Certificate 13" class="certificate-image">
                     <h4 class="text-lg font-bold mb-2 neon-text">Power BI</h4>
-                    <p class="text-sm text-gray-400">Business Intelligence</p>
+                    <p class="text-sm text-gray-400">Análisis y Visualización de Datos</p>
                 </div>
 
                 <!-- Certificado 14 -->
-                <div class="certificate-card" onclick="openCertificate('cert14.jpg')">
+                <div class="certificate-card" onclick="openCertificate('excela.png')">
                     <span class="certificate-badge">CERTIFICADO</span>
-                    <img src="cert14.jpg" alt="Certificate 14" class="certificate-image">
+                    <img src="excela.png" alt="Certificate 14" class="certificate-image">
                     <h4 class="text-lg font-bold mb-2 neon-text">Excel Avanzado</h4>
-                    <p class="text-sm text-gray-400">Análisis de Datos</p>
+                    <p class="text-sm text-gray-400">Macros, Tablas Dinámicas y Análisis</p>
                 </div>
 
                 <!-- Certificado 15 -->
-                <div class="certificate-card" onclick="openCertificate('cert15.jpg')">
+                <div class="certificate-card" onclick="openCertificate('sheets.png')">
                     <span class="certificate-badge">CERTIFICADO</span>
-                    <img src="cert15.jpg" alt="Certificate 15" class="certificate-image">
+                    <img src="sheets.png" alt="Certificate 15" class="certificate-image">
                     <h4 class="text-lg font-bold mb-2 neon-text">Google Sheets</h4>
-                    <p class="text-sm text-gray-400">Hojas de Cálculo</p>
+                    <p class="text-sm text-gray-400">Hojas de Cálculo en la Nube</p>
                 </div>
 
                 <!-- Certificado 16 -->
                 <div class="certificate-card" onclick="openCertificate('cert16.jpg')">
                     <span class="certificate-badge">CERTIFICADO</span>
                     <img src="cert16.jpg" alt="Certificate 16" class="certificate-image">
-                    <h4 class="text-lg font-bold mb-2 neon-text">API REST</h4>
-                    <p class="text-sm text-gray-400">Desarrollo de APIs</p>
+                    <h4 class="text-lg font-bold mb-2 neon-text">Blockchain Technology</h4>
+                    <p class="text-sm text-gray-400">Fundamentos de Blockchain</p>
                 </div>
 
                 <!-- Certificado 17 -->
                 <div class="certificate-card" onclick="openCertificate('cert17.jpg')">
                     <span class="certificate-badge">CERTIFICADO</span>
                     <img src="cert17.jpg" alt="Certificate 17" class="certificate-image">
-                    <h4 class="text-lg font-bold mb-2 neon-text">Scrum Master</h4>
-                    <p class="text-sm text-gray-400">Metodologías Ágiles</p>
+                    <h4 class="text-lg font-bold mb-2 neon-text">Ultimate Docker Course</h4>
+                    <p class="text-sm text-gray-400">Containerización y DevOps</p>
                 </div>
 
                 <!-- Certificado 18 -->
@@ -1606,6 +1898,26 @@
             } else {
                 navbar.classList.remove('scrolled');
             }
+
+            // Active section highlighting
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
         });
 
         // Smooth Scroll
@@ -2027,6 +2339,34 @@
         document.getElementById('certificate-modal').addEventListener('click', (e) => {
             if (e.target.id === 'certificate-modal') {
                 closeCertificate();
+            }
+        });
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const overlay = document.getElementById('mobile-menu-overlay');
+            const hamburger = document.getElementById('hamburger');
+            
+            menu.classList.toggle('active');
+            overlay.classList.toggle('active');
+            hamburger.classList.toggle('active');
+            
+            // Prevenir scroll cuando el menú está abierto
+            if (menu.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Cerrar menú con tecla ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const menu = document.getElementById('mobile-menu');
+                if (menu.classList.contains('active')) {
+                    toggleMobileMenu();
+                }
             }
         });
     </script>
