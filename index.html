@@ -184,6 +184,13 @@
             justify-content: center;
             position: relative;
             z-index: 1;
+            padding-top: 80px; /* Espacio para el navbar */
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding-top: 100px; /* Más espacio en móvil */
+            }
         }
 
         .profile-glow {
@@ -407,6 +414,46 @@
 
         .nav-link.active::after {
             width: 90%;
+        }
+
+        /* Menú Desktop Container */
+        .nav-desktop-menu {
+            display: none;
+            gap: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .nav-desktop-menu {
+                display: flex !important;
+                gap: 1rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .nav-desktop-menu {
+                gap: 1.5rem;
+            }
+        }
+
+        /* Logo Responsive */
+        .logo-mobile {
+            display: block;
+            font-size: 1.25rem; /* text-xl */
+        }
+
+        .logo-desktop {
+            display: none;
+            font-size: 1.5rem; /* text-2xl */
+        }
+
+        @media (min-width: 768px) {
+            .logo-mobile {
+                display: none;
+            }
+            
+            .logo-desktop {
+                display: inline-block !important;
+            }
         }
 
         /* ===== SECTION TITLE ===== */
@@ -1106,6 +1153,16 @@
         }
 
         /* Hamburger Icon Animation */
+        #hamburger-btn {
+            display: block;
+        }
+
+        @media (min-width: 768px) {
+            #hamburger-btn {
+                display: none !important;
+            }
+        }
+
         .hamburger {
             width: 30px;
             height: 24px;
@@ -1152,7 +1209,7 @@
 <body>
     <!-- Loading Screen -->
     <div class="loading-screen" id="loadingScreen">
-        <div class="loading-logo holographic">LIZETH</div>
+        <div class="loading-logo holographic">Liz</div>
     </div>
 
     <!-- Particles Background -->
@@ -1162,8 +1219,14 @@
     <!-- Navbar -->
     <nav class="navbar">
         <div class="container mx-auto px-6 flex justify-between items-center">
-            <h1 class="text-2xl font-bold holographic navbar-logo">LIZETH ESTRADA</h1>
-            <div class="flex space-x-4 max-md:hidden">
+            <!-- Logo responsive: cambia texto según pantalla -->
+            <h1 class="font-bold holographic navbar-logo">
+                <span class="logo-mobile">LIZETH ESTRADA</span>
+                <span class="logo-desktop">LIZETH ESTRADA</span>
+            </h1>
+            
+            <!-- Menú Desktop - Solo visible en pantallas grandes -->
+            <div class="nav-desktop-menu">
                 <a href="#home" class="nav-link">
                     <i class="fas fa-home"></i> INICIO
                 </a>
@@ -1183,7 +1246,9 @@
                     <i class="fas fa-envelope"></i> CONTACTO
                 </a>
             </div>
-            <button class="md:hidden text-white" onclick="toggleMobileMenu()" id="hamburger-btn">
+            
+            <!-- Hamburger - Solo visible en móvil -->
+            <button class="text-white" onclick="toggleMobileMenu()" id="hamburger-btn">
                 <div class="hamburger" id="hamburger">
                     <span></span>
                     <span></span>
@@ -1307,7 +1372,7 @@
             </h1>
             
             <p class="text-xl md:text-4xl font-bold mb-4 neon-text">
-                INGENIERA EN SISTEMAS COMPUTACIONALES
+                INGENIERA EN SISTEMAS 
             </p>
             
             <p class="text-lg md:text-2xl mb-12 text-gray-300">
