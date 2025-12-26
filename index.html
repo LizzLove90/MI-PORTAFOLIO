@@ -3,1904 +3,2032 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Portafolio Profesional</title>
+    <title>✨ Eva Lizeth | Portfolio PRO</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.10.2/dist/cdn.min.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair Display:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800;900&family=Pacifico&display=swap" rel="stylesheet">
 
     <style>
-        /* Estilos base responsive */
-        .mobile-menu {
-            display: none;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        
-        /* Animación de pulso para botones */
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+
+        :root {
+            --neon-pink: #ff2a9f;
+            --neon-purple: #c74cff;
+            --neon-blue: #00d9ff;
+            --neon-yellow: #ffea00;
+            --dark-bg: #0a0a0f;
+            --card-bg: rgba(255, 255, 255, 0.03);
         }
-        
-        /* Animación de arcoíris para el título */
-        @keyframes rainbow {
-            0% { color: #ff85a2; }
-            25% { color: #ffb3c6; }
-            50% { color: #ff578f; }
-            75% { color: #ff2970; }
-            100% { color: #ff85a2; }
-        }
-        
-        .animate-pulse {
-            animation: pulse 2s infinite;
-        }
-        
-        .pacman-title {
-            animation: rainbow 4s infinite;
-            font-family: 'Comic Sans MS', cursive, sans-serif;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-        
-        .pacman-button {
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        
-        .pacman-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-            background-color: #ff57a6 !important;
-        }
-        
-        .pacman-canvas-container {
-            border: 4px solid #ff85a2;
-            border-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-        
-        .pacman-stats {
-            background-color: #ff85a2;
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--dark-bg);
             color: white;
-            font-weight: bold;
-            border-radius: 0 0 10px 10px;
-            padding: 8px 15px;
-            display: flex;
-            justify-content: space-between;
+            overflow-x: hidden;
         }
-        
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
+
+        /* ===== NEON TEXT EFFECT ===== */
+        .neon-text {
+            text-shadow: 
+                0 0 10px var(--neon-pink),
+                0 0 20px var(--neon-pink),
+                0 0 30px var(--neon-pink),
+                0 0 40px var(--neon-pink);
+            animation: neonPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes neonPulse {
+            0%, 100% { 
+                text-shadow: 
+                    0 0 10px var(--neon-pink),
+                    0 0 20px var(--neon-pink),
+                    0 0 30px var(--neon-pink);
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+            50% { 
+                text-shadow: 
+                    0 0 20px var(--neon-pink),
+                    0 0 30px var(--neon-pink),
+                    0 0 40px var(--neon-pink),
+                    0 0 50px var(--neon-pink);
             }
         }
-        
-        .kawaii-bg {
-            background-color: #ffe6ee;
-            background-image: linear-gradient(45deg, #ffe6ee 25%, #ffcce0 25%, #ffcce0 50%, #ffe6ee 50%, #ffe6ee 75%, #ffcce0 75%, #ffcce0 100%);
-            background-size: 20px 20px;
+
+        /* ===== PARTICLES BACKGROUND ===== */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
         }
-        
-        .kawaii-border {
-            border: 3px dotted #ff85a2;
+
+        /* ===== 3D CARD EFFECT ===== */
+        .card-3d {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 20px;
+            padding: 30px;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+            overflow: hidden;
         }
-        
-        /* Media queries para responsividad */
+
+        .card-3d::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--neon-pink), var(--neon-purple), var(--neon-blue));
+            border-radius: 20px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .card-3d:hover {
+            transform: translateY(-20px) rotateX(10deg) rotateY(5deg);
+            box-shadow: 
+                0 20px 60px rgba(255, 42, 159, 0.4),
+                0 0 80px rgba(199, 76, 255, 0.3);
+        }
+
+        .card-3d:hover::before {
+            opacity: 1;
+        }
+
+        /* ===== GLITCH EFFECT ===== */
+        .glitch {
+            position: relative;
+            animation: glitch 3s infinite;
+        }
+
+        @keyframes glitch {
+            0%, 100% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+        }
+
+        /* ===== HOLOGRAPHIC EFFECT ===== */
+        .holographic {
+            background: linear-gradient(
+                45deg,
+                #ff2a9f 0%,
+                #c74cff 25%,
+                #00d9ff 50%,
+                #c74cff 75%,
+                #ff2a9f 100%
+            );
+            background-size: 400% 400%;
+            animation: holographic 3s ease infinite;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        @keyframes holographic {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* ===== ANIMATED GRADIENT BORDER ===== */
+        .gradient-border {
+            position: relative;
+            border-radius: 20px;
+            padding: 3px;
+            background: linear-gradient(45deg, var(--neon-pink), var(--neon-purple), var(--neon-blue), var(--neon-yellow));
+            background-size: 400% 400%;
+            animation: gradientShift 3s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .gradient-border-content {
+            background: var(--dark-bg);
+            border-radius: 18px;
+            padding: 30px;
+        }
+
+        /* ===== FLOATING ANIMATION ===== */
+        .float {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-glow {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            position: relative;
+            animation: profileGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes profileGlow {
+            0%, 100% {
+                box-shadow: 
+                    0 0 40px var(--neon-pink),
+                    0 0 80px var(--neon-purple),
+                    inset 0 0 40px var(--neon-pink);
+            }
+            50% {
+                box-shadow: 
+                    0 0 80px var(--neon-pink),
+                    0 0 120px var(--neon-purple),
+                    inset 0 0 80px var(--neon-pink);
+            }
+        }
+
+        /* ===== BUTTON NEON ===== */
+        .btn-neon {
+            position: relative;
+            padding: 15px 40px;
+            border: 2px solid var(--neon-pink);
+            background: transparent;
+            color: var(--neon-pink);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            overflow: hidden;
+            transition: all 0.3s;
+            border-radius: 50px;
+        }
+
+        .btn-neon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--neon-pink);
+            transition: all 0.4s;
+            z-index: -1;
+        }
+
+        .btn-neon:hover {
+            color: white;
+            box-shadow: 
+                0 0 20px var(--neon-pink),
+                0 0 40px var(--neon-pink),
+                0 0 60px var(--neon-pink);
+        }
+
+        .btn-neon:hover::before {
+            left: 0;
+        }
+
+        /* ===== TECH STACK ICONS ===== */
+        .tech-icon {
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+        }
+
+        .tech-icon:hover {
+            transform: translateY(-15px) scale(1.1);
+            box-shadow: 0 20px 60px rgba(255, 42, 159, 0.5);
+        }
+
+        .tech-icon img {
+            width: 50px;
+            height: 50px;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 0;
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            transition: all 0.3s;
+        }
+
+        .navbar.scrolled {
+            padding: 10px 0;
+            background: rgba(10, 10, 15, 0.95);
+        }
+
+        .nav-link {
+            position: relative;
+            padding: 10px 20px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--neon-pink), var(--neon-purple));
+            transition: all 0.3s;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::after {
+            width: 80%;
+        }
+
+        /* ===== SECTION TITLE ===== */
+        .section-title {
+            font-size: 4rem;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        /* ===== PACMAN GAME SECTION ===== */
+        .pacman-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            padding: 20px;
+        }
+
+        .pacman-container {
+            background: linear-gradient(135deg, rgba(255, 42, 159, 0.1), rgba(199, 76, 255, 0.1));
+            border: 2px solid var(--neon-pink);
+            border-radius: 30px;
+            padding: 30px;
+            max-width: 600px;
+            width: 100%;
+            position: relative;
+            box-shadow: 
+                0 0 40px var(--neon-pink),
+                0 0 80px var(--neon-purple);
+        }
+
+        .close-game-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: transparent;
+            border: 2px solid var(--neon-pink);
+            color: var(--neon-pink);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 24px;
+            transition: all 0.3s;
+        }
+
+        .close-game-btn:hover {
+            background: var(--neon-pink);
+            color: white;
+            transform: rotate(90deg);
+        }
+
+        #pacman-canvas {
+            border: 3px solid var(--neon-pink);
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(255, 42, 159, 0.5);
+            background: #0a0a0f;
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* ===== SCROLL INDICATOR ===== */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-20px); }
+            60% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
-            .desktop-menu {
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .profile-glow {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .tech-icon {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .tech-icon img {
+                width: 35px;
+                height: 35px;
+            }
+
+            .pacman-container {
+                padding: 20px;
+            }
+
+            #pacman-canvas {
+                width: 100%;
+                max-width: 320px;
+            }
+        }
+
+        /* ===== CYBER GRID ===== */
+        .cyber-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 42, 159, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 42, 159, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 50px 50px; }
+        }
+
+        /* ===== LOADING SCREEN PRO ===== */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            transition: opacity 0.5s;
+        }
+
+        .loading-logo {
+            font-size: 6rem;
+            font-weight: 900;
+            animation: loadingPulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes loadingPulse {
+            0%, 100% {
+                transform: scale(1);
+                text-shadow: 
+                    0 0 20px var(--neon-pink),
+                    0 0 40px var(--neon-purple);
+            }
+            50% {
+                transform: scale(1.1);
+                text-shadow: 
+                    0 0 40px var(--neon-pink),
+                    0 0 80px var(--neon-purple),
+                    0 0 120px var(--neon-blue);
+            }
+        }
+
+        /* ===== PROJECT VIDEO HOVER ===== */
+        .project-video-wrapper {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+        }
+
+        .project-video-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 42, 159, 0.3), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s;
+        }
+
+        .project-video-wrapper:hover::after {
+            transform: translateX(100%);
+        }
+
+        /* ===== CUSTOM SCROLLBAR ===== */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--dark-bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--neon-pink), var(--neon-purple));
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, var(--neon-purple), var(--neon-blue));
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* ===== WHATSAPP FLOAT BUTTON NEON ===== */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+            box-shadow: 
+                0 0 20px rgba(37, 211, 102, 0.6),
+                0 0 40px rgba(37, 211, 102, 0.4),
+                0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: whatsappPulse 2s ease-in-out infinite;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1) translateY(-5px);
+            box-shadow: 
+                0 0 30px rgba(37, 211, 102, 0.8),
+                0 0 60px rgba(37, 211, 102, 0.6),
+                0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .whatsapp-float i {
+            color: white;
+            font-size: 35px;
+            transition: transform 0.3s;
+        }
+
+        .whatsapp-float:hover i {
+            transform: rotate(15deg) scale(1.1);
+        }
+
+        @keyframes whatsappPulse {
+            0%, 100% {
+                box-shadow: 
+                    0 0 20px rgba(37, 211, 102, 0.6),
+                    0 0 40px rgba(37, 211, 102, 0.4),
+                    0 10px 30px rgba(0, 0, 0, 0.3);
+            }
+            50% {
+                box-shadow: 
+                    0 0 30px rgba(37, 211, 102, 0.8),
+                    0 0 60px rgba(37, 211, 102, 0.6),
+                    0 10px 30px rgba(0, 0, 0, 0.3);
+            }
+        }
+
+        /* Tooltip para WhatsApp */
+        .whatsapp-tooltip {
+            position: absolute;
+            right: 85px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(37, 211, 102, 0.95);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            box-shadow: 
+                0 0 20px rgba(37, 211, 102, 0.5),
+                0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .whatsapp-float:hover .whatsapp-tooltip {
+            opacity: 1;
+            visibility: visible;
+            right: 95px;
+        }
+
+        /* Responsive para móvil */
+        @media (max-width: 768px) {
+            .whatsapp-float {
+                width: 60px;
+                height: 60px;
+                bottom: 20px;
+                right: 20px;
+            }
+
+            .whatsapp-float i {
+                font-size: 30px;
+            }
+
+            .whatsapp-tooltip {
                 display: none;
             }
-            
-            .mobile-menu {
-                display: block;
+        }
+
+        /* ===== ICONOS NEON PARA CARDS ===== */
+        .neon-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid var(--neon-pink);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .neon-icon::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(255, 42, 159, 0.3),
+                transparent
+            );
+            transform: rotate(45deg);
+            animation: iconShine 3s linear infinite;
+        }
+
+        @keyframes iconShine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .neon-icon i {
+            font-size: 40px;
+            background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple), var(--neon-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            z-index: 1;
+            filter: drop-shadow(0 0 10px var(--neon-pink));
+            animation: iconPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes iconPulse {
+            0%, 100% {
+                filter: drop-shadow(0 0 10px var(--neon-pink));
+                transform: scale(1);
             }
-            
-            .pacman-game-container {
-                width: 100% !important;
-                height: auto !important;
-            }
-            
-            .projects-grid {
-                grid-template-columns: 1fr !important;
-            }
-            
-            .certificate-container {
-                min-width: 280px !important;
-            }
-            
-            #pacman-canvas {
-                width: 100% !important;
-                height: auto !important;
+            50% {
+                filter: drop-shadow(0 0 20px var(--neon-pink)) drop-shadow(0 0 30px var(--neon-purple));
+                transform: scale(1.05);
             }
         }
-        
-        @media (max-width: 640px) {
-            .hero-text {
-                font-size: 1.5rem !important;
+
+        .card-3d:hover .neon-icon {
+            border-color: var(--neon-purple);
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-10px) rotateY(180deg);
+            box-shadow: 
+                0 0 30px rgba(255, 42, 159, 0.5),
+                0 0 60px rgba(199, 76, 255, 0.3);
+        }
+
+        .card-3d:hover .neon-icon i {
+            animation: none;
+            transform: rotateY(180deg) scale(1.2);
+        }
+
+        @media (max-width: 768px) {
+            .neon-icon {
+                width: 60px;
+                height: 60px;
             }
-            
-            .profile-image {
-                width: 6rem !important;
-                height: 6rem !important;
-            }
-            
-            .certificate-container {
-                min-width: 240px !important;
+
+            .neon-icon i {
+                font-size: 30px;
             }
         }
-        
-        @media (max-width: 480px) {
-            .certificate-container {
-                min-width: 200px !important;
+
+        /* ===== SKILLS SLIDER AUTOMÁTICO ===== */
+        .skills-slider-container {
+            overflow: hidden;
+            position: relative;
+            padding: 40px 0;
+        }
+
+        .skills-slider {
+            display: flex;
+            animation: skillsSlide 30s linear infinite;
+            width: fit-content;
+        }
+
+        .skills-slider:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes skillsSlide {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .skill-item {
+            margin: 0 15px;
+            flex-shrink: 0;
+        }
+
+        /* ===== CERTIFICADOS SECTION ===== */
+        .certificate-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 20px;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .certificate-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--neon-pink), var(--neon-purple), var(--neon-blue), var(--neon-yellow));
+            border-radius: 20px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .certificate-card:hover {
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: 
+                0 20px 60px rgba(255, 42, 159, 0.4),
+                0 0 80px rgba(199, 76, 255, 0.3);
+        }
+
+        .certificate-card:hover::before {
+            opacity: 1;
+        }
+
+        .certificate-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            transition: transform 0.5s;
+        }
+
+        .certificate-card:hover .certificate-image {
+            transform: scale(1.1);
+        }
+
+        .certificate-badge {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple));
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            box-shadow: 0 0 20px rgba(255, 42, 159, 0.6);
+            animation: badgePulse 2s ease-in-out infinite;
+        }
+
+        @keyframes badgePulse {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(255, 42, 159, 0.6);
+            }
+            50% {
+                box-shadow: 0 0 30px rgba(255, 42, 159, 0.9);
             }
         }
-        <!-- Estilos para corazones y símbolos -->
-        <style>
-            .heart-container {
-                position: absolute;
-                width: 100%;
-                height: 100%;
-                overflow: visible;
-                pointer-events: none;
+
+        /* Modal para ver certificado */
+        .certificate-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            padding: 20px;
+        }
+
+        .certificate-modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+            animation: modalZoomIn 0.3s ease-out;
+        }
+
+        @keyframes modalZoomIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
             }
-        
-            .heart,
-            .code-symbol {
-                position: absolute;
-                width: 10px;
-                height: 10px;
-                animation: floatUp 3s linear infinite;
-                opacity: 0.8;
+            to {
+                transform: scale(1);
+                opacity: 1;
             }
-        
-            .heart {
-                background-color: #ff69b4;
-                transform: rotate(45deg);
+        }
+
+        .certificate-modal img {
+            max-width: 100%;
+            max-height: 80vh;
+            border-radius: 20px;
+            border: 3px solid var(--neon-pink);
+            box-shadow: 
+                0 0 40px rgba(255, 42, 159, 0.6),
+                0 0 80px rgba(199, 76, 255, 0.4);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            background: var(--neon-pink);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 24px;
+            border: none;
+            transition: all 0.3s;
+        }
+
+        .close-modal:hover {
+            background: var(--neon-purple);
+            transform: rotate(90deg);
+        }
+
+        @media (max-width: 768px) {
+            .certificate-image {
+                height: 150px;
             }
-        
-            .heart::before,
-            .heart::after {
-                content: '';
-                position: absolute;
-                width: 10px;
-                height: 10px;
-                background-color: #ff69b4;
-                border-radius: 50%;
+
+            .certificate-badge {
+                top: 20px;
+                right: 20px;
+                padding: 3px 10px;
+                font-size: 10px;
             }
-        
-            .heart::before {
-                top: -5px;
-                left: 0;
-            }
-        
-            .heart::after {
-                left: -5px;
-                top: 0;
-            }
-        
-            .code-symbol {
-                font-size: 14px;
-                color: #ff69b4;
-                width: auto;
-                height: auto;
-                font-weight: bold;
-                animation: floatUp 4s linear infinite;
-            }
-        
-            @keyframes floatUp {
-                0% {
-                    transform: translateY(0) scale(1);
-                    opacity: 1;
-                }
-        
-                100% {
-                    transform: translateY(-200px) scale(1.2);
-                    opacity: 0;
-                }
-            }
-        </style>
-      
-        
-  
-  
-  
+        }
     </style>
 </head>
-<body class="bg-black text-white">
-    <!-- Header -->
-    <header class="bg-pink-200 shadow-lg fixed w-full z-10">
-        <div class="container mx-auto flex justify-between items-center p-5">
-            <h1 class="text-2xl font-bold text-black">Mi Portafolio</h1>
-            
-            <!-- Menú de escritorio -->
-            <nav class="desktop-menu">
-                <ul class="flex space-x-6">
-                    <li><a href="#about" class="hover:text-pink-400">Sobre mí</a></li>
-                    <li><a href="#projects" class="hover:text-pink-400">Proyectos</a></li>
-                    <li><a href="#skills" class="hover:text-pink-400">Habilidades</a></li>
-                    <li><a href="#contact" class="hover:text-pink-400">Contacto</a></li>
-                    <li><a href="#certificate" class="hover:text-pink-400">Certificados</a></li>
-                </ul>
-            </nav>
-            
-            <!-- Menú móvil (hamburguesa) -->
-            <div class="mobile-menu relative" x-data="{ open: false }">
-                <button @click="open = !open" class="text-black focus:outline-none">
-                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-                    </svg>
-                </button>
-                
-                <div x-show="open" @click.away="open = false" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
-                    <a href="#about" class="block px-4 py-2 text-sm text-gray-700 hover:bg-pink-100">Sobre mí</a>
-                    <a href="#projects" class="block px-4 py-2 text-sm text-gray-700 hover:bg-pink-100">Proyectos</a>
-                    <a href="#skills" class="block px-4 py-2 text-sm text-gray-700 hover:bg-pink-100">Habilidades</a>
-                    <a href="#contact" class="block px-4 py-2 text-sm text-gray-700 hover:bg-pink-100">Contacto</a>
-                    <a href="#certificate" class="block px-4 py-2 text-sm text-gray-700 hover:bg-pink-100">Certificados</a>
-                </div>
-            </div>
-        </div>
-    </header>
-
-<!-- Hero Section -->
-<section class="relative h-screen flex flex-col justify-center items-center text-center px-4 py-12 md:py-20 overflow-hidden"
-    style="background: url('https://source.unsplash.com/1600x900/?technology') center/cover no-repeat;" id="hero">
-
-    <!-- Partículas (si ya las usas) -->
-    <div id="particles-js" class="absolute inset-0"></div>
-
-    <!-- Contenido principal -->
-    <div class="relative z-10 flex flex-col items-center">
-
-        <!-- Contenedor de imagen con corazones -->
-        <div class="relative mb-10 w-32 h-32 md:w-40 md:h-40 rounded-full">
-            <img src="lizeth.jpg" alt="Tu Foto"
-                class="relative z-10 w-full h-full object-cover rounded-full border-4 border-pink-400 
-                shadow-xl hover:shadow-pink-400 transition-all duration-500 hover:scale-110">
-
-            <!-- Corazones y símbolos animados -->
-            <div class="heart-container absolute inset-0 z-0"></div>
-        </div>
-
-        <!-- Texto principal -->
-        <h2 class="hero-text text-4xl font-bold mt-6 bg-clip-text text-transparent bg-gradient-to-r from-pink-300 via-pink-200 to-pink-500">
-            Hola, soy <span class="text-pink-400">Eva Lizeth</span>
-        </h2>
-
-        <p class="mt-6 text-lg text-white max-w-xl">
-            Ingeniera en Sistemas | Desarrolladora Web | Innovadora | Diseñadora UI/UX | Diseñadora Gráfica
-        </p>
-
-        <a href="Eva_Lizeth_CV.pdf" download="Eva_Lizeth_CV.pdf"
-            class="mt-8 bg-pink-400 text-white px-6 py-2 rounded-full text-lg font-semibold transition-all duration-300 hover:bg-pink-300 hover:scale-105 animate-pulse">
-            Descargar CV
-        </a>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-logo holographic">EVA</div>
     </div>
-</section>
 
+    <!-- Particles Background -->
+    <div id="particles-js"></div>
+    <div class="cyber-grid"></div>
 
-
-
-
-
-   
-<!-- Sección de Pac-Man Kawaii (Ajustada) -->
-<section id="pacman-game" class="fixed inset-0 flex justify-center items-center bg-black bg-opacity-90 z-50 p-4">
-    <div class="bg-pink-100 p-3 md:p-4 rounded-lg shadow-lg max-w-xl w-full text-center">
-        <h2 class="text-xl md:text-2xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-pink-400 via-purple-400 to-pink-500 animate-pulse font-cute flex items-center justify-center">
-            <span class="mr-2">🎮</span>
-            ¡Juega Pac-Man Kawaii Para Desbloquear Mí Portafolio!
-            <span class="ml-2">❤️</span>
-        </h2>
-        <p class="mb-2 text-gray-700 text-xs md:text-sm">Usa las flechas para mover a Pac-Man y come todos los puntos para ganar.</p>
-        
-        <div class="pacman-game-container relative mx-auto bg-pink-900 rounded-lg overflow-hidden" style="max-width: 320px; width: 100%;">
-            <canvas id="pacman-canvas" width="320" height="350" class="block w-full"></canvas>
-            <div class="pacman-stats bg-pink-800 flex justify-between items-center px-4 py-1 text-white text-sm">
-                <div>Puntos: <span id="score">0</span></div>
-                <div>Vidas: <span id="lives">3</span></div>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <h1 class="text-2xl font-bold holographic">EVA LIZETH</h1>
+            <div class="hidden md:flex space-x-6">
+                <a href="#home" class="nav-link">INICIO</a>
+                <a href="#about" class="nav-link">SOBRE MÍ</a>
+                <a href="#projects" class="nav-link">PROYECTOS</a>
+                <a href="#skills" class="nav-link">SKILLS</a>
+                <a href="#certificates" class="nav-link">CERTIFICADOS</a>
+                <a href="#contact" class="nav-link">CONTACTO</a>
             </div>
-        </div>
-        
-        <div class="flex justify-center gap-2 mt-3">
-            <button id="start-game" class="pacman-button bg-pink-400 text-white px-3 py-1 rounded-full text-sm font-semibold transition-all duration-300 hover:bg-pink-300 hover:scale-105">
-                Iniciar Juego
+            <button class="md:hidden text-white" onclick="alert('Menú móvil - En desarrollo')">
+                <i class="fas fa-bars text-2xl"></i>
             </button>
-           
+        </div>
+    </nav>
+
+    <!-- Pac-Man Game Overlay -->
+    <section id="pacman-game" class="pacman-overlay">
+        <div class="pacman-container text-center">
+            <!-- Botón de cerrar X -->
+            <button class="close-game-btn" id="close-pacman">
+                <i class="fas fa-times"></i>
+            </button>
+
+            <h2 class="text-3xl md:text-4xl font-bold neon-text mb-4">
+                🎮 ¡JUEGA PAC-MAN KAWAII! 🎮
+            </h2>
+            <p class="text-base md:text-lg mb-6 text-pink-300">
+                ¡Come todos los puntos para desbloquear mi portafolio! ✨
+            </p>
+            
+            <div class="inline-block w-full">
+                <canvas id="pacman-canvas" width="420" height="460"></canvas>
+                <div class="mt-4 flex justify-between text-lg md:text-xl font-bold px-4">
+                    <div class="text-yellow-400">⭐ Puntos: <span id="score">0</span></div>
+                    <div class="text-pink-400">❤️ Vidas: <span id="lives">3</span></div>
+                </div>
+            </div>
+            
+            <div class="mt-6 flex flex-wrap justify-center gap-3 md:gap-4">
+                <button id="start-game" class="btn-neon text-sm md:text-base">
+                    INICIAR JUEGO
+                </button>
+                <button id="skip-game" class="btn-neon text-sm md:text-base" style="border-color: var(--neon-purple); color: var(--neon-purple);">
+                    SALTAR JUEGO
+                </button>
+            </div>
+
+            <p class="mt-4 text-xs md:text-sm text-gray-400">
+                Usa las flechas del teclado para moverte
+            </p>
+        </div>
+    </section>
+
+    <!-- Victory Overlay -->
+    <div id="victory-overlay" class="pacman-overlay hidden">
+        <div class="pacman-container text-center">
+            <h2 class="text-4xl md:text-5xl font-bold neon-text mb-4">¡FELICIDADES! 🎉</h2>
+            <p class="text-lg md:text-xl mb-6">¡Has desbloqueado mi portafolio!</p>
+            <div class="w-48 h-48 md:w-64 md:h-64 mx-auto mb-6 bg-purple-900 rounded-lg flex items-center justify-center">
+                <p class="text-6xl">🎊</p>
+            </div>
+            <button id="view-portfolio" class="btn-neon">
+                VER PORTAFOLIO
+            </button>
         </div>
     </div>
-</section>
 
-<!-- Overlay de Victoria (Ajustado) -->
-<div id="victory-overlay" class="pacman-victory fixed inset-0 flex justify-center items-center bg-black bg-opacity-80 z-50 hidden p-4">
-    <div class="bg-pink-100 p-4 md:p-6 rounded-lg shadow-lg max-w-sm w-full text-center">
-        <h2 class="text-xl md:text-2xl font-bold text-pink-500 mb-2">¡Felicidades!</h2>
-        <p class="mb-3 text-gray-700 text-sm">Has superado el juego. ¡Ahora puedes acceder a mis proyectos!</p>
-        <div class="flex justify-center">
-            <img src="pacman-win.gif" alt="Victoria" class="w-20 h-20 mb-3" onerror="this.src='https://i.gifer.com/ZJG.gif'; this.onerror=null;">
+    <!-- Game Over Overlay -->
+    <div id="game-over-overlay" class="pacman-overlay hidden">
+        <div class="pacman-container text-center">
+            <h2 class="text-4xl md:text-5xl font-bold neon-text mb-4">GAME OVER 💔</h2>
+            <p class="text-lg md:text-xl mb-6">¡No te rindas! Inténtalo de nuevo</p>
+            <div class="w-48 h-48 md:w-64 md:h-64 mx-auto mb-6 bg-red-900 rounded-lg flex items-center justify-center">
+                <p class="text-6xl">😢</p>
+            </div>
+            <button id="retry-game" class="btn-neon">
+                REINTENTAR
+            </button>
         </div>
-        <button id="view-projects" class="pacman-button bg-pink-400 text-white px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 hover:bg-pink-300 hover:scale-105">
-            Ver Proyectos
-        </button>
     </div>
-</div>
 
-<!-- Overlay de Derrota (Ajustado) -->
-<div id="game-over-overlay" class="fixed inset-0 flex justify-center items-center bg-black bg-opacity-80 z-50 hidden p-4">
-    <div class="bg-pink-100 p-4 md:p-6 rounded-lg shadow-lg max-w-sm w-full text-center">
-        <h2 class="text-xl md:text-2xl font-bold text-pink-500 mb-2">¡Game Over!</h2>
-        <p class="mb-3 text-gray-700 text-sm">No te rindas, ¡inténtalo de nuevo!</p>
-        <div class="flex justify-center">
-            <img src="pacman-lose.gif" alt="Derrota" class="w-20 h-20 mb-3" onerror="this.src='https://i.gifer.com/7VE.gif'; this.onerror=null;">
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <div class="float mb-8">
+                <div class="profile-glow mx-auto">
+                    <img src="lizeth.jpg" alt="Eva Lizeth" class="w-full h-full object-cover rounded-full border-4 border-white">
+                </div>
+            </div>
+            
+            <h1 class="text-5xl md:text-8xl font-black mb-6 glitch">
+                <span class="holographic">EVA LIZETH</span>
+            </h1>
+            
+            <p class="text-xl md:text-4xl font-bold mb-4 neon-text">
+                INGENIERA EN SISTEMAS
+            </p>
+            
+            <p class="text-lg md:text-2xl mb-12 text-gray-300">
+                Full Stack Developer 💻 | UI/UX Designer 🎨 | Creative Coder ✨
+            </p>
+            
+            <div class="flex flex-wrap justify-center gap-4 md:gap-6">
+                <a href="Eva_Lizeth_CV.pdf" download class="btn-neon text-sm md:text-base">
+                    DESCARGAR CV
+                </a>
+                <button onclick="document.getElementById('projects').scrollIntoView({behavior: 'smooth'})" 
+                        class="btn-neon text-sm md:text-base" style="border-color: var(--neon-purple); color: var(--neon-purple);">
+                    VER PROYECTOS
+                </button>
+            </div>
+            
+            <div class="scroll-indicator">
+                <i class="fas fa-chevron-down text-3xl neon-text"></i>
+            </div>
         </div>
-        <button id="retry-game" class="pacman-button bg-pink-400 text-white px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 hover:bg-pink-300 hover:scale-105">
-            Intentar de nuevo
-        </button>
-    </div>
-</div>
+    </section>
 
-
-
-<!-- Sobre Mí -->
-<section id="about" class="container mx-auto py-20 px-6 text-white">
-    <h2 class="text-4xl font-extrabold text-pink-400 text-center mb-6 font-serif">Sobre Mí</h2>
-    <p class="mt-4 text-center max-w-3xl mx-auto text-lg leading-relaxed font-light font-[Inter]">
-        Soy <span class="font-medium text-pink-500"">Ingeniera en Sistemas Computacionales</span> con un enfoque integral en el desarrollo web, combinando habilidades técnicas con un fuerte sentido estético. Cuento con experiencia en tecnologías modernas como <span class="font-medium text-pink-500">JavaScript, PHP</span> y bases de datos, y me especializo en diseñar e implementar soluciones digitales eficientes y funcionales.
-        <br><br>
-        Además, me desempeño como <span class="font-medium text-pink-500">Diseñadora UI/UX</span>, creando interfaces intuitivas, accesibles y centradas en el usuario. Como <span class="font-medium text-pink-500">Diseñadora Gráfica</span>, aporto creatividad y coherencia visual a cada proyecto, asegurando una experiencia atractiva y profesional.
-        <br><br>
-        Mi objetivo es ofrecer soluciones digitales completas que integren tecnología, diseño y usabilidad para generar valor real a los usuarios y a los proyectos en los que participo.
-    </p>
-</section>
-
-
-    <!-- Proyectos -->
-    <section id="projects" class="bg-pink-50 py-20">
+    <!-- About Section -->
+    <section id="about" class="py-20 relative z-10">
         <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold text-black text-center">Mis Proyectos</h2>
+            <h2 class="section-title holographic">SOBRE MÍ</h2>
+            
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="card-3d">
+                    <h3 class="text-2xl md:text-3xl font-bold mb-6 neon-text">Mi Historia ✨</h3>
+                    <p class="text-base md:text-lg leading-relaxed mb-4">
+                        Soy <span class="holographic font-bold">Ingeniera en Sistemas Computacionales</span> con pasión por crear experiencias digitales únicas e impactantes.
+                    </p>
+                    <p class="text-base md:text-lg leading-relaxed mb-4">
+                        Especializada en <span class="holographic font-bold">Desarrollo Full Stack</span> con tecnologías modernas como JavaScript, PHP, Python y bases de datos relacionales.
+                    </p>
+                    <p class="text-base md:text-lg leading-relaxed">
+                        Como <span class="holographic font-bold">Diseñadora UI/UX</span>, creo interfaces que no solo son hermosas, sino que también ofrecen experiencias excepcionales.
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-6">
+                    <div class="card-3d text-center">
+                        <div class="neon-icon">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <h4 class="text-lg md:text-xl font-bold mb-2">Diseño</h4>
+                        <p class="text-sm md:text-base text-gray-400">UI/UX & Gráfico</p>
+                    </div>
+                    <div class="card-3d text-center">
+                        <div class="neon-icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <h4 class="text-lg md:text-xl font-bold mb-2">Desarrollo</h4>
+                        <p class="text-sm md:text-base text-gray-400">Full Stack</p>
+                    </div>
+                    <div class="card-3d text-center">
+                        <div class="neon-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h4 class="text-lg md:text-xl font-bold mb-2">Responsive</h4>
+                        <p class="text-sm md:text-base text-gray-400">Mobile First</p>
+                    </div>
+                    <div class="card-3d text-center">
+                        <div class="neon-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h4 class="text-lg md:text-xl font-bold mb-2">Performance</h4>
+                        <p class="text-sm md:text-base text-gray-400">Optimizado</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            <!-- Sección de Desarrollo Web -->
-            <div class="mt-10">
-                <h3 class="text-2xl font-semibold text-center text-pink-400">Desarrollo Web</h3>
-                <div class="projects-grid grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
-                    <!-- Proyecto 1 -->
-                    <div class="bg-black p-5 rounded-lg shadow-lg">
-                        <video class="w-full h-48 object-cover rounded" autoplay loop muted onclick="openModal('nuevo_proyecto_1')">
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 relative z-10">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title holographic">PROYECTOS</h2>
+            
+            <h3 class="text-2xl md:text-3xl font-bold text-center mb-8 neon-text">DESARROLLO WEB</h3>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                <!-- Proyecto 1 -->
+                <div class="card-3d">
+                    <div class="project-video-wrapper mb-4">
+                        <video class="w-full h-48 md:h-64 object-cover rounded-lg" autoplay loop muted>
                             <source src="Miniatura.mp4" type="video/mp4">
-                            Tu navegador no soporta el video.
                         </video>
-                        <h3 class="text-xl font-semibold mt-2 text-white">Expedientes Escolares</h3>
-                        <p class="mt-2 text-white">Aplicación de Expedientes Escolares.</p>
-                        <div class="flex flex-wrap mt-3">
-                            <img src="html.png" alt="HTML" class="w-8 h-8 mr-2 mb-2">
-                            <img src="CSS.png" alt="CSS" class="w-8 h-8 mr-2 mb-2">
-                            <img src="py.png" alt="JavaScript" class="w-8 h-8 mr-2 mb-2">
-                            <img src="mysql.png" alt="JavaScript" class="w-8 h-8 mr-2 mb-2">
-                        </div>
-                        <a href="https://github.com/LizzLove90/expedientes-escolares.git" target="_blank" class="bg-pink-500 text-white px-4 py-2 rounded-md hover:bg-gray-600 mt-6 inline-block">Ver Código</a>
                     </div>
-                    
-                    <!-- Proyecto 2 -->
-                    <div class="bg-black p-5 rounded-lg shadow-lg">
-                        <video class="w-full h-48 object-cover rounded" autoplay loop muted onclick="openModal('nuevo_proyecto_2')">
+                    <h4 class="text-xl md:text-2xl font-bold mb-2 neon-text">Expedientes Escolares</h4>
+                    <p class="text-sm md:text-base text-gray-400 mb-4">Sistema completo de gestión de expedientes con Python y MySQL</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-2 md:px-3 py-1 bg-orange-500 bg-opacity-20 text-orange-400 rounded-full text-xs md:text-sm border border-orange-500">HTML</span>
+                        <span class="px-2 md:px-3 py-1 bg-blue-500 bg-opacity-20 text-blue-400 rounded-full text-xs md:text-sm border border-blue-500">CSS</span>
+                        <span class="px-2 md:px-3 py-1 bg-green-500 bg-opacity-20 text-green-400 rounded-full text-xs md:text-sm border border-green-500">Python</span>
+                        <span class="px-2 md:px-3 py-1 bg-purple-500 bg-opacity-20 text-purple-400 rounded-full text-xs md:text-sm border border-purple-500">MySQL</span>
+                    </div>
+                    <a href="https://github.com/LizzLove90/expedientes-escolares.git" target="_blank" class="btn-neon w-full block text-center text-sm md:text-base">
+                        VER CÓDIGO
+                    </a>
+                </div>
+
+                <!-- Proyecto 2 -->
+                <div class="card-3d">
+                    <div class="project-video-wrapper mb-4">
+                        <video class="w-full h-48 md:h-64 object-cover rounded-lg" autoplay loop muted>
                             <source src="min.mp4" type="video/mp4">
-                            Tu navegador no soporta el video.
                         </video>
-                        <h3 class="text-xl font-semibold mt-2 text-white">Sistema de Seguimiento de Estudiantes</h3>
-                        <p class="mt-2 text-white">Aplicación para seguimiento de Estudiantes con Reportes y Citatorios Recurrentes.</p>
-                        <div class="flex flex-wrap mt-3">
-                            <img src="html.png" alt="HTML" class="w-8 h-8 mr-2 mb-2">
-                            <img src="CSS.png" alt="CSS" class="w-8 h-8 mr-2 mb-2">
-                            <img src="PHP.png" alt="JavaScript" class="w-8 h-8 mr-2 mb-2">
-                            <img src="mysql.png" alt="JavaScript" class="w-8 h-8 mr-2 mb-2">
-                        </div>
-                        <a href="https://github.com/LizzLove90/SEGUIMIENTO-DE-ESTUDIANTES" target="_blank" class="bg-pink-500 text-white px-4 py-2 rounded-md hover:bg-gray-600 mt-6 inline-block">Ver Código</a>
                     </div>
-                    
-                    <!-- Proyecto 3 -->
-                    <div class="bg-black p-5 rounded-lg shadow-lg">
-                        <video class="w-full h-48 object-cover rounded" autoplay loop muted onclick="openModal('nuevo_proyecto_3')">
+                    <h4 class="text-xl md:text-2xl font-bold mb-2 neon-text">Sistema de Seguimiento</h4>
+                    <p class="text-sm md:text-base text-gray-400 mb-4">Plataforma de seguimiento de estudiantes con reportes dinámicos</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-2 md:px-3 py-1 bg-orange-500 bg-opacity-20 text-orange-400 rounded-full text-xs md:text-sm border border-orange-500">HTML</span>
+                        <span class="px-2 md:px-3 py-1 bg-blue-500 bg-opacity-20 text-blue-400 rounded-full text-xs md:text-sm border border-blue-500">CSS</span>
+                        <span class="px-2 md:px-3 py-1 bg-indigo-500 bg-opacity-20 text-indigo-400 rounded-full text-xs md:text-sm border border-indigo-500">PHP</span>
+                        <span class="px-2 md:px-3 py-1 bg-purple-500 bg-opacity-20 text-purple-400 rounded-full text-xs md:text-sm border border-purple-500">MySQL</span>
+                    </div>
+                    <a href="https://github.com/LizzLove90/SEGUIMIENTO-DE-ESTUDIANTES" target="_blank" class="btn-neon w-full block text-center text-sm md:text-base">
+                        VER CÓDIGO
+                    </a>
+                </div>
+
+                <!-- Proyecto 3 -->
+                <div class="card-3d">
+                    <div class="project-video-wrapper mb-4">
+                        <video class="w-full h-48 md:h-64 object-cover rounded-lg" autoplay loop muted>
                             <source src="mm.mp4" type="video/mp4">
-                            Tu navegador no soporta el video.
                         </video>
-                        <h3 class="text-xl font-semibold mt-2 text-white">Tetris</h3>
-                        <p class="mt-2 text-white">Juego de Tetris.</p>
-                        <div class="flex flex-wrap mt-3">
-                            <img src="html.png" alt="HTML" class="w-8 h-8 mr-2 mb-2">
-                            <img src="CSS.png" alt="CSS" class="w-8 h-8 mr-2 mb-2">
-                            <img src="js.png" alt="JavaScript" class="w-8 h-8 mr-2 mb-2">
-                        </div>
-                        <a href="https://github.com/LizzLove90/Tetris" target="_blank" class="bg-pink-500 text-white px-4 py-2 rounded-md hover:bg-gray-600 mt-6 inline-block">Ver Código</a>
                     </div>
+                    <h4 class="text-xl md:text-2xl font-bold mb-2 neon-text">Tetris Game</h4>
+                    <p class="text-sm md:text-base text-gray-400 mb-4">Juego clásico reimaginado con JavaScript puro</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-2 md:px-3 py-1 bg-orange-500 bg-opacity-20 text-orange-400 rounded-full text-xs md:text-sm border border-orange-500">HTML</span>
+                        <span class="px-2 md:px-3 py-1 bg-blue-500 bg-opacity-20 text-blue-400 rounded-full text-xs md:text-sm border border-blue-500">CSS</span>
+                        <span class="px-2 md:px-3 py-1 bg-yellow-500 bg-opacity-20 text-yellow-400 rounded-full text-xs md:text-sm border border-yellow-500">JavaScript</span>
+                    </div>
+                    <a href="https://github.com/LizzLove90/Tetris" target="_blank" class="btn-neon w-full block text-center text-sm md:text-base">
+                        VER CÓDIGO
+                    </a>
                 </div>
             </div>
 
-            <!-- Sección de Diseño UI/UX -->
-            <div class="mt-10">
-                <h3 class="text-2xl font-semibold text-center text-pink-400">Diseño UI/UX</h3>
-                <div class="projects-grid grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
-                    <!-- Proyecto UI/UX -->
-                    <div class="bg-black p-5 rounded-lg shadow-lg">
-                        <video class="w-full h-48 object-cover rounded" autoplay loop muted onclick="openModal('nuevo_proyecto_uiux')">
+            <h3 class="text-2xl md:text-3xl font-bold text-center mb-8 neon-text">DISEÑO UI/UX</h3>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                <div class="card-3d">
+                    <div class="project-video-wrapper mb-4">
+                        <video class="w-full h-48 md:h-64 object-cover rounded-lg" autoplay loop muted>
                             <source src="MI.mp4" type="video/mp4">
-                            Tu navegador no soporta el video.
                         </video>
-                        <h3 class="text-xl font-semibold mt-2 text-white">Diseño UI/UX para Aplicación Móvil de Gestión de Tareas</h3>
-                        <p class="mt-2 text-white">Diseño para una aplicación móvil de gestión de tareas, con enfoque en la experiencia del usuario.</p>
-                        <div class="flex flex-wrap mt-4">
-                            <a href="https://www.figma.com/design/uiux_project_link" target="_blank" class="bg-pink-400 text-white px-4 py-2 rounded-md hover:bg-pink-600 mr-2 mb-2">Ver diseño en Figma</a>
+                    </div>
+                    <h4 class="text-xl md:text-2xl font-bold mb-2 neon-text">App Gestión de Tareas</h4>
+                    <p class="text-sm md:text-base text-gray-400 mb-4">Diseño UI/UX centrado en experiencia del usuario</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-2 md:px-3 py-1 bg-pink-500 bg-opacity-20 text-pink-400 rounded-full text-xs md:text-sm border border-pink-500">Figma</span>
+                        <span class="px-2 md:px-3 py-1 bg-purple-500 bg-opacity-20 text-purple-400 rounded-full text-xs md:text-sm border border-purple-500">UI/UX</span>
+                    </div>
+                    <button class="btn-neon w-full text-sm md:text-base">VER DISEÑO</button>
+                </div>
+            </div>
+
+            <h3 class="text-2xl md:text-3xl font-bold text-center mb-8 neon-text">DISEÑO GRÁFICO</h3>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card-3d">
+                    <div class="project-video-wrapper mb-4">
+                        <video class="w-full h-48 md:h-64 object-cover rounded-lg" autoplay loop muted>
+                            <source src="mii.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <h4 class="text-xl md:text-2xl font-bold mb-2 neon-text">Overlay Gengar - Twitch</h4>
+                    <p class="text-sm md:text-base text-gray-400 mb-4">Diseño profesional para streaming</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-2 md:px-3 py-1 bg-green-500 bg-opacity-20 text-green-400 rounded-full text-xs md:text-sm border border-green-500">Illustrator</span>
+                        <span class="px-2 md:px-3 py-1 bg-purple-500 bg-opacity-20 text-purple-400 rounded-full text-xs md:text-sm border border-purple-500">Streaming</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 relative z-10">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title holographic">SKILLS</h2>
+            
+            <div class="skills-slider-container">
+                <div class="skills-slider">
+                    <!-- Primera vuelta de iconos -->
+                    <div class="tech-icon skill-item">
+                        <img src="html.png" alt="HTML5">
+                    </div>
+                    <div class="tech-icon skill-item">
+                        <img src="CSS.png" alt="CSS3">
+                    </div>
+                    <div class="tech-icon skill-item">
+                        <img src="js.png" alt="JavaScript">
+                    </div>
+                    <div class="tech-icon skill-item">
+                        <img src="PHP.png" alt="PHP">
+                    </div>
+                    <div class="tech-icon skill-item">
+                        <img src="py.png" alt="Python">
+                    </div>
+                    <div class="tech-icon skill-item">
+                        <img src="mysql.png" alt="MySQL">
+                    </div>
+                    <div class="tech-icon skill-item">
+                        <img src="FIGMA.png" alt="Figma">
+                    </div>
+                    <div class="tech-icon skill-item">
+                        <img src="ai.png" alt="Illustrator">
+                    </div>
+                    <div class="tech-icon skill-item">
+                        <img src="xd.png" alt="Adobe XD">
+                    </div>
+                    <div class="tech-icon skill-item">
+                        <img src="bi.png" alt="Power BI">
+                    </div>
+                    <div class="tech-icon skill-item">
+                        <img src="excel.png" alt="Excel">
+                    </div>
+                    <div class="tech-icon skill-item">
+                        <img src="git.png" alt="Git">
+                    </div>
+                    <div class="tech-icon skill-item">
+                        <img src="ruby.png" alt="Ruby">
+                    </div>
+                    <div class="tech-icon skill-item">
+                        <img src="sheet.png" alt="Sheets">
+                    </div>
+
+                    <!-- Segunda vuelta (duplicado para efecto infinito) -->
+                    <div class="tech-icon skill-item">
+                        <img src="html.png" alt="HTML5">
+                    </div>
+                    <div class="tech-icon skill-item">
+                        <img src="CSS.png" alt="CSS3">
+                    </div>
+                    <div class="tech-icon skill-item">
+                        <img src="js.png" alt="JavaScript">
+                    </div>
+                    <div class="tech-icon skill-item">
+                        <img src="PHP.png" alt="PHP">
+                    </div>
+                    <div class="tech-icon skill-item">
+                        <img src="py.png" alt="Python">
+                    </div>
+                    <div class="tech-icon skill-item">
+                        <img src="mysql.png" alt="MySQL">
+                    </div>
+                    <div class="tech-icon skill-item">
+                        <img src="FIGMA.png" alt="Figma">
+                    </div>
+                    <div class="tech-icon skill-item">
+                        <img src="ai.png" alt="Illustrator">
+                    </div>
+                    <div class="tech-icon skill-item">
+                        <img src="xd.png" alt="Adobe XD">
+                    </div>
+                    <div class="tech-icon skill-item">
+                        <img src="bi.png" alt="Power BI">
+                    </div>
+                    <div class="tech-icon skill-item">
+                        <img src="excel.png" alt="Excel">
+                    </div>
+                    <div class="tech-icon skill-item">
+                        <img src="git.png" alt="Git">
+                    </div>
+                    <div class="tech-icon skill-item">
+                        <img src="ruby.png" alt="Ruby">
+                    </div>
+                    <div class="tech-icon skill-item">
+                        <img src="sheet.png" alt="Sheets">
+                    </div>
+                </div>
+            </div>
+
+            <p class="text-center text-gray-400 mt-4 text-sm md:text-base">
+                ✨ Pasa el mouse sobre el slider para pausarlo ✨
+            </p>
+        </div>
+    </section>
+
+    <!-- Certificates Section -->
+    <section id="certificates" class="py-20 relative z-10">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title holographic">CERTIFICADOS</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <!-- Certificado 1 -->
+                <div class="certificate-card" onclick="openCertificate('python.jpg')">
+                    <span class="certificate-badge">CERTIFICADO</span>
+                    <img src="python.jpg" alt="Python Certificate" class="certificate-image">
+                    <h4 class="text-lg font-bold mb-2 neon-text">Python Programming</h4>
+                    <p class="text-sm text-gray-400">Fundamentos de Python</p>
+                </div>
+
+                <!-- Certificado 2 -->
+                <div class="certificate-card" onclick="openCertificate('UI.jpg')">
+                    <span class="certificate-badge">CERTIFICADO</span>
+                    <img src="UI.jpg" alt="UI Certificate" class="certificate-image">
+                    <h4 class="text-lg font-bold mb-2 neon-text">UI Design</h4>
+                    <p class="text-sm text-gray-400">Diseño de Interfaces</p>
+                </div>
+
+                <!-- Certificado 3 -->
+                <div class="certificate-card" onclick="openCertificate('ux.jpeg')">
+                    <span class="certificate-badge">CERTIFICADO</span>
+                    <img src="ux.jpeg" alt="UX Certificate" class="certificate-image">
+                    <h4 class="text-lg font-bold mb-2 neon-text">UX Design</h4>
+                    <p class="text-sm text-gray-400">Experiencia de Usuario</p>
+                </div>
+
+                <!-- Certificado 4 -->
+                <div class="certificate-card" onclick="openCertificate('php.jpeg')">
+                    <span class="certificate-badge">CERTIFICADO</span>
+                    <img src="php.jpeg" alt="PHP Certificate" class="certificate-image">
+                    <h4 class="text-lg font-bold mb-2 neon-text">PHP Development</h4>
+                    <p class="text-sm text-gray-400">Desarrollo Backend</p>
+                </div>
+
+                <!-- Certificado 5 -->
+                <div class="certificate-card" onclick="openCertificate('ruby.jpeg')">
+                    <span class="certificate-badge">CERTIFICADO</span>
+                    <img src="ruby.jpeg" alt="Ruby Certificate" class="certificate-image">
+                    <h4 class="text-lg font-bold mb-2 neon-text">Ruby Programming</h4>
+                    <p class="text-sm text-gray-400">Ruby on Rails</p>
+                </div>
+
+                <!-- Certificado 6 -->
+                <div class="certificate-card" onclick="openCertificate('cert6.jpg')">
+                    <span class="certificate-badge">CERTIFICADO</span>
+                    <img src="cert6.jpg" alt="Certificate 6" class="certificate-image">
+                    <h4 class="text-lg font-bold mb-2 neon-text">JavaScript Avanzado</h4>
+                    <p class="text-sm text-gray-400">ES6+ y Frameworks</p>
+                </div>
+
+                <!-- Certificado 7 -->
+                <div class="certificate-card" onclick="openCertificate('cert7.jpg')">
+                    <span class="certificate-badge">CERTIFICADO</span>
+                    <img src="cert7.jpg" alt="Certificate 7" class="certificate-image">
+                    <h4 class="text-lg font-bold mb-2 neon-text">MySQL Database</h4>
+                    <p class="text-sm text-gray-400">Administración BD</p>
+                </div>
+
+                <!-- Certificado 8 -->
+                <div class="certificate-card" onclick="openCertificate('cert8.jpg')">
+                    <span class="certificate-badge">CERTIFICADO</span>
+                    <img src="cert8.jpg" alt="Certificate 8" class="certificate-image">
+                    <h4 class="text-lg font-bold mb-2 neon-text">Git & GitHub</h4>
+                    <p class="text-sm text-gray-400">Control de Versiones</p>
+                </div>
+
+                <!-- Certificado 9 -->
+                <div class="certificate-card" onclick="openCertificate('cert9.jpg')">
+                    <span class="certificate-badge">CERTIFICADO</span>
+                    <img src="cert9.jpg" alt="Certificate 9" class="certificate-image">
+                    <h4 class="text-lg font-bold mb-2 neon-text">Responsive Design</h4>
+                    <p class="text-sm text-gray-400">Mobile First Approach</p>
+                </div>
+
+                <!-- Certificado 10 -->
+                <div class="certificate-card" onclick="openCertificate('cert10.jpg')">
+                    <span class="certificate-badge">CERTIFICADO</span>
+                    <img src="cert10.jpg" alt="Certificate 10" class="certificate-image">
+                    <h4 class="text-lg font-bold mb-2 neon-text">Adobe Illustrator</h4>
+                    <p class="text-sm text-gray-400">Diseño Gráfico</p>
+                </div>
+
+                <!-- Certificado 11 -->
+                <div class="certificate-card" onclick="openCertificate('cert11.jpg')">
+                    <span class="certificate-badge">CERTIFICADO</span>
+                    <img src="cert11.jpg" alt="Certificate 11" class="certificate-image">
+                    <h4 class="text-lg font-bold mb-2 neon-text">Adobe XD</h4>
+                    <p class="text-sm text-gray-400">Prototipado UI/UX</p>
+                </div>
+
+                <!-- Certificado 12 -->
+                <div class="certificate-card" onclick="openCertificate('cert12.jpg')">
+                    <span class="certificate-badge">CERTIFICADO</span>
+                    <img src="cert12.jpg" alt="Certificate 12" class="certificate-image">
+                    <h4 class="text-lg font-bold mb-2 neon-text">Figma</h4>
+                    <p class="text-sm text-gray-400">Diseño Colaborativo</p>
+                </div>
+
+                <!-- Certificado 13 -->
+                <div class="certificate-card" onclick="openCertificate('cert13.jpg')">
+                    <span class="certificate-badge">CERTIFICADO</span>
+                    <img src="cert13.jpg" alt="Certificate 13" class="certificate-image">
+                    <h4 class="text-lg font-bold mb-2 neon-text">Power BI</h4>
+                    <p class="text-sm text-gray-400">Business Intelligence</p>
+                </div>
+
+                <!-- Certificado 14 -->
+                <div class="certificate-card" onclick="openCertificate('cert14.jpg')">
+                    <span class="certificate-badge">CERTIFICADO</span>
+                    <img src="cert14.jpg" alt="Certificate 14" class="certificate-image">
+                    <h4 class="text-lg font-bold mb-2 neon-text">Excel Avanzado</h4>
+                    <p class="text-sm text-gray-400">Análisis de Datos</p>
+                </div>
+
+                <!-- Certificado 15 -->
+                <div class="certificate-card" onclick="openCertificate('cert15.jpg')">
+                    <span class="certificate-badge">CERTIFICADO</span>
+                    <img src="cert15.jpg" alt="Certificate 15" class="certificate-image">
+                    <h4 class="text-lg font-bold mb-2 neon-text">Google Sheets</h4>
+                    <p class="text-sm text-gray-400">Hojas de Cálculo</p>
+                </div>
+
+                <!-- Certificado 16 -->
+                <div class="certificate-card" onclick="openCertificate('cert16.jpg')">
+                    <span class="certificate-badge">CERTIFICADO</span>
+                    <img src="cert16.jpg" alt="Certificate 16" class="certificate-image">
+                    <h4 class="text-lg font-bold mb-2 neon-text">API REST</h4>
+                    <p class="text-sm text-gray-400">Desarrollo de APIs</p>
+                </div>
+
+                <!-- Certificado 17 -->
+                <div class="certificate-card" onclick="openCertificate('cert17.jpg')">
+                    <span class="certificate-badge">CERTIFICADO</span>
+                    <img src="cert17.jpg" alt="Certificate 17" class="certificate-image">
+                    <h4 class="text-lg font-bold mb-2 neon-text">Scrum Master</h4>
+                    <p class="text-sm text-gray-400">Metodologías Ágiles</p>
+                </div>
+
+                <!-- Certificado 18 -->
+                <div class="certificate-card" onclick="openCertificate('cert18.jpg')">
+                    <span class="certificate-badge">CERTIFICADO</span>
+                    <img src="cert18.jpg" alt="Certificate 18" class="certificate-image">
+                    <h4 class="text-lg font-bold mb-2 neon-text">Web Accessibility</h4>
+                    <p class="text-sm text-gray-400">WCAG 2.1 Standards</p>
+                </div>
+
+                <!-- Certificado 19 -->
+                <div class="certificate-card" onclick="openCertificate('cert19.jpg')">
+                    <span class="certificate-badge">CERTIFICADO</span>
+                    <img src="cert19.jpg" alt="Certificate 19" class="certificate-image">
+                    <h4 class="text-lg font-bold mb-2 neon-text">SEO Optimization</h4>
+                    <p class="text-sm text-gray-400">Marketing Digital</p>
+                </div>
+
+                <!-- Certificado 20 -->
+                <div class="certificate-card" onclick="openCertificate('cert20.jpg')">
+                    <span class="certificate-badge">CERTIFICADO</span>
+                    <img src="cert20.jpg" alt="Certificate 20" class="certificate-image">
+                    <h4 class="text-lg font-bold mb-2 neon-text">Cloud Computing</h4>
+                    <p class="text-sm text-gray-400">AWS & Azure</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificate Modal -->
+    <div id="certificate-modal" class="certificate-modal hidden">
+        <div class="certificate-modal-content">
+            <button class="close-modal" onclick="closeCertificate()">
+                <i class="fas fa-times"></i>
+            </button>
+            <img id="certificate-modal-image" src="" alt="Certificate">
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 relative z-10">
+        <div class="container mx-auto px-6">
+            <h2 class="section-title holographic">CONTACTO</h2>
+            
+            <div class="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+                <div class="gradient-border">
+                    <div class="gradient-border-content">
+                        <h3 class="text-xl md:text-2xl font-bold mb-6 neon-text">Envíame un mensaje</h3>
+                        <form id="contact-form" class="space-y-4">
+                            <input type="text" placeholder="Tu Nombre" class="w-full p-3 md:p-4 bg-transparent border-2 border-pink-500 rounded-lg focus:outline-none focus:border-purple-500 text-white text-sm md:text-base" required>
+                            <input type="email" placeholder="Tu Email" class="w-full p-3 md:p-4 bg-transparent border-2 border-pink-500 rounded-lg focus:outline-none focus:border-purple-500 text-white text-sm md:text-base" required>
+                            <textarea placeholder="Tu Mensaje" class="w-full p-3 md:p-4 bg-transparent border-2 border-pink-500 rounded-lg focus:outline-none focus:border-purple-500 text-white h-32 text-sm md:text-base" required></textarea>
+                            <button type="submit" class="btn-neon w-full text-sm md:text-base">ENVIAR MENSAJE</button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="gradient-border">
+                    <div class="gradient-border-content">
+                        <h3 class="text-xl md:text-2xl font-bold mb-6 neon-text">Conéctate conmigo</h3>
+                        
+                        <div class="flex flex-wrap gap-4 mb-8 justify-center md:justify-start">
+                            <a href="https://www.linkedin.com/in/eva-lizeth-estrada-calleros-157b1929b/" target="_blank" class="tech-icon">
+                                <i class="fab fa-linkedin text-2xl md:text-3xl text-blue-400"></i>
+                            </a>
+                            <a href="https://github.com/LizzLove90" target="_blank" class="tech-icon">
+                                <i class="fab fa-github text-2xl md:text-3xl text-purple-400"></i>
+                            </a>
+                            <a href="https://wa.me/6647510372" target="_blank" class="tech-icon">
+                                <i class="fab fa-whatsapp text-2xl md:text-3xl text-green-400"></i>
+                            </a>
+                            <a href="mailto:lizeth.estradac90@gmail.com" class="tech-icon">
+                                <i class="fas fa-envelope text-2xl md:text-3xl text-pink-400"></i>
+                            </a>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <p class="flex items-center text-sm md:text-lg">
+                                <i class="fas fa-map-marker-alt text-pink-400 mr-3"></i>
+                                Tijuana, BC, MX
+                            </p>
+                            <p class="flex items-center text-sm md:text-lg">
+                                <i class="fas fa-envelope text-pink-400 mr-3"></i>
+                                lizeth.estradac90@gmail.com
+                            </p>
+                            <p class="flex items-center text-sm md:text-lg">
+                                <i class="fas fa-phone text-pink-400 mr-3"></i>
+                                +52 664 751 0372
+                            </p>
                         </div>
                     </div>
                 </div>
             </div>
-
-             <!-- Sección de Diseño Gráfico -->
-            <div class="mt-10">
-                <h3 class="text-2xl font-semibold text-center text-pink-400">Diseño Gráfico</h3>
-                <div class="projects-grid grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
-                    <!-- Proyecto Gráfico -->
-                    <div class="bg-black p-5 rounded-lg shadow-lg">
-                        <video class="w-full h-48 object-cover rounded" autoplay loop muted onclick="openModal('nuevo_proyecto_grafico')">
-                            <source src="mii.mp4" type="video/mp4">
-                            Tu navegador no soporta el video.
-                        </video>
-                        <h3 class="text-xl font-semibold mt-2 text-white">Overlay Evolución de Gengar para Twitch</h3>
-                        <p class="mt-2 text-white">Diseño de Overlay para Twitch.</p>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 
-    <!-- Modal de Imágenes -->
-    <div id="imageModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden">
-        <div class="relative w-full max-w-3xl p-4 bg-white rounded-lg mx-4">
-            <button id="closeModal" class="absolute top-4 right-4 text-xl text-white bg-red-500 rounded-full px-3 py-1">X</button>
-            <div class="flex justify-between items-center">
-                <button id="prevBtn" class="text-3xl text-pink-500" onclick="changeImage(-1)">&#10094;</button>
-                <img id="modalImage" src="" alt="Imagen del proyecto" class="w-full max-h-96 object-contain">
-                <button id="nextBtn" class="text-3xl text-pink-500" onclick="changeImage(1)">&#10095;</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Certificados con diseño mejorado para móviles -->
-<section id="certificate" class="container mx-auto py-20 px-6">
-    <h2 class="text-3xl font-bold text-pink-400 text-center">Mis Certificados</h2>
-    <div class="relative mt-6">
-        <button id="prevCert" class="absolute left-0 top-1/2 transform -translate-y-1/2 text-3xl text-pink-500 hover:text-pink-700 bg-white bg-opacity-50 rounded-full p-2 z-10" onclick="changeCertificate(-1)">&#10094;</button>
-
-        <div id="certificatesContainer" class="overflow-x-hidden flex space-x-6 py-4 scroll-smooth">
-            <!-- Los certificados se generarán con JavaScript -->
-        </div>
-
-        <button id="nextCert" class="absolute right-0 top-1/2 transform -translate-y-1/2 text-3xl text-pink-500 hover:text-pink-700 bg-white bg-opacity-50 rounded-full p-2 z-10" onclick="changeCertificate(1)">&#10095;</button>
-    </div>
-
-    <div class="flex justify-center mt-4 space-x-2 flex-wrap" id="navDots">
-        <!-- Los puntos se generarán aquí con JavaScript -->
-    </div>
-</section>
-
-<!-- Modal para visualizar el certificado a pantalla completa -->
-<div id="certificateModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden">
-    <div class="relative w-full max-w-3xl p-4 bg-white rounded-lg mx-4">
-        <button id="closeCertModal" class="absolute top-4 right-4 text-xl text-white bg-red-500 rounded-full px-3 py-1">X</button>
-        <img id="certificateImage" src="" alt="Certificado en pantalla completa" class="w-full max-h-96 object-contain">
-    </div>
-</div>
-    <!-- Habilidades -->
-    <section id="skills" class="bg-pink-50 py-20 overflow-hidden">
+    <!-- Footer -->
+    <footer class="py-10 border-t border-pink-500 border-opacity-20 relative z-10">
         <div class="container mx-auto px-6 text-center">
-            <h2 class="text-3xl font-bold text-black">Habilidades</h2>
-            <div class="flex flex-wrap justify-center gap-6 mt-10 md:flex-nowrap md:justify-start md:overflow-hidden md:whitespace-nowrap" id="skills-container">
-                <div class="flex flex-wrap justify-center gap-6 md:flex-nowrap md:gap-10" id="skills-track">
-                    <img src="html.png" alt="HTML5" class="w-12 h-12 md:w-16 md:h-16 object-contain">
-                    <img src="CSS.png" alt="CSS3" class="w-12 h-12 md:w-16 md:h-16 object-contain">
-                    <img src="js.png" alt="JavaScript" class="w-12 h-12 md:w-16 md:h-16 object-contain">
-                    <img src="PHP.png" alt="PHP" class="w-12 h-12 md:w-16 md:h-16 object-contain">
-                    <img src="mysql.png" alt="MySQL" class="w-12 h-12 md:w-16 md:h-16 object-contain">
-                    <img src="ruby.png" alt="Ruby" class="w-12 h-12 md:w-16 md:h-16 object-contain">
-                    <img src="py.png" alt="Python" class="w-12 h-12 md:w-16 md:h-16 object-contain">
-                    <img src="git.png" alt="Git" class="w-12 h-12 md:w-16 md:h-16 object-contain">
-                    <img src="FIGMA.png" alt="Figma" class="w-12 h-12 md:w-16 md:h-16 object-contain">
-                    <img src="ai.png" alt="Adobe Illustrator" class="w-12 h-12 md:w-16 md:h-16 object-contain">
-                    <img src="xd.png" alt="Adobe XD" class="w-12 h-12 md:w-16 md:h-16 object-contain">
-                    <img src="bi.png" alt="Power BI" class="w-12 h-12 md:w-16 md:h-16 object-contain">
-                    <img src="excel.png" alt="Excel" class="w-12 h-12 md:w-16 md:h-16 object-contain">
-                    <img src="sheet.png" alt="Google Sheets" class="w-12 h-12 md:w-16 md:h-16 object-contain">
-                </div>
-            </div>
+            <p class="holographic text-lg md:text-xl font-bold">
+                Hecho con 💖 por Eva Lizeth | © 2024
+            </p>
         </div>
-    </section>
+    </footer>
 
-  <!-- Contacto (con funcionalidad de envío de correo) -->
-<section id="contact" class="container mx-auto py-20 px-6">
-    <h2 class="text-3xl font-bold text-pink-400 text-center">Contáctame</h2>
-    
-    <!-- Mensaje de éxito (oculto inicialmente) -->
-    <div id="success-message" class="hidden max-w-lg mx-auto mt-4 p-3 bg-green-100 text-green-700 rounded-lg text-center">
-        ¡Mensaje enviado con éxito! Te responderé lo antes posible.
-    </div>
-    
-    <!-- Mensaje de error (oculto inicialmente) -->
-    <div id="error-message" class="hidden max-w-lg mx-auto mt-4 p-3 bg-red-100 text-red-700 rounded-lg text-center">
-        Ha ocurrido un error al enviar el mensaje. Por favor, intenta de nuevo.
-    </div>
-    
-    <form id="contact-form" class="max-w-lg mx-auto mt-6">
-        <input type="text" id="name" name="name" placeholder="Tu Nombre" class="w-full p-2 mb-4 bg-pink-50 border border-pink-200 rounded text-black" required>
-        <input type="email" id="email" name="email" placeholder="Tu Email" class="w-full p-2 mb-4 bg-pink-50 border border-pink-200 rounded text-black" required>
-        <textarea id="message" name="message" placeholder="Tu Mensaje" class="w-full p-2 mb-4 bg-pink-50 border border-pink-200 rounded text-black h-32" required></textarea>
-        
-        <!-- Botón con indicador de carga -->
-        <button type="submit" id="submit-btn" class="bg-pink-400 text-white px-6 py-2 rounded-full font-semibold hover:bg-pink-500 transition-all duration-300 w-full relative">
-            <span>Enviar</span>
-            <span id="loading-spinner" class="hidden absolute inset-0 flex items-center justify-center">
-                <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
-            </span>
-        </button>
-    </form>
+    <!-- WhatsApp Float Button NEON -->
+    <a href="https://wa.me/526647510372?text=Hola%20Eva!%20Vi%20tu%20portafolio%20y%20me%20gustaría%20contactarte" 
+       target="_blank" 
+       class="whatsapp-float"
+       title="Chatea conmigo por WhatsApp">
+        <span class="whatsapp-tooltip">¡Chatea conmigo! 💬</span>
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
-    <div class="mt-8 text-center">
-        <p class="text-pink-400">Conéctame en mis redes sociales</p>
-        <div class="flex justify-center space-x-6 mt-4">
-            <!-- LinkedIn -->
-            <a href="https://www.linkedin.com/in/eva-lizeth-estrada-calleros-157b1929b/" target="_blank" class="text-pink-400 hover:text-pink-500 transition-all duration-300">
-                <i class="fab fa-linkedin fa-2x"></i>
-            </a>
-            <!-- GitHub -->
-            <a href="https://github.com/LizzLove90" target="_blank" class="text-pink-400 hover:text-pink-500 transition-all duration-300">
-                <i class="fab fa-github fa-2x"></i>
-            </a>
-            <!-- WhatsApp -->
-            <a href="https://wa.me/6647510372" target="_blank" class="text-pink-400 hover:text-pink-500 transition-all duration-300">
-                <i class="fab fa-whatsapp fa-2x"></i>
-            </a>
-            <!-- Email -->
-            <a href="mailto:lizeth.estradac90@gmail.com" class="text-pink-400 hover:text-pink-500 transition-all duration-300">
-                <i class="fas fa-envelope fa-2x"></i>
-            </a>
-        </div>
-    </div>
-</section>
-
-<!-- Script para EmailJS con parámetros corregidos -->
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-<script>
-    (function() {
-        // Inicializar EmailJS con tu Public Key
-        emailjs.init("do-1jRGWDvkYenqW2");
-        
-        // Referencias a elementos del DOM
-        const form = document.getElementById('contact-form');
-        const submitBtn = document.getElementById('submit-btn');
-        const submitText = submitBtn.querySelector('span');
-        const loadingSpinner = document.getElementById('loading-spinner');
-        const successMessage = document.getElementById('success-message');
-        const errorMessage = document.getElementById('error-message');
-        
-        // Manejar envío del formulario
-        form.addEventListener('submit', function(event) {
-            event.preventDefault();
-            
-            // Mostrar indicador de carga
-            submitText.classList.add('invisible');
-            loadingSpinner.classList.remove('hidden');
-            
-            // Ocultar mensajes previos
-            successMessage.classList.add('hidden');
-            errorMessage.classList.add('hidden');
-            
-            // Obtener valores del formulario
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-            
-            // IMPORTANTE: Mira tu plantilla en EmailJS y asegúrate de usar 
-            // exactamente los mismos nombres de variables que espera tu plantilla
-            
-            // Parámetros para el correo que TÚ recibes (mensaje original)
-            const paramsForYou = {
-                name: name,
-                email: email,
-                message: message
-                // No agregamos to_email o reply_to aquí, eso se configura en la plantilla
-            };
-            
-            // Enviar el correo para ti
-            emailjs.send('service_s88nri1', 'template_vvlrlve', paramsForYou)
-                .then(function(response) {
-                    console.log('Mensaje enviado a Eva Lizeth:', response);
-                    
-                    // Éxito: mostrar mensaje y resetear formulario
-                    successMessage.classList.remove('hidden');
-                    form.reset();
-                    
-                    // Opcional: Enviar confirmación al remitente
-                    // Si decides implementar esto más adelante
-                })
-                .catch(function(error) {
-                    // Error: mostrar mensaje de error
-                    errorMessage.classList.remove('hidden');
-                    console.error('Error al enviar el mensaje:', error);
-                    
-                    // Mostrar detalles del error en la consola para depuración
-                    if (error.text) {
-                        console.log('Detalle del error:', error.text);
-                    }
-                })
-                .finally(function() {
-                    // Restaurar botón
-                    submitText.classList.remove('invisible');
-                    loadingSpinner.classList.add('hidden');
-                });
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        // Loading Screen
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loadingScreen').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loadingScreen').style.display = 'none';
+                }, 500);
+            }, 2000);
         });
-    })();
-</script>
 
-<!-- Script de Partículas -->
-<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-<script>
-// Inicializar partículas solo en pantallas medianas y grandes
-function initParticles() {
-    if (window.innerWidth > 768) { // Verificar si la pantalla es lo suficientemente grande
-        particlesJS("particles-js", {
+        // Particles.js Configuration
+        particlesJS('particles-js', {
             particles: {
                 number: { value: 80, density: { enable: true, value_area: 800 } },
-                color: { value: "#f53b88" },  // Rosa pastel
-                shape: { type: "circle" },
-                opacity: { value: 0.7, random: true },
+                color: { value: ['#ff2a9f', '#c74cff', '#00d9ff'] },
+                shape: { type: 'circle' },
+                opacity: { value: 0.5, random: true },
                 size: { value: 3, random: true },
-                move: { enable: true, speed: 2, direction: "none", out_mode: "out" }
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: '#ff2a9f',
+                    opacity: 0.2,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: 'none',
+                    random: true,
+                    straight: false,
+                    out_mode: 'out'
+                }
             },
-            background: {
-                color: "#F7D1D0"  // Rosa pastel
+            interactivity: {
+                detect_on: 'canvas',
+                events: {
+                    onhover: { enable: true, mode: 'repulse' },
+                    onclick: { enable: true, mode: 'push' }
+                }
             }
         });
-    }
-}
 
-// Llamar a la función cuando el DOM esté cargado
-document.addEventListener('DOMContentLoaded', initParticles);
-
-// Y también al redimensionar la ventana (con debounce para rendimiento)
-let resizeTimer;
-window.addEventListener('resize', function() {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(initParticles, 250);
-});
-</script>
-
-<!-- Script para Modal de Imágenes -->
-<script>
-// Objeto con las imágenes de cada proyecto
-const projectImages = {
-    "nuevo_proyecto_1": ["15.png","16.png"], // Agregar imágenes del nuevo proyecto
-    "nuevo_proyecto_2": ["17.png","18.png","19.png","20.png","21.png","22.png","23.png"], // Agregar imágenes del nuevo proyecto
-    "nuevo_proyecto_3": ["24.png" , "25.png"],
-    "nuevo_proyecto_uiux": ["1.png", "2.png", "3.png", "4.png", "5.png", "6.png", "7.png", "8.png", "9.png", "10.png", "11.png", "12.png", "13.png", "14.png"], // Agregar imágenes del nuevo proyecto UI/UX
-    "nuevo_proyecto_grafico": ["Overlay.gif"] // Agregar imágenes del nuevo proyecto gráfico
-};
-
-let currentProject = []; // Imágenes del proyecto seleccionado
-let currentIndex = 0; // Índice de la imagen actual
-
-// Función para abrir el modal y mostrar las imágenes del proyecto seleccionado
-function openModal(projectKey) {
-    currentProject = projectImages[projectKey] || []; // Obtener imágenes del proyecto
-    if (currentProject.length > 0) {
-        currentIndex = 0;
-        document.getElementById('modalImage').src = currentProject[currentIndex];
-        document.getElementById('imageModal').classList.remove('hidden');
-    }
-}
-
-// Función para cambiar la imagen en el modal
-function changeImage(direction) {
-    if (currentProject.length > 1) {
-        currentIndex = (currentIndex + direction + currentProject.length) % currentProject.length;
-        document.getElementById('modalImage').src = currentProject[currentIndex];
-    }
-}
-
-// Cerrar el modal
-document.getElementById('closeModal').addEventListener('click', function() {
-    document.getElementById('imageModal').classList.add('hidden');
-});
-
-// También cerrar al hacer clic fuera del contenido del modal
-document.getElementById('imageModal').addEventListener('click', function(e) {
-    if (e.target === this) {
-        this.classList.add('hidden');
-    }
-});
-
-// Navegación con teclado para el modal
-document.addEventListener('keydown', function(e) {
-    if (!document.getElementById('imageModal').classList.contains('hidden')) {
-        if (e.key === 'ArrowLeft') {
-            changeImage(-1);
-        } else if (e.key === 'ArrowRight') {
-            changeImage(1);
-        } else if (e.key === 'Escape') {
-            document.getElementById('imageModal').classList.add('hidden');
-        }
-    }
-});
-</script>
-
-<!-- Script mejorado para Certificados -->
-<script>
-    // Arreglo de las imágenes de los certificados
-    const certificates = [
-        "python.jpg", "UI.jpg", "ux.jpeg", "php.jpeg", "ruby.jpeg", "html.jpeg", "python.jpeg", "powerbi.jpeg", "excel.jpeg", 
-        "excela.png", "sheets.png", "Legacy JavaScript Algorithms and Data Structures.png", "Relational Database.png", "Front End Development Libraries.png", "Responsive Web Design.png", "c.png"
-    ];
-    
-    let currentCertIndex = 0;
-    
-    // Función para abrir un certificado en pantalla completa
-    function openCertificate(cert) {
-        document.getElementById('certificateImage').src = cert;
-        document.getElementById('certificateModal').classList.remove('hidden');
-    }
-    
-    // Función para cambiar al siguiente o anterior certificado
-    function changeCertificate(direction) {
-        const containerWidth = document.getElementById('certificatesContainer').offsetWidth;
-        const certificateWidth = document.querySelector('.certificate-container').offsetWidth + parseInt(getComputedStyle(document.querySelector('.certificate-container')).marginRight);
-        
-        // Calcular cuántos certificados son visibles a la vez
-        let visibleCerts = Math.floor(containerWidth / certificateWidth);
-        // En móviles, asegurar que al menos 1 es visible
-        visibleCerts = Math.max(1, visibleCerts);
-        
-        if (direction > 0) {
-            // Asegurarse de que no nos pasemos del final
-            if (currentCertIndex + visibleCerts < certificates.length) {
-                currentCertIndex += 1;
-            }
-        } else {
-            // Asegurarse de que no nos pasemos del inicio
-            if (currentCertIndex > 0) {
-                currentCertIndex -= 1;
-            }
-        }
-        
-        const scrollPosition = certificateWidth * currentCertIndex;
-        document.getElementById('certificatesContainer').scrollTo({
-            left: scrollPosition,
-            behavior: 'smooth'
-        });
-    
-        updateDots();
-    }
-    
-    // Cerrar el modal del certificado
-    document.getElementById('closeCertModal').addEventListener('click', function() {
-        document.getElementById('certificateModal').classList.add('hidden');
-    });
-    
-    // También cerrar al hacer clic fuera del contenido del modal
-    document.getElementById('certificateModal').addEventListener('click', function(e) {
-        if (e.target === this) {
-            this.classList.add('hidden');
-        }
-    });
-    
-    // Actualizar los puntos de navegación debajo del carrusel
-    function updateDots() {
-        const navDots = document.getElementById('navDots');
-        navDots.innerHTML = '';
-        
-        const containerWidth = document.getElementById('certificatesContainer').offsetWidth;
-        const certificateWidth = document.querySelector('.certificate-container').offsetWidth + parseInt(getComputedStyle(document.querySelector('.certificate-container')).marginRight);
-        
-        // Calcular cuántos certificados son visibles a la vez
-        let visibleCerts = Math.floor(containerWidth / certificateWidth);
-        // En móviles, asegurar que al menos 1 es visible
-        visibleCerts = Math.max(1, visibleCerts);
-        
-        const totalGroups = Math.ceil(certificates.length / visibleCerts);
-        
-        // Crear un punto por cada grupo
-        for (let i = 0; i < totalGroups; i++) {
-            const dot = document.createElement('div');
-            dot.classList.add('w-3', 'h-3', 'rounded-full', 'bg-pink-100', 'cursor-pointer', 'mb-2');
-            
-            // Resaltar el punto activo
-            if (Math.floor(currentCertIndex / visibleCerts) === i) {
-                dot.classList.add('bg-pink-400');
-            }
-            
-            dot.addEventListener('click', () => {
-                currentCertIndex = i * visibleCerts;
-                const scrollPosition = certificateWidth * currentCertIndex;
-                document.getElementById('certificatesContainer').scrollTo({
-                    left: scrollPosition,
-                    behavior: 'smooth'
-                });
-                updateDots();
-            });
-            
-            navDots.appendChild(dot);
-        }
-    }
-    
-    // Inicializar el carrusel de certificados
-    document.addEventListener('DOMContentLoaded', function() {
-        const certificatesContainer = document.getElementById('certificatesContainer');
-        
-        // Limpiar cualquier contenido existente
-        certificatesContainer.innerHTML = '';
-        
-        // Crear elementos para cada certificado con tamaños adaptables
-        certificates.forEach((cert, index) => {
-            const certDiv = document.createElement('div');
-            certDiv.className = 'certificate-container flex-shrink-0 bg-pink-200 p-3 md:p-6 rounded-lg shadow-lg cursor-pointer';
-            
-            // Estilos específicos para móvil y escritorio
-            if (window.innerWidth < 640) {
-                // Tamaño más pequeño en móviles
-                certDiv.style.width = '220px';
-                certDiv.style.minWidth = '220px';
-            } else if (window.innerWidth < 768) {
-                // Tamaño medio en tabletas
-                certDiv.style.width = '260px';
-                certDiv.style.minWidth = '260px';
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
             } else {
-                // Tamaño completo en escritorio
-                certDiv.style.width = '320px';
-                certDiv.style.minWidth = '320px';
+                navbar.classList.remove('scrolled');
             }
-            
-            certDiv.onclick = function() { openCertificate(cert); };
-            
-            const imgContainer = document.createElement('div');
-            imgContainer.className = 'bg-cover bg-center';
-            
-            // Ajustar altura según el dispositivo
-            if (window.innerWidth < 640) {
-                imgContainer.classList.add('h-40');
-            } else if (window.innerWidth < 768) {
-                imgContainer.classList.add('h-48');
-            } else {
-                imgContainer.classList.add('h-60');
-            }
-            
-            imgContainer.style.width = '100%';
-            imgContainer.style.backgroundImage = `url('${cert}')`;
-            imgContainer.style.backgroundSize = 'contain';
-            imgContainer.style.backgroundRepeat = 'no-repeat';
-            imgContainer.style.backgroundPosition = 'center';
-            
-            certDiv.appendChild(imgContainer);
-            certificatesContainer.appendChild(certDiv);
         });
-        
-        // Inicializar los puntos de navegación
-        updateDots();
-        
-        // Ajustar al redimensionar
-        window.addEventListener('resize', function() {
-            // Actualizar tamaños de certificados al cambiar el tamaño de la ventana
-            const certDivs = document.querySelectorAll('.certificate-container');
-            
-            certDivs.forEach(div => {
-                const imgContainer = div.querySelector('div');
-                
-                // Quitar clases de altura previas
-                imgContainer.classList.remove('h-40', 'h-48', 'h-60');
-                
-                if (window.innerWidth < 640) {
-                    // Tamaño más pequeño en móviles
-                    div.style.width = '220px';
-                    div.style.minWidth = '220px';
-                    imgContainer.classList.add('h-40');
-                } else if (window.innerWidth < 768) {
-                    // Tamaño medio en tabletas
-                    div.style.width = '260px';
-                    div.style.minWidth = '260px';
-                    imgContainer.classList.add('h-48');
-                } else {
-                    // Tamaño completo en escritorio
-                    div.style.width = '320px';
-                    div.style.minWidth = '320px';
-                    imgContainer.classList.add('h-60');
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
                 }
             });
+        });
+
+        // EmailJS
+        emailjs.init("do-1jRGWDvkYenqW2");
+        
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
             
-            updateDots();
+            emailjs.send('service_s88nri1', 'template_vvlrlve', data)
+                .then(() => {
+                    alert('¡Mensaje enviado con éxito! 💌');
+                    this.reset();
+                })
+                .catch((error) => {
+                    alert('Error al enviar. Intenta de nuevo.');
+                });
         });
-    });
-    
-    // Navegación con teclado para el modal de certificados
-    document.addEventListener('keydown', function(e) {
-        if (!document.getElementById('certificateModal').classList.contains('hidden')) {
-            if (e.key === 'Escape') {
-                document.getElementById('certificateModal').classList.add('hidden');
-            }
-        }
-    });
-    </script>
 
-<!-- Script para Animación en Sección de Habilidades -->
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Solo aplicar la animación en pantallas medianas y grandes
-    if (window.innerWidth > 768) {
-        gsap.to("#skills-track", {
-            x: "-50%",
-            duration: 15,
-            repeat: -1,
-            ease: "linear"
-        });
-    }
-});
-
-// Reiniciar animación si cambia el tamaño de la ventana
-window.addEventListener('resize', function() {
-    if (window.innerWidth > 768) {
-        gsap.to("#skills-track", {
-            x: "-50%",
-            duration: 15,
-            repeat: -1,
-            ease: "linear"
-        });
-    } else {
-        gsap.killTweensOf("#skills-track");
-        gsap.set("#skills-track", { x: 0 });
-    }
-});
-</script>
-<!-- Script para el Juego de Pac-Man -->
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Referencias a los elementos del DOM
+        // PAC-MAN GAME
         const canvas = document.getElementById('pacman-canvas');
         const ctx = canvas.getContext('2d');
         const scoreElement = document.getElementById('score');
         const livesElement = document.getElementById('lives');
-        const startButton = document.getElementById('start-game');
-        const gameSection = document.getElementById('pacman-game');
-        const victoryOverlay = document.getElementById('victory-overlay');
-        const gameOverOverlay = document.getElementById('game-over-overlay');
-        const viewProjectsButton = document.getElementById('view-projects');
-        const retryButton = document.getElementById('retry-game');
-    
-        // Ajustar tamaño del canvas según el tamaño de la pantalla
-        function adjustCanvasSize() {
-            if (window.innerWidth < 768) {
-                // En móviles, ajustar proporcionalmente
-                const containerWidth = canvas.parentElement.offsetWidth;
-                const aspectRatio = 460 / 420;
-                canvas.width = containerWidth;
-                canvas.height = containerWidth * aspectRatio;
-            } else {
-                // En pantallas grandes, tamaño original
-                canvas.width = 420;
-                canvas.height = 460;
-            }
-        }
-    
-        // Llamar a adjustCanvasSize al cargar y al redimensionar
-        adjustCanvasSize();
-        window.addEventListener('resize', adjustCanvasSize);
-    
-        // Dimensiones del laberinto y tamaño de celda
-        let CELL_SIZE, ROWS, COLS, WIDTH, HEIGHT;
-    
-        function updateDimensions() {
-            ROWS = 23;
-            COLS = 21;
-            CELL_SIZE = canvas.width / COLS;
-            WIDTH = COLS * CELL_SIZE;
-            HEIGHT = ROWS * CELL_SIZE;
-        }
-    
-        updateDimensions();
-        window.addEventListener('resize', updateDimensions);
-    
-        // Colores
-        const COLORS = {
-            wall: '#f705a3',      // Rosa fuerte
-            path: '#FFE4E1',      // Rosa muy claro
-            dot: '#0a0a0a',       // Rosa medio
-            pacman: '#FFFF00',    // Amarillo
-            ghost1: '#c859ff',    // Morado
-            ghost2: '#FF5A87',    // Rosa medio
-            ghost3: '#59f9ff',    // Azul cielo
-            ghost4: '#59ffcd'     // Menta
-        };
-    
-        // Estado del juego
+        
         let gameRunning = false;
-        let gameWon = false;
         let score = 0;
         let lives = 3;
-        let totalDots = 0;
         let dotsEaten = 0;
-    
-        // AÑADIR AQUÍ: Variables para controlar velocidad de Pac-Man
-        let pacmanMoveInterval = 0;
-        const PACMAN_MOVE_DELAY = 10; // Ajusta este valor para controlar la velocidad (mayor = más lento)
-    
-        // Dirección actual y siguiente de Pac-Man (0: ninguna, 1: arriba, 2: derecha, 3: abajo, 4: izquierda)
-        let currentDirection = 0;
-        let nextDirection = 0;
-    
-        // Posición de Pac-Man
-        let pacman = {
-            x: 10,
-            y: 15,
-            mouthOpen: true,
-            mouthAngle: 0.2
-        };
-    
-        // Posición de fantasmas
+        let totalDots = 0;
+        let pacmanMoveCounter = 0;
+        let ghostMoveCounter = 0;
+        
+        const CELL_SIZE = 20;
+        const ROWS = 23;
+        const COLS = 21;
+        
+        let pacman = { x: 10, y: 15, direction: 0, nextDirection: 0, mouthOpen: true };
         let ghosts = [
-            { x: 10, y: 11, direction: Math.floor(Math.random() * 4) + 1, color: COLORS.ghost1, speed: 1 },
-            { x: 9, y: 11, direction: Math.floor(Math.random() * 4) + 1, color: COLORS.ghost2, speed: 0.8 },
-            { x: 11, y: 11, direction: Math.floor(Math.random() * 4) + 1, color: COLORS.ghost3, speed: 0.7 },
-            { x: 10, y: 10, direction: Math.floor(Math.random() * 4) + 1, color: COLORS.ghost4, speed: 0.9 }
+            { x: 10, y: 11, direction: 2, color: '#c74cff' },
+            { x: 9, y: 11, direction: 4, color: '#ff2a9f' },
+            { x: 11, y: 11, direction: 2, color: '#00d9ff' },
+            { x: 10, y: 10, direction: 3, color: '#ffea00' }
         ];
-    
-        // Controlador de animación
-        let animationId;
-        let lastTime = 0;
-        let pacmanMouthInterval;
-        let ghostMoveInterval = 0;
-    
-        // Laberinto (0: camino, 1: pared, 2: punto)
+        
         let maze = [
-            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-            [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1],
-            [1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1],
-            [1, 2, 1, 0, 1, 2, 1, 0, 1, 2, 1, 2, 1, 0, 1, 2, 1, 0, 1, 2, 1],
-            [1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1],
-            [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1],
-            [1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1],
-            [1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1],
-            [1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1],
-            [1, 1, 1, 1, 1, 2, 1, 1, 1, 0, 1, 0, 1, 1, 1, 2, 1, 1, 1, 1, 1],
-            [0, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0],
-            [0, 0, 0, 0, 1, 2, 1, 0, 1, 1, 0, 1, 1, 0, 1, 2, 1, 0, 0, 0, 0],
-            [1, 1, 1, 1, 1, 2, 1, 0, 1, 0, 0, 0, 1, 0, 1, 2, 1, 1, 1, 1, 1],
-            [0, 0, 0, 0, 0, 2, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2, 0, 0, 0, 0, 0],
-            [1, 1, 1, 1, 1, 2, 1, 0, 1, 1, 1, 1, 1, 0, 1, 2, 1, 1, 1, 1, 1],
-            [0, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0],
-            [0, 0, 0, 0, 1, 2, 1, 0, 1, 1, 1, 1, 1, 0, 1, 2, 1, 0, 0, 0, 0],
-            [1, 1, 1, 1, 1, 2, 1, 0, 1, 1, 1, 1, 1, 0, 1, 2, 1, 1, 1, 1, 1],
-            [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1],
-            [1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1],
-            [1, 2, 2, 2, 1, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 1, 2, 2, 2, 1],
-            [1, 1, 1, 2, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 2, 1, 1, 1],
-            [1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1]
+            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+            [1,2,2,2,2,2,2,2,2,2,1,2,2,2,2,2,2,2,2,2,1],
+            [1,2,1,1,1,2,1,1,1,2,1,2,1,1,1,2,1,1,1,2,1],
+            [1,2,1,0,1,2,1,0,1,2,1,2,1,0,1,2,1,0,1,2,1],
+            [1,2,1,1,1,2,1,1,1,2,1,2,1,1,1,2,1,1,1,2,1],
+            [1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],
+            [1,2,1,1,1,2,1,2,1,1,1,1,1,2,1,2,1,1,1,2,1],
+            [1,2,1,1,1,2,1,2,1,1,1,1,1,2,1,2,1,1,1,2,1],
+            [1,2,2,2,2,2,1,2,2,2,1,2,2,2,1,2,2,2,2,2,1],
+            [1,1,1,1,1,2,1,1,1,0,1,0,1,1,1,2,1,1,1,1,1],
+            [0,0,0,0,1,2,1,0,0,0,0,0,0,0,1,2,1,0,0,0,0],
+            [0,0,0,0,1,2,1,0,1,1,0,1,1,0,1,2,1,0,0,0,0],
+            [1,1,1,1,1,2,1,0,1,0,0,0,1,0,1,2,1,1,1,1,1],
+            [0,0,0,0,0,2,0,0,1,0,0,0,1,0,0,2,0,0,0,0,0],
+            [1,1,1,1,1,2,1,0,1,1,1,1,1,0,1,2,1,1,1,1,1],
+            [0,0,0,0,1,2,1,0,0,0,0,0,0,0,1,2,1,0,0,0,0],
+            [0,0,0,0,1,2,1,0,1,1,1,1,1,0,1,2,1,0,0,0,0],
+            [1,1,1,1,1,2,1,0,1,1,1,1,1,0,1,2,1,1,1,1,1],
+            [1,2,2,2,2,2,2,2,2,2,1,2,2,2,2,2,2,2,2,2,1],
+            [1,2,1,1,1,2,1,1,1,2,1,2,1,1,1,2,1,1,1,2,1],
+            [1,2,2,2,1,2,2,2,2,2,0,2,2,2,2,2,1,2,2,2,1],
+            [1,1,1,2,1,2,1,2,1,1,1,1,1,2,1,2,1,2,1,1,1],
+            [1,2,2,2,2,2,1,2,2,2,1,2,2,2,1,2,2,2,2,2,1]
         ];
-    
-        // Contar puntos totales
-        function countTotalDots() {
+        
+        function countDots() {
             totalDots = 0;
-            for (let y = 0; y < ROWS; y++) {
-                for (let x = 0; x < COLS; x++) {
-                    if (maze[y][x] === 2) {
-                        totalDots++;
-                    }
-                }
-            }
+            maze.forEach(row => row.forEach(cell => { if (cell === 2) totalDots++; }));
         }
         
-        countTotalDots();
-    
-        // Inicializar eventos
-        function initEvents() {
-            // Controles de teclado para el movimiento
-            document.addEventListener('keydown', function(e) {
-                if (!gameRunning) return;
-    
-                // Flechas de dirección
-                switch (e.key) {
-                    case 'ArrowUp':
-                        nextDirection = 1;
-                        break;
-                    case 'ArrowRight':
-                        nextDirection = 2;
-                        break;
-                    case 'ArrowDown':
-                        nextDirection = 3;
-                        break;
-                    case 'ArrowLeft':
-                        nextDirection = 4;
-                        break;
-                }
-            });
-    
-            // Controles táctiles para dispositivos móviles
-            let touchStartX = 0;
-            let touchStartY = 0;
-            
-            canvas.addEventListener('touchstart', function(e) {
-                touchStartX = e.touches[0].clientX;
-                touchStartY = e.touches[0].clientY;
-                e.preventDefault();
-            }, { passive: false });
-            
-            canvas.addEventListener('touchmove', function(e) {
-                if (!gameRunning) return;
-                
-                const touchEndX = e.touches[0].clientX;
-                const touchEndY = e.touches[0].clientY;
-                
-                const diffX = touchStartX - touchEndX;
-                const diffY = touchStartY - touchEndY;
-                
-                // Determinar dirección del deslizamiento
-                if (Math.abs(diffX) > Math.abs(diffY)) {
-                    // Deslizamiento horizontal
-                    if (diffX > 0) {
-                        // Deslizar a la izquierda
-                        nextDirection = 4;
-                    } else {
-                        // Deslizar a la derecha
-                        nextDirection = 2;
-                    }
-                } else {
-                    // Deslizamiento vertical
-                    if (diffY > 0) {
-                        // Deslizar hacia arriba
-                        nextDirection = 1;
-                    } else {
-                        // Deslizar hacia abajo
-                        nextDirection = 3;
-                    }
-                }
-                
-                e.preventDefault();
-            }, { passive: false });
-    
-            // Iniciar juego
-            startButton.addEventListener('click', startGame);
-    
-            // Ver proyectos
-            viewProjectsButton.addEventListener('click', function() {
-                victoryOverlay.classList.add('hidden');
-                gameSection.classList.add('hidden');
-                
-                // Hacer scroll a la sección de proyectos
-                document.getElementById('projects').scrollIntoView({ behavior: 'smooth' });
-            });
-    
-            // Reintentar juego
-            retryButton.addEventListener('click', function() {
-                gameOverOverlay.classList.add('hidden');
-                resetGame();
-                startGame();
-            });
-        }
-    
-        // Dibujar el laberinto
+        countDots();
+        
         function drawMaze() {
-            for (let y = 0; y < ROWS; y++) {
-                for (let x = 0; x < COLS; x++) {
-                    if (maze[y][x] === 1) {
-                        // Pared
-                        ctx.fillStyle = COLORS.wall;
+            maze.forEach((row, y) => {
+                row.forEach((cell, x) => {
+                    if (cell === 1) {
+                        ctx.fillStyle = '#ff2a9f';
                         ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
-                        
-                        // Añadir un borde para hacerlo kawaii
-                        ctx.strokeStyle = '#FF9CC5';
-                        ctx.lineWidth = 2;
-                        ctx.strokeRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
                     } else {
-                        // Camino
-                        ctx.fillStyle = COLORS.path;
+                        ctx.fillStyle = '#0a0a0f';
                         ctx.fillRect(x * CELL_SIZE, y * CELL_SIZE, CELL_SIZE, CELL_SIZE);
-                        
-                        // Dibujar puntos
-                        if (maze[y][x] === 2) {
-                            ctx.fillStyle = COLORS.dot;
+                        if (cell === 2) {
+                            ctx.fillStyle = '#ffea00';
                             ctx.beginPath();
-                            ctx.arc(x * CELL_SIZE + CELL_SIZE / 2, y * CELL_SIZE + CELL_SIZE / 2, CELL_SIZE / 6, 0, Math.PI * 2);
+                            ctx.arc(x * CELL_SIZE + CELL_SIZE/2, y * CELL_SIZE + CELL_SIZE/2, 3, 0, Math.PI * 2);
                             ctx.fill();
                         }
                     }
-                }
-            }
+                });
+            });
         }
-    
-        // Dibujar Pac-Man
+        
         function drawPacman() {
-            const x = pacman.x * CELL_SIZE + CELL_SIZE / 2;
-            const y = pacman.y * CELL_SIZE + CELL_SIZE / 2;
-            const radius = CELL_SIZE / 2 - 2;
+            const x = pacman.x * CELL_SIZE + CELL_SIZE/2;
+            const y = pacman.y * CELL_SIZE + CELL_SIZE/2;
+            const radius = CELL_SIZE/2 - 2;
             
-            // Ángulo de la boca según la dirección
-            let startAngle = 0;
-            let endAngle = 2 * Math.PI;
+            let startAngle = 0.2;
+            let endAngle = 2 * Math.PI - 0.2;
             
             if (pacman.mouthOpen) {
-                switch (currentDirection) {
-                    case 1: // Arriba
-                        startAngle = Math.PI * 1.25 + pacman.mouthAngle;
-                        endAngle = Math.PI * 2.75 - pacman.mouthAngle;
-                        break;
-                    case 2: // Derecha
-                        startAngle = pacman.mouthAngle;
-                        endAngle = 2 * Math.PI - pacman.mouthAngle;
-                        break;
-                    case 3: // Abajo
-                        startAngle = Math.PI * 0.75 + pacman.mouthAngle;
-                        endAngle = Math.PI * 2.25 - pacman.mouthAngle;
-                        break;
-                    case 4: // Izquierda
-                        startAngle = Math.PI + pacman.mouthAngle;
-                        endAngle = Math.PI - pacman.mouthAngle;
-                        break;
-                    default:
-                        startAngle = pacman.mouthAngle;
-                        endAngle = 2 * Math.PI - pacman.mouthAngle;
+                switch(pacman.direction) {
+                    case 1: startAngle = Math.PI * 1.25 + 0.2; endAngle = Math.PI * 2.75 - 0.2; break;
+                    case 2: startAngle = 0.2; endAngle = 2 * Math.PI - 0.2; break;
+                    case 3: startAngle = Math.PI * 0.75 + 0.2; endAngle = Math.PI * 2.25 - 0.2; break;
+                    case 4: startAngle = Math.PI + 0.2; endAngle = Math.PI - 0.2; break;
                 }
             }
             
-            // Dibujar a Pac-Man
-            ctx.fillStyle = COLORS.pacman;
+            ctx.fillStyle = '#ffea00';
             ctx.beginPath();
             ctx.arc(x, y, radius, startAngle, endAngle);
-            if (pacman.mouthOpen && currentDirection !== 0) {
-                ctx.lineTo(x, y);
-            }
-            ctx.fill();
-            
-            // Dibujar ojo kawaii
-            ctx.fillStyle = '#000';
-            let eyeX = x;
-            let eyeY = y;
-            
-            switch (currentDirection) {
-                case 1: // Arriba
-                    eyeX -= 3;
-                    eyeY -= 5;
-                    break;
-                case 2: // Derecha
-                    eyeX += 3;
-                    eyeY -= 5;
-                    break;
-                case 3: // Abajo
-                    eyeX += 3;
-                    eyeY += 0;
-                    break;
-                case 4: // Izquierda
-                    eyeX -= 3;
-                    eyeY -= 5;
-                    break;
-                default:
-                    eyeX += 3;
-                    eyeY -= 5;
-            }
-            
-            ctx.beginPath();
-            ctx.arc(eyeX, eyeY, 2, 0, Math.PI * 2);
-            ctx.fill();
-            
-            // Añadir rubor kawaii
-            ctx.fillStyle = 'rgba(255, 150, 150, 0.5)';
-            ctx.beginPath();
-            ctx.arc(x + radius * 0.5, y + radius * 0.3, radius * 0.3, 0, Math.PI * 2);
-            ctx.fill();
-            
-            ctx.beginPath();
-            ctx.arc(x - radius * 0.5, y + radius * 0.3, radius * 0.3, 0, Math.PI * 2);
+            if (pacman.mouthOpen && pacman.direction !== 0) ctx.lineTo(x, y);
             ctx.fill();
         }
         
-        // Dibujar fantasmas
         function drawGhosts() {
             ghosts.forEach(ghost => {
-                const x = ghost.x * CELL_SIZE + CELL_SIZE / 2;
-                const y = ghost.y * CELL_SIZE + CELL_SIZE / 2;
-                const radius = CELL_SIZE / 2 - 2;
+                const x = ghost.x * CELL_SIZE + CELL_SIZE/2;
+                const y = ghost.y * CELL_SIZE + CELL_SIZE/2;
+                const radius = CELL_SIZE/2 - 2;
                 
-                // Cuerpo del fantasma
                 ctx.fillStyle = ghost.color;
                 ctx.beginPath();
                 ctx.arc(x, y - 2, radius, Math.PI, 0, false);
                 ctx.lineTo(x + radius, y + radius);
                 
-                // Base ondulada
-                const waveCount = 4;
-                const waveHeight = 3;
-                const waveWidth = (radius * 2) / waveCount;
-                
-                for (let i = 0; i < waveCount; i++) {
+                for (let i = 0; i < 4; i++) {
                     ctx.quadraticCurveTo(
-                        x + radius - waveWidth * i - waveWidth / 2, 
-                        y + radius + waveHeight,
-                        x + radius - waveWidth * (i + 1), 
+                        x + radius - (radius * 2 / 4) * i - (radius / 4),
+                        y + radius + 3,
+                        x + radius - (radius * 2 / 4) * (i + 1),
                         y + radius
                     );
                 }
                 
-                ctx.lineTo(x - radius, y + radius);
                 ctx.closePath();
                 ctx.fill();
                 
-                // Ojos
-                ctx.fillStyle = '#FFF';
+                // Eyes
+                ctx.fillStyle = '#fff';
                 ctx.beginPath();
                 ctx.arc(x - 4, y - 2, 4, 0, Math.PI * 2);
                 ctx.arc(x + 4, y - 2, 4, 0, Math.PI * 2);
                 ctx.fill();
                 
-                // Pupilas
                 ctx.fillStyle = '#000';
-                let pupilOffsetX = 0;
-                let pupilOffsetY = 0;
-                
-                switch (ghost.direction) {
-                    case 1: // Arriba
-                        pupilOffsetY = -1;
-                        break;
-                    case 2: // Derecha
-                        pupilOffsetX = 1;
-                        break;
-                    case 3: // Abajo
-                        pupilOffsetY = 1;
-                        break;
-                    case 4: // Izquierda
-                        pupilOffsetX = -1;
-                        break;
-                }
-                
                 ctx.beginPath();
-                ctx.arc(x - 4 + pupilOffsetX, y - 2 + pupilOffsetY, 2, 0, Math.PI * 2);
-                ctx.arc(x + 4 + pupilOffsetX, y - 2 + pupilOffsetY, 2, 0, Math.PI * 2);
+                ctx.arc(x - 4, y - 2, 2, 0, Math.PI * 2);
+                ctx.arc(x + 4, y - 2, 2, 0, Math.PI * 2);
                 ctx.fill();
-                
-                // Boca kawaii
-                ctx.strokeStyle = '#000';
-                ctx.lineWidth = 1;
-                ctx.beginPath();
-                ctx.arc(x, y + 3, 2, 0, Math.PI);
-                ctx.stroke();
             });
         }
-    
-        // Función actualizada para el movimiento de Pac-Man con portales
-    function updatePacman() {
-        // Control de velocidad para Pac-Man
-        pacmanMoveInterval += 1;
-        if (pacmanMoveInterval < PACMAN_MOVE_DELAY) return; // Esperar hasta el siguiente intervalo
-        pacmanMoveInterval = 0;
         
-        // Verificar si el movimiento en la dirección siguiente es válida
-        let nextX = pacman.x;
-        let nextY = pacman.y;
-        
-        switch (nextDirection) {
-            case 1: // Arriba
-                nextY--;
-                break;
-            case 2: // Derecha
-                nextX++;
-                break;
-            case 3: // Abajo
-                nextY++;
-                break;
-            case 4: // Izquierda
-                nextX--;
-                break;
-        }
-        
-        // Si la dirección siguiente es válida, actualizar la dirección actual
-        // Verificar tanto los límites normales como los portales
-        if ((nextX >= 0 && nextX < COLS && nextY >= 0 && nextY < ROWS && maze[nextY][nextX] !== 1) || 
-            (nextDirection === 2 && nextX >= COLS) || 
-            (nextDirection === 4 && nextX < 0)) {
-            currentDirection = nextDirection;
-        }
-        
-        // Mover en la dirección actual
-        nextX = pacman.x;
-        nextY = pacman.y;
-        
-        switch (currentDirection) {
-            case 1: // Arriba
-                nextY--;
-                break;
-            case 2: // Derecha
-                nextX++;
-                break;
-            case 3: // Abajo
-                nextY++;
-                break;
-            case 4: // Izquierda
-                nextX--;
-                break;
-        }
-        
-        // Implementar portales
-        // Portal del lado derecho al izquierdo
-        if (nextX >= COLS) {
-            nextX = 0;
-        }
-        // Portal del lado izquierdo al derecho
-        else if (nextX < 0) {
-            nextX = COLS - 1;
-        }
-        
-        // Verificar si el movimiento es válido (excluyendo paredes)
-        if ((nextX >= 0 && nextX < COLS && nextY >= 0 && nextY < ROWS && maze[nextY][nextX] !== 1) || 
-            nextX >= COLS || nextX < 0) {
+        function updatePacman() {
+            pacmanMoveCounter++;
+            if (pacmanMoveCounter < 10) return;
+            pacmanMoveCounter = 0;
             
-            // Actualizar posición con manejo de portales
-            if (nextX >= COLS) {
-                pacman.x = 0;
-            } else if (nextX < 0) {
-                pacman.x = COLS - 1;
-            } else {
-                pacman.x = nextX;
-            }
-            pacman.y = nextY;
-            
-            // Comer punto (solo si estamos dentro del laberinto)
-            if (nextX >= 0 && nextX < COLS && nextY >= 0 && nextY < ROWS && maze[nextY][nextX] === 2) {
-                maze[nextY][nextX] = 0;
-                score += 10;
-                dotsEaten++;
-                scoreElement.textContent = score;
+            // Try to change direction if requested
+            if (pacman.nextDirection !== 0) {
+                let testX = pacman.x;
+                let testY = pacman.y;
                 
-                // Verificar victoria
-                if (dotsEaten >= totalDots) {
-                    gameWon = true;
-                    endGame();
+                switch(pacman.nextDirection) {
+                    case 1: testY--; break;
+                    case 2: testX++; break;
+                    case 3: testY++; break;
+                    case 4: testX--; break;
+                }
+                
+                if (testX >= COLS) testX = 0;
+                if (testX < 0) testX = COLS - 1;
+                
+                if (testX >= 0 && testX < COLS && testY >= 0 && testY < ROWS && maze[testY][testX] !== 1) {
+                    pacman.direction = pacman.nextDirection;
+                    pacman.nextDirection = 0;
+                }
+            }
+            
+            let nextX = pacman.x;
+            let nextY = pacman.y;
+            
+            switch(pacman.direction) {
+                case 1: nextY--; break;
+                case 2: nextX++; break;
+                case 3: nextY++; break;
+                case 4: nextX--; break;
+            }
+            
+            if (nextX >= COLS) nextX = 0;
+            if (nextX < 0) nextX = COLS - 1;
+            
+            if (nextX >= 0 && nextX < COLS && nextY >= 0 && nextY < ROWS && maze[nextY][nextX] !== 1) {
+                pacman.x = nextX;
+                pacman.y = nextY;
+                
+                if (maze[nextY][nextX] === 2) {
+                    maze[nextY][nextX] = 0;
+                    score += 10;
+                    dotsEaten++;
+                    scoreElement.textContent = score;
+                    
+                    if (dotsEaten >= totalDots) {
+                        endGame(true);
+                    }
                 }
             }
         }
-    }
-    
-    // Función actualizada para el movimiento de los fantasmas con portales
-    function updateGhosts() {
-        ghostMoveInterval += 1;
-        if (ghostMoveInterval < 15) return; // Ralentizar el movimiento de los fantasmas
-        ghostMoveInterval = 0;
         
-        ghosts.forEach(ghost => {
-            // Decidir aleatoriamente si cambiar de dirección
-            if (Math.random() < 0.3) {
-                // Intentar moverse hacia Pac-Man con cierta probabilidad
-                if (Math.random() < 0.5) {
-                    if (pacman.x < ghost.x) ghost.direction = 4; // Izquierda
-                    else if (pacman.x > ghost.x) ghost.direction = 2; // Derecha
-                    else if (pacman.y < ghost.y) ghost.direction = 1; // Arriba
-                    else if (pacman.y > ghost.y) ghost.direction = 3; // Abajo
-                } else {
-                    // Dirección aleatoria
+        function updateGhosts() {
+            ghostMoveCounter++;
+            if (ghostMoveCounter < 15) return;
+            ghostMoveCounter = 0;
+            
+            ghosts.forEach(ghost => {
+                if (Math.random() < 0.3) {
                     ghost.direction = Math.floor(Math.random() * 4) + 1;
                 }
-            }
-            
-            // Intentar mover en la dirección actual
-            let nextX = ghost.x;
-            let nextY = ghost.y;
-            
-            switch (ghost.direction) {
-                case 1: // Arriba
-                    nextY--;
-                    break;
-                case 2: // Derecha
-                    nextX++;
-                    break;
-                case 3: // Abajo
-                    nextY++;
-                    break;
-                case 4: // Izquierda
-                    nextX--;
-                    break;
-            }
-            
-            // Implementar portales para fantasmas
-            // Portal del lado derecho al izquierdo
-            if (nextX >= COLS) {
-                nextX = 0;
-            }
-            // Portal del lado izquierdo al derecho
-            else if (nextX < 0) {
-                nextX = COLS - 1;
-            }
-            
-            // Verificar si el movimiento es válido
-            if (nextX >= 0 && nextX < COLS && nextY >= 0 && nextY < ROWS && maze[nextY][nextX] !== 1) {
-                ghost.x = nextX;
-                ghost.y = nextY;
-            } else {
-                // Si no es válido, cambiar a una dirección aleatoria
-                ghost.direction = Math.floor(Math.random() * 4) + 1;
-            }
-            
-            // Verificar colisión con Pac-Man
-            if (Math.abs(ghost.x - pacman.x) < 0.5 && Math.abs(ghost.y - pacman.y) < 0.5) {
-                lives--;
-                livesElement.textContent = lives;
                 
-                // Verificar game over
-                if (lives <= 0) {
-                    endGame();
-                } else {
-                    // Reiniciar posiciones
-                    resetPositions();
+                let nextX = ghost.x;
+                let nextY = ghost.y;
+                
+                switch(ghost.direction) {
+                    case 1: nextY--; break;
+                    case 2: nextX++; break;
+                    case 3: nextY++; break;
+                    case 4: nextX--; break;
                 }
-            }
-        });
-    }
-        
-        // Animación de la boca de Pac-Man
-        function animatePacmanMouth() {
-            pacman.mouthOpen = !pacman.mouthOpen;
+                
+                if (nextX >= 0 && nextX < COLS && nextY >= 0 && nextY < ROWS && maze[nextY][nextX] !== 1) {
+                    ghost.x = nextX;
+                    ghost.y = nextY;
+                }
+                
+                if (Math.abs(ghost.x - pacman.x) < 0.5 && Math.abs(ghost.y - pacman.y) < 0.5) {
+                    lives--;
+                    livesElement.textContent = lives;
+                    
+                    if (lives <= 0) {
+                        endGame(false);
+                    } else {
+                        resetPositions();
+                    }
+                }
+            });
         }
         
-        // Reiniciar las posiciones
         function resetPositions() {
-            pacman.x = 10;
-            pacman.y = 15;
-            currentDirection = 0;
-            nextDirection = 0;
-            
+            pacman = { x: 10, y: 15, direction: 0, nextDirection: 0, mouthOpen: true };
             ghosts = [
-                { x: 10, y: 11, direction: Math.floor(Math.random() * 4) + 1, color: COLORS.ghost1, speed: 1 },
-                { x: 9, y: 11, direction: Math.floor(Math.random() * 4) + 1, color: COLORS.ghost2, speed: 0.8 },
-                { x: 11, y: 11, direction: Math.floor(Math.random() * 4) + 1, color: COLORS.ghost3, speed: 0.7 },
-                { x: 10, y: 10, direction: Math.floor(Math.random() * 4) + 1, color: COLORS.ghost4, speed: 0.9 }
+                { x: 10, y: 11, direction: 2, color: '#c74cff' },
+                { x: 9, y: 11, direction: 4, color: '#ff2a9f' },
+                { x: 11, y: 11, direction: 2, color: '#00d9ff' },
+                { x: 10, y: 10, direction: 3, color: '#ffea00' }
             ];
         }
         
-        // Reiniciar el juego
-        function resetGame() {
+        function gameLoop() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawMaze();
+            drawPacman();
+            drawGhosts();
+            updatePacman();
+            updateGhosts();
+            
+            if (gameRunning) {
+                requestAnimationFrame(gameLoop);
+            }
+        }
+        
+        function startGame() {
+            gameRunning = true;
+            document.getElementById('start-game').textContent = 'JUGANDO...';
+            document.getElementById('start-game').disabled = true;
+            
+            setInterval(() => { pacman.mouthOpen = !pacman.mouthOpen; }, 200);
+            requestAnimationFrame(gameLoop);
+        }
+        
+        function endGame(won) {
             gameRunning = false;
-            gameWon = false;
+            document.getElementById('start-game').textContent = 'INICIAR JUEGO';
+            document.getElementById('start-game').disabled = false;
+            
+            if (won) {
+                document.getElementById('victory-overlay').classList.remove('hidden');
+            } else {
+                document.getElementById('game-over-overlay').classList.remove('hidden');
+            }
+        }
+        
+        function resetGame() {
             score = 0;
             lives = 3;
             dotsEaten = 0;
             scoreElement.textContent = score;
             livesElement.textContent = lives;
             
-            // Reiniciar el laberinto (regenerar los puntos)
             maze = [
-                [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1],
-                [1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1],
-                [1, 2, 1, 0, 1, 2, 1, 0, 1, 2, 1, 2, 1, 0, 1, 2, 1, 0, 1, 2, 1],
-                [1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1],
-                [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1],
-                [1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1],
-                [1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1],
-                [1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1],
-                [1, 1, 1, 1, 1, 2, 1, 1, 1, 0, 1, 0, 1, 1, 1, 2, 1, 1, 1, 1, 1],
-                [0, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0],
-                [0, 0, 0, 0, 1, 2, 1, 0, 1, 1, 0, 1, 1, 0, 1, 2, 1, 0, 0, 0, 0],
-                [1, 1, 1, 1, 1, 2, 1, 0, 1, 0, 0, 0, 1, 0, 1, 2, 1, 1, 1, 1, 1],
-                [0, 0, 0, 0, 0, 2, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2, 0, 0, 0, 0, 0],
-                [1, 1, 1, 1, 1, 2, 1, 0, 1, 1, 1, 1, 1, 0, 1, 2, 1, 1, 1, 1, 1],
-                [0, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 1, 2, 1, 0, 0, 0, 0],
-                [0, 0, 0, 0, 1, 2, 1, 0, 1, 1, 1, 1, 1, 0, 1, 2, 1, 0, 0, 0, 0],
-                [1, 1, 1, 1, 1, 2, 1, 0, 1, 1, 1, 1, 1, 0, 1, 2, 1, 1, 1, 1, 1],
-                [1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1],
-                [1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1, 1, 1, 2, 1],
-                [1, 2, 2, 2, 1, 2, 2, 2, 2, 2, 0, 2, 2, 2, 2, 2, 1, 2, 2, 2, 1],
-                [1, 1, 1, 2, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 2, 1, 1, 1],
-                [1, 2, 2, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 1, 2, 2, 2, 2, 2, 1]
+                [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+                [1,2,2,2,2,2,2,2,2,2,1,2,2,2,2,2,2,2,2,2,1],
+                [1,2,1,1,1,2,1,1,1,2,1,2,1,1,1,2,1,1,1,2,1],
+                [1,2,1,0,1,2,1,0,1,2,1,2,1,0,1,2,1,0,1,2,1],
+                [1,2,1,1,1,2,1,1,1,2,1,2,1,1,1,2,1,1,1,2,1],
+                [1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1],
+                [1,2,1,1,1,2,1,2,1,1,1,1,1,2,1,2,1,1,1,2,1],
+                [1,2,1,1,1,2,1,2,1,1,1,1,1,2,1,2,1,1,1,2,1],
+                [1,2,2,2,2,2,1,2,2,2,1,2,2,2,1,2,2,2,2,2,1],
+                [1,1,1,1,1,2,1,1,1,0,1,0,1,1,1,2,1,1,1,1,1],
+                [0,0,0,0,1,2,1,0,0,0,0,0,0,0,1,2,1,0,0,0,0],
+                [0,0,0,0,1,2,1,0,1,1,0,1,1,0,1,2,1,0,0,0,0],
+                [1,1,1,1,1,2,1,0,1,0,0,0,1,0,1,2,1,1,1,1,1],
+                [0,0,0,0,0,2,0,0,1,0,0,0,1,0,0,2,0,0,0,0,0],
+                [1,1,1,1,1,2,1,0,1,1,1,1,1,0,1,2,1,1,1,1,1],
+                [0,0,0,0,1,2,1,0,0,0,0,0,0,0,1,2,1,0,0,0,0],
+                [0,0,0,0,1,2,1,0,1,1,1,1,1,0,1,2,1,0,0,0,0],
+                [1,1,1,1,1,2,1,0,1,1,1,1,1,0,1,2,1,1,1,1,1],
+                [1,2,2,2,2,2,2,2,2,2,1,2,2,2,2,2,2,2,2,2,1],
+                [1,2,1,1,1,2,1,1,1,2,1,2,1,1,1,2,1,1,1,2,1],
+                [1,2,2,2,1,2,2,2,2,2,0,2,2,2,2,2,1,2,2,2,1],
+                [1,1,1,2,1,2,1,2,1,1,1,1,1,2,1,2,1,2,1,1,1],
+                [1,2,2,2,2,2,1,2,2,2,1,2,2,2,1,2,2,2,2,2,1]
             ];
             
-            // Contar puntos totales de nuevo
-            countTotalDots();
+            countDots();
             resetPositions();
         }
         
-        // Bucle principal del juego
-        function gameLoop(timestamp) {
-            // Calcular delta de tiempo
-            const deltaTime = timestamp - lastTime;
-            lastTime = timestamp;
-            
-            // Limpiar el canvas
-            ctx.clearRect(0, 0, WIDTH, HEIGHT);
-            
-            // Dibujar elementos
-            drawMaze();
-            drawPacman();
-            drawGhosts();
-            
-            // Actualizar el estado del juego
-            updatePacman();
-            updateGhosts();
-            
-            // Continuar el bucle si el juego sigue corriendo
-            if (gameRunning) {
-                animationId = requestAnimationFrame(gameLoop);
+        function closeGame() {
+            document.getElementById('pacman-game').classList.add('hidden');
+        }
+        
+        // Game Controls
+        document.addEventListener('keydown', (e) => {
+            if (!gameRunning) return;
+            switch(e.key) {
+                case 'ArrowUp': 
+                    e.preventDefault();
+                    pacman.nextDirection = 1; 
+                    break;
+                case 'ArrowRight': 
+                    e.preventDefault();
+                    pacman.nextDirection = 2; 
+                    break;
+                case 'ArrowDown': 
+                    e.preventDefault();
+                    pacman.nextDirection = 3; 
+                    break;
+                case 'ArrowLeft': 
+                    e.preventDefault();
+                    pacman.nextDirection = 4; 
+                    break;
             }
-        }
+        });
         
-        // Iniciar el juego
-        function startGame() {
-            if (gameRunning) return;
-            
-            gameRunning = true;
-            startButton.innerText = "Jugando...";
-            startButton.disabled = true;
-            
-            // Iniciar animación de la boca
-            pacmanMouthInterval = setInterval(animatePacmanMouth, 200);
-            
-            // Iniciar bucle del juego
-            lastTime = performance.now();
-            animationId = requestAnimationFrame(gameLoop);
-        }
+        document.getElementById('start-game').addEventListener('click', startGame);
         
-        // Finalizar el juego
-        function endGame() {
-            gameRunning = false;
-            clearInterval(pacmanMouthInterval);
-            cancelAnimationFrame(animationId);
-            startButton.innerText = "Iniciar Juego";
-            startButton.disabled = false;
-            
-            if (gameWon) {
-                victoryOverlay.classList.remove('hidden');
-            } else {
-                gameOverOverlay.classList.remove('hidden');
-            }
-        }
+        document.getElementById('skip-game').addEventListener('click', closeGame);
+        document.getElementById('close-pacman').addEventListener('click', closeGame);
         
-        // Inicializar el juego
-        initEvents();
+        document.getElementById('view-portfolio').addEventListener('click', () => {
+            document.getElementById('victory-overlay').classList.add('hidden');
+            closeGame();
+        });
+        
+        document.getElementById('retry-game').addEventListener('click', () => {
+            document.getElementById('game-over-overlay').classList.add('hidden');
+            resetGame();
+            startGame();
+        });
+        
+        // Initial draw
         drawMaze();
         drawPacman();
         drawGhosts();
-    });
-    </script>
-    
-      <!-- Script para el botón "Skip Game" para todas las pantallas -->
-<script>
-// Añadir un botón para saltar el juego en todos los dispositivos
-document.addEventListener('DOMContentLoaded', function() {
-    // Crear el botón Skip para todos los dispositivos (no solo móviles)
-    const skipButton = document.createElement('button');
-    skipButton.className = 'pacman-button mt-2 bg-gray-400 text-white px-4 py-1 rounded-full text-sm font-semibold transition-all duration-300 hover:bg-gray-500';
-    skipButton.innerText = 'Saltar juego';
-    skipButton.addEventListener('click', function() {
-        document.getElementById('pacman-game').classList.add('hidden');
-        document.getElementById('projects').scrollIntoView({ behavior: 'smooth' });
-    });
-    
-    // Agregar el botón después del botón de inicio
-    const startButton = document.getElementById('start-game');
-    const buttonContainer = startButton.parentNode;
-    
-    // Insertar el botón después del botón de inicio
-    buttonContainer.insertBefore(skipButton, startButton.nextSibling);
-});
-</script>
 
-    
-    <!-- Script para la navegación fluida -->
-    <script>
-    // Navegación fluida para los enlaces del menú
-    document.addEventListener('DOMContentLoaded', function() {
-        const menuLinks = document.querySelectorAll('header a[href^="#"]');
-        
-        menuLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                // Si estamos en móvil, cerrar el menú desplegable
-                if (window.innerWidth < 768) {
-                    const menuToggle = document.querySelector('.mobile-menu [x-data]');
-                    if (menuToggle && typeof menuToggle.__x !== 'undefined') {
-                        menuToggle.__x.updateElements(menuToggle);
-                    }
-                }
-                
-                // Desplazamiento suave a la sección
-                const targetId = this.getAttribute('href');
-                const targetSection = document.querySelector(targetId);
-                
-                if (targetSection) {
-                    const headerHeight = document.querySelector('header').offsetHeight;
-                    const targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-                    
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
-                }
-            });
+        // Certificate Modal Functions
+        function openCertificate(imageSrc) {
+            const modal = document.getElementById('certificate-modal');
+            const modalImage = document.getElementById('certificate-modal-image');
+            modalImage.src = imageSrc;
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCertificate() {
+            const modal = document.getElementById('certificate-modal');
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Cerrar modal con tecla ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeCertificate();
+            }
         });
-    });
+
+        // Cerrar modal al hacer click fuera de la imagen
+        document.getElementById('certificate-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'certificate-modal') {
+                closeCertificate();
+            }
+        });
     </script>
-    
-    <!-- Script para efectos de desplazamiento -->
-    <script>
-    // Efectos de aparición al desplazarse
-    document.addEventListener('DOMContentLoaded', function() {
-        // Verificar si GSAP está disponible
-        if (typeof gsap !== 'undefined') {
-            // Elementos a animar
-            const sections = document.querySelectorAll('section:not(#pacman-game)');
-            
-            // Configurar animaciones
-            sections.forEach((section, index) => {
-                gsap.fromTo(
-                    section, 
-                    { opacity: 0, y: 50 }, 
-                    { 
-                        opacity: 1, 
-                        y: 0, 
-                        duration: 0.8, 
-                        ease: "power2.out",
-                        scrollTrigger: {
-                            trigger: section,
-                            start: "top 80%",
-                            toggleActions: "play none none none"
-                        }
-                    }
-                );
-            });
-        }
-    });
-    </script>
-<!-- Script para los controles táctiles visibles -->
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Solo crear controles táctiles si estamos en un dispositivo móvil
-        if (window.innerWidth < 768) {
-            // Crear el contenedor de controles
-            const controlsContainer = document.createElement('div');
-            controlsContainer.id = 'mobile-controls';
-            controlsContainer.style.cssText = `
-                position: fixed;
-                bottom: 30px;
-                left: 50%;
-                transform: translateX(-50%);
-                display: grid;
-                grid-template-columns: repeat(3, 45px);
-                grid-template-rows: repeat(3, 45px);
-                gap: 4px;
-                z-index: 1000;
-                background-color: rgba(255, 255, 255, 0.4);
-                border-radius: 15px;
-                padding: 8px;
-                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            `;
-            
-            // Crear botones de dirección
-            const directions = [
-                { id: 'up', text: '↑', x: 1, y: 0, dir: 1 },
-                { id: 'left', text: '←', x: 0, y: 1, dir: 4 },
-                { id: 'right', text: '→', x: 2, y: 1, dir: 2 },
-                { id: 'down', text: '↓', x: 1, y: 2, dir: 3 }
-            ];
-            
-            directions.forEach(dir => {
-                const button = document.createElement('button');
-                button.id = `control-${dir.id}`;
-                button.textContent = dir.text;
-                button.style.cssText = `
-                    grid-column: ${dir.x + 1};
-                    grid-row: ${dir.y + 1};
-                    background-color: rgba(247, 5, 163, 0.7);
-                    border: none;
-                    border-radius: 50%;
-                    color: white;
-                    font-size: 22px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    cursor: pointer;
-                    user-select: none;
-                    -webkit-tap-highlight-color: transparent;
-                `;
-                
-                // Añadir eventos de toque
-                const handleDirectionChange = function(e) {
-                    e.preventDefault();
-                    // Simular evento de teclado para aprovechar la lógica existente
-                    const keyEvent = new KeyboardEvent('keydown', {
-                        key: dir.id === 'up' ? 'ArrowUp' : 
-                             dir.id === 'right' ? 'ArrowRight' : 
-                             dir.id === 'down' ? 'ArrowDown' : 'ArrowLeft'
-                    });
-                    document.dispatchEvent(keyEvent);
-                    
-                    button.style.backgroundColor = 'rgba(255, 156, 197, 0.8)';
-                    setTimeout(() => {
-                        button.style.backgroundColor = 'rgba(247, 5, 163, 0.7)';
-                    }, 200);
-                };
-                
-                button.addEventListener('touchstart', handleDirectionChange);
-                
-                controlsContainer.appendChild(button);
-            });
-            
-            // Crear un espacio vacío en el centro para mejor diseño
-            const centerSpace = document.createElement('div');
-            centerSpace.style.cssText = `
-                grid-column: 2;
-                grid-row: 2;
-            `;
-            controlsContainer.appendChild(centerSpace);
-            
-            // Añadir el contenedor al documento
-            document.body.appendChild(controlsContainer);
-            
-            // Ocultar inicialmente los controles
-            controlsContainer.style.display = 'none';
-            
-            // Mostrar los controles cuando se inicia el juego
-            const startButton = document.getElementById('start-game');
-            if (startButton) {
-                startButton.addEventListener('click', function() {
-                    controlsContainer.style.display = 'grid';
-                });
-            }
-            
-            // Ocultar los controles cuando termina el juego
-            const gameSection = document.getElementById('pacman-game');
-            if (gameSection) {
-                // Usar un MutationObserver para detectar cuando el gameSection se oculta
-                const observer = new MutationObserver(function(mutations) {
-                    mutations.forEach(function(mutation) {
-                        if (mutation.attributeName === 'class' && gameSection.classList.contains('hidden')) {
-                            controlsContainer.style.display = 'none';
-                        }
-                    });
-                });
-                
-                observer.observe(gameSection, { attributes: true });
-            }
-            
-            // Ocultar también cuando aparecen las pantallas finales
-            const victoryOverlay = document.getElementById('victory-overlay');
-            const gameOverOverlay = document.getElementById('game-over-overlay');
-            
-            if (victoryOverlay) {
-                victoryOverlay.addEventListener('click', function() {
-                    controlsContainer.style.display = 'none';
-                });
-            }
-            
-            if (gameOverOverlay) {
-                gameOverOverlay.addEventListener('click', function() {
-                    controlsContainer.style.display = 'none';
-                });
-            }
-            
-            // Adicionalmente, ocultar cuando se hace scroll fuera de la sección del juego
-            window.addEventListener('scroll', function() {
-                const gameSectionRect = gameSection ? gameSection.getBoundingClientRect() : null;
-                if (gameSectionRect && (gameSectionRect.bottom < 0 || gameSectionRect.top > window.innerHeight)) {
-                    controlsContainer.style.display = 'none';
-                }
-            });
-        }
-    });
-    </script>
-    <script src="corazoncitos.js"></script>
-
-    </body>
-    </html>
-
-
-
-    
+</body>
+</html>
