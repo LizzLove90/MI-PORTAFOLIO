@@ -494,6 +494,14 @@
                 0 0 80px var(--neon-purple);
         }
 
+        @media (max-width: 768px) {
+            .pacman-container {
+                padding: 20px 15px;
+                max-width: 95%;
+                margin: 0 auto;
+            }
+        }
+
         .close-game-btn {
             position: absolute;
             top: 15px;
@@ -527,6 +535,90 @@
             margin: 0 auto;
             max-width: 100%;
             height: auto;
+        }
+
+        /* Canvas más pequeño en móvil */
+        @media (max-width: 768px) {
+            #pacman-canvas {
+                max-width: 320px;
+                height: auto;
+            }
+        }
+
+        /* Controles móviles para Pac-Man */
+        .mobile-controls {
+            display: none;
+            margin-top: 20px;
+            max-width: 320px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-controls {
+                display: block;
+            }
+        }
+
+        .control-pad {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            max-width: 200px;
+            margin: 0 auto;
+        }
+
+        .control-btn {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, rgba(255, 42, 159, 0.3), rgba(199, 76, 255, 0.3));
+            border: 2px solid var(--neon-pink);
+            border-radius: 15px;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            box-shadow: 
+                0 0 15px rgba(255, 42, 159, 0.4),
+                0 5px 15px rgba(0, 0, 0, 0.3);
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .control-btn:active {
+            transform: scale(0.9);
+            background: linear-gradient(135deg, rgba(255, 42, 159, 0.6), rgba(199, 76, 255, 0.6));
+            box-shadow: 
+                0 0 25px rgba(255, 42, 159, 0.8),
+                0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .control-btn i {
+            filter: drop-shadow(0 0 5px rgba(255, 42, 159, 0.8));
+        }
+
+        /* Posicionamiento de botones */
+        .control-up {
+            grid-column: 2;
+            grid-row: 1;
+        }
+
+        .control-left {
+            grid-column: 1;
+            grid-row: 2;
+        }
+
+        .control-down {
+            grid-column: 2;
+            grid-row: 2;
+        }
+
+        .control-right {
+            grid-column: 3;
+            grid-row: 2;
         }
 
         /* ===== SCROLL INDICATOR ===== */
@@ -1209,7 +1301,7 @@
 <body>
     <!-- Loading Screen -->
     <div class="loading-screen" id="loadingScreen">
-        <div class="loading-logo holographic">Liz</div>
+        <div class="loading-logo holographic">LIZ♥</div>
     </div>
 
     <!-- Particles Background -->
@@ -1309,6 +1401,28 @@
             
             <div class="inline-block w-full">
                 <canvas id="pacman-canvas" width="420" height="460"></canvas>
+                
+                <!-- Controles Móviles -->
+                <div class="mobile-controls">
+                    <p class="text-center text-pink-400 font-bold mb-3 text-sm">
+                        🎮 Usa los botones para moverte
+                    </p>
+                    <div class="control-pad">
+                        <button class="control-btn control-up" id="btn-up">
+                            <i class="fas fa-chevron-up"></i>
+                        </button>
+                        <button class="control-btn control-left" id="btn-left">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="control-btn control-down" id="btn-down">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <button class="control-btn control-right" id="btn-right">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+                
                 <div class="mt-4 flex justify-between text-lg md:text-xl font-bold px-4">
                     <div class="text-yellow-400">⭐ Puntos: <span id="score">0</span></div>
                     <div class="text-pink-400">❤️ Vidas: <span id="lives">3</span></div>
@@ -1325,7 +1439,8 @@
             </div>
 
             <p class="mt-4 text-xs md:text-sm text-gray-400">
-                Usa las flechas del teclado para moverte
+                <span class="hidden md:inline">Usa las flechas del teclado para moverte</span>
+                <span class="md:hidden">Usa los botones para moverte 🎮</span>
             </p>
         </div>
     </section>
@@ -1372,7 +1487,7 @@
             </h1>
             
             <p class="text-xl md:text-4xl font-bold mb-4 neon-text">
-                INGENIERA EN SISTEMAS 
+                INGENIERA EN SISTEMAS
             </p>
             
             <p class="text-lg md:text-2xl mb-12 text-gray-300">
@@ -1871,7 +1986,7 @@
     <footer class="py-10 border-t border-pink-500 border-opacity-20 relative z-10">
         <div class="container mx-auto px-6 text-center">
             <p class="holographic text-lg md:text-xl font-bold">
-                Hecho con 💖 por Eva Lizeth | © 2024
+                Hecho con 💖 por Lizeth Estrada | © 2025
             </p>
         </div>
     </footer>
@@ -2332,6 +2447,50 @@
                     break;
             }
         });
+
+        // Mobile Touch Controls
+        function setupMobileControls() {
+            const btnUp = document.getElementById('btn-up');
+            const btnDown = document.getElementById('btn-down');
+            const btnLeft = document.getElementById('btn-left');
+            const btnRight = document.getElementById('btn-right');
+
+            // Función para manejar el movimiento
+            function movePacman(direction) {
+                if (!gameRunning) return;
+                pacman.nextDirection = direction;
+            }
+
+            // Touch events para mejor respuesta en móvil
+            btnUp.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                movePacman(1);
+            });
+
+            btnDown.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                movePacman(3);
+            });
+
+            btnLeft.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                movePacman(4);
+            });
+
+            btnRight.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                movePacman(2);
+            });
+
+            // Click events como respaldo
+            btnUp.addEventListener('click', () => movePacman(1));
+            btnDown.addEventListener('click', () => movePacman(3));
+            btnLeft.addEventListener('click', () => movePacman(4));
+            btnRight.addEventListener('click', () => movePacman(2));
+        }
+
+        // Inicializar controles móviles
+        setupMobileControls();
         
         document.getElementById('start-game').addEventListener('click', startGame);
         
