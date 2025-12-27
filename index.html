@@ -232,6 +232,13 @@
             border-radius: 50px;
         }
 
+        @media (max-width: 768px) {
+            .btn-neon {
+                padding: 10px 20px;
+                letter-spacing: 1px;
+            }
+        }
+
         .btn-neon::before {
             content: '';
             position: absolute;
@@ -496,9 +503,10 @@
 
         @media (max-width: 768px) {
             .pacman-container {
-                padding: 20px 15px;
+                padding: 15px 10px;
                 max-width: 95%;
                 margin: 0 auto;
+                border-radius: 20px;
             }
         }
 
@@ -518,6 +526,17 @@
             cursor: pointer;
             font-size: 24px;
             transition: all 0.3s;
+            z-index: 10;
+        }
+
+        @media (max-width: 768px) {
+            .close-game-btn {
+                width: 35px;
+                height: 35px;
+                font-size: 18px;
+                top: 10px;
+                right: 10px;
+            }
         }
 
         .close-game-btn:hover {
@@ -537,10 +556,12 @@
             height: auto;
         }
 
-        /* Canvas más pequeño en móvil */
+        /* Canvas MÁS PEQUEÑO en móvil */
         @media (max-width: 768px) {
             #pacman-canvas {
-                max-width: 320px;
+                max-width: 280px !important;
+                max-height: 300px !important;
+                width: 280px !important;
                 height: auto;
             }
         }
@@ -557,6 +578,7 @@
         @media (max-width: 768px) {
             .mobile-controls {
                 display: block;
+                margin-top: 12px;
             }
         }
 
@@ -566,6 +588,13 @@
             gap: 10px;
             max-width: 200px;
             margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            .control-pad {
+                gap: 8px;
+                max-width: 180px;
+            }
         }
 
         .control-btn {
@@ -586,6 +615,14 @@
                 0 5px 15px rgba(0, 0, 0, 0.3);
             user-select: none;
             -webkit-tap-highlight-color: transparent;
+        }
+
+        @media (max-width: 768px) {
+            .control-btn {
+                width: 55px;
+                height: 55px;
+                font-size: 20px;
+            }
         }
 
         .control-btn:active {
@@ -1392,10 +1429,10 @@
                 <i class="fas fa-times"></i>
             </button>
 
-            <h2 class="text-3xl md:text-4xl font-bold neon-text mb-4">
+            <h2 class="text-xl md:text-4xl font-bold neon-text mb-3 md:mb-4 pr-12 md:pr-0">
                 🎮 ¡JUEGA PAC-MAN KAWAII! 🎮
             </h2>
-            <p class="text-base md:text-lg mb-6 text-pink-300">
+            <p class="text-sm md:text-lg mb-4 md:mb-6 text-pink-300">
                 ¡Come todos los puntos para desbloquear mi portafolio! ✨
             </p>
             
@@ -1429,11 +1466,11 @@
                 </div>
             </div>
             
-            <div class="mt-6 flex flex-wrap justify-center gap-3 md:gap-4">
-                <button id="start-game" class="btn-neon text-sm md:text-base">
+            <div class="mt-4 md:mt-6 flex flex-wrap justify-center gap-2 md:gap-4">
+                <button id="start-game" class="btn-neon text-xs md:text-base px-4 md:px-10">
                     INICIAR JUEGO
                 </button>
-                <button id="skip-game" class="btn-neon text-sm md:text-base" style="border-color: var(--neon-purple); color: var(--neon-purple);">
+                <button id="skip-game" class="btn-neon text-xs md:text-base px-4 md:px-10" style="border-color: var(--neon-purple); color: var(--neon-purple);">
                     SALTAR JUEGO
                 </button>
             </div>
@@ -1483,7 +1520,7 @@
             </div>
             
             <h1 class="text-5xl md:text-8xl font-black mb-6 glitch">
-                <span class="holographic">LIZETH ESTRADA</span>
+                <span class="holographic">Lizeth Estrada</span>
             </h1>
             
             <p class="text-xl md:text-4xl font-bold mb-4 neon-text">
